@@ -6,26 +6,26 @@ import { splitProps } from "solid-js";
 import { cn } from "~/lib/utils";
 
 type SeparatorRootProps<T extends ValidComponent = "hr"> =
-	SeparatorPrimitive.SeparatorRootProps<T> & { class?: string | undefined };
+  SeparatorPrimitive.SeparatorRootProps<T> & { class?: string | undefined };
 
 const Separator = <T extends ValidComponent = "hr">(
-	props: PolymorphicProps<T, SeparatorRootProps<T>>,
+  props: PolymorphicProps<T, SeparatorRootProps<T>>
 ) => {
-	const [local, others] = splitProps(props as SeparatorRootProps, [
-		"class",
-		"orientation",
-	]);
-	return (
-		<SeparatorPrimitive.Root
-			class={cn(
-				"shrink-0 bg-border",
-				local.orientation === "vertical" ? "h-full w-px" : "h-px w-full",
-				local.class,
-			)}
-			orientation={local.orientation ?? "horizontal"}
-			{...others}
-		/>
-	);
+  const [local, others] = splitProps(props as SeparatorRootProps, [
+    "class",
+    "orientation",
+  ]);
+  return (
+    <SeparatorPrimitive.Root
+      class={cn(
+        "shrink-0 bg-border",
+        local.orientation === "vertical" ? "h-full w-px" : "h-px w-full",
+        local.class
+      )}
+      orientation={local.orientation ?? "horizontal"}
+      {...others}
+    />
+  );
 };
 
 export { Separator };

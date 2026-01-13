@@ -5,7 +5,7 @@ import { useSidebar } from "./sidebar-provider";
 export function SidebarTrigger() {
   const { toggle } = useSidebar();
   return (
-    <Button variant="ghost" size="icon" onClick={toggle}>
+    <Button onClick={toggle} size="icon" variant="ghost">
       <PanelLeft class="h-4 w-4" />
     </Button>
   );

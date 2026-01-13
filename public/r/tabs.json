@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Tabs",
   "description": "Tabbed interface component",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/tabs.tsx",

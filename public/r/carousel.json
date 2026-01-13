@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Carousel",
   "description": "Image/content carousel",
-  "dependencies": [
-    "embla-carousel-solid"
-  ],
+  "dependencies": ["embla-carousel-solid"],
   "files": [
     {
       "path": "components/ui/carousel.tsx",

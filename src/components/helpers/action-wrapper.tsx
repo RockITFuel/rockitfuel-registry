@@ -3,9 +3,8 @@ import debounce from "debounce";
 import type { Accessor, JSX } from "solid-js";
 import useLoading from "~/hooks/use-loading";
 
-type NarrowResponse<T> = T extends CustomResponse<infer U>
-  ? U
-  : Exclude<T, Response>;
+type NarrowResponse<T> =
+  T extends CustomResponse<infer U> ? U : Exclude<T, Response>;
 
 type Props<T extends any[], U> = {
   action: Action<T, U>;
@@ -76,7 +75,7 @@ export default function ActionWrapper<T extends any[], U>(props: Props<T, U>) {
           >)
         : args;
       await handleAction(...convertedArgs).then((res) =>
-        props.onSuccess?.(res),
+        props.onSuccess?.(res)
       );
     } catch (error) {
       console.error("error: ", JSON.stringify(error, null, 2));

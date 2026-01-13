@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Sheet",
   "description": "Slide-out panel/drawer component",
-  "dependencies": [
-    "@kobalte/core",
-    "class-variance-authority"
-  ],
+  "dependencies": ["@kobalte/core", "class-variance-authority"],
   "files": [
     {
       "path": "components/ui/sheet.tsx",

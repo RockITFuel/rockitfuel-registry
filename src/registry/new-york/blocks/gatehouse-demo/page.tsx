@@ -1,11 +1,12 @@
 /**
  * Gatehouse Authorization Demo
- * 
+ *
  * Interactive demonstration of RBAC, ABAC, and ReBAC authorization patterns
  * using the Gatehouse-TS library.
  */
 
 import { createSignal, For, Show } from "solid-js";
+import { Button } from "@/registry/new-york/ui/button";
 import {
   Card,
   CardContent,
@@ -13,22 +14,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/registry/new-york/ui/card";
-import { Button } from "@/registry/new-york/ui/button";
 import {
-  type User,
-  type Document,
   type Action,
-  type PolicyMode,
-  sampleUsers,
-  sampleDocuments,
   createPermissionChecker,
+  type Document,
   getPolicyDescription,
+  type PolicyMode,
+  sampleDocuments,
+  sampleUsers,
+  type User,
 } from "./lib/demo-policies";
 
 export function GatehouseDemo() {
   // State
   const [selectedUser, setSelectedUser] = createSignal<User>(sampleUsers[0]);
-  const [selectedDoc, setSelectedDoc] = createSignal<Document>(sampleDocuments[0]);
+  const [selectedDoc, setSelectedDoc] = createSignal<Document>(
+    sampleDocuments[0]
+  );
   const [selectedAction, setSelectedAction] = createSignal<Action>("read");
   const [policyMode, setPolicyMode] = createSignal<PolicyMode>("combined");
   const [result, setResult] = createSignal<"granted" | "denied" | null>(null);
@@ -36,7 +38,13 @@ export function GatehouseDemo() {
   const [isLoading, setIsLoading] = createSignal(false);
 
   const actions: Action[] = ["read", "write", "delete"];
-  const policyModes: PolicyMode[] = ["combined", "rbac", "abac", "rebac", "strict"];
+  const policyModes: PolicyMode[] = [
+    "combined",
+    "rbac",
+    "abac",
+    "rebac",
+    "strict",
+  ];
 
   const checkAccess = async () => {
     setIsLoading(true);
@@ -55,7 +63,9 @@ export function GatehouseDemo() {
       setResult(evaluation.isGranted() ? "granted" : "denied");
       setTrace(evaluation.getDisplayTrace());
     } catch (error) {
-      setTrace(`Error: ${error instanceof Error ? error.message : "Unknown error"}`);
+      setTrace(
+        `Error: ${error instanceof Error ? error.message : "Unknown error"}`
+      );
     } finally {
       setIsLoading(false);
     }
@@ -67,7 +77,8 @@ export function GatehouseDemo() {
       <div>
         <h2 class="font-bold text-2xl">Gatehouse Authorization Demo</h2>
         <p class="text-muted-foreground">
-          Test different authorization patterns: RBAC, ABAC, ReBAC, and combined policies
+          Test different authorization patterns: RBAC, ABAC, ReBAC, and combined
+          policies
         </p>
       </div>
 
@@ -77,7 +88,8 @@ export function GatehouseDemo() {
           <CardHeader>
             <CardTitle>Configuration</CardTitle>
             <CardDescription>
-              Select a user, document, action, and policy mode to test authorization
+              Select a user, document, action, and policy mode to test
+              authorization
             </CardDescription>
           </CardHeader>
           <CardContent class="space-y-6">
@@ -88,13 +100,13 @@ export function GatehouseDemo() {
                 <For each={sampleUsers}>
                   {(user) => (
                     <button
-                      type="button"
                       class={`rounded-md border p-3 text-left text-sm transition-colors ${
                         selectedUser().id === user.id
                           ? "border-primary bg-primary/10"
                           : "hover:bg-muted"
                       }`}
                       onClick={() => setSelectedUser(user)}
+                      type="button"
                     >
                       <div class="font-medium">{user.name}</div>
                       <div class="text-muted-foreground text-xs">
@@ -116,17 +128,18 @@ export function GatehouseDemo() {
                 <For each={sampleDocuments}>
                   {(doc) => (
                     <button
-                      type="button"
                       class={`rounded-md border p-3 text-left text-sm transition-colors ${
                         selectedDoc().id === doc.id
                           ? "border-primary bg-primary/10"
                           : "hover:bg-muted"
                       }`}
                       onClick={() => setSelectedDoc(doc)}
+                      type="button"
                     >
                       <div class="font-medium">{doc.title}</div>
                       <div class="text-muted-foreground text-xs">
-                        Owner: User #{doc.ownerId} | {doc.isPublic ? "Public" : "Private"}
+                        Owner: User #{doc.ownerId} |{" "}
+                        {doc.isPublic ? "Public" : "Private"}
                       </div>
                       <Show when={doc.requiredDepartment}>
                         <div class="text-muted-foreground text-xs">
@@ -146,9 +159,11 @@ export function GatehouseDemo() {
                 <For each={actions}>
                   {(action) => (
                     <Button
-                      variant={selectedAction() === action ? "default" : "outline"}
-                      size="sm"
                       onClick={() => setSelectedAction(action)}
+                      size="sm"
+                      variant={
+                        selectedAction() === action ? "default" : "outline"
+                      }
                     >
                       {action}
                     </Button>
@@ -164,9 +179,9 @@ export function GatehouseDemo() {
                 <For each={policyModes}>
                   {(mode) => (
                     <Button
-                      variant={policyMode() === mode ? "default" : "outline"}
-                      size="sm"
                       onClick={() => setPolicyMode(mode)}
+                      size="sm"
+                      variant={policyMode() === mode ? "default" : "outline"}
                     >
                       {mode.toUpperCase()}
                     </Button>
@@ -179,11 +194,7 @@ export function GatehouseDemo() {
             </div>
 
             {/* Check Access Button */}
-            <Button 
-              class="w-full" 
-              onClick={checkAccess}
-              disabled={isLoading()}
-            >
+            <Button class="w-full" disabled={isLoading()} onClick={checkAccess}>
               {isLoading() ? "Checking..." : "Check Access"}
             </Button>
           </CardContent>
@@ -216,7 +227,8 @@ export function GatehouseDemo() {
               <div class="rounded-md bg-muted p-3 text-sm">
                 <div class="font-medium">Request Summary:</div>
                 <div class="mt-1 text-muted-foreground">
-                  <span class="font-medium">{selectedUser().name}</span> attempted to{" "}
+                  <span class="font-medium">{selectedUser().name}</span>{" "}
+                  attempted to{" "}
                   <span class="font-medium">{selectedAction()}</span>{" "}
                   <span class="font-medium">"{selectedDoc().title}"</span>
                 </div>
@@ -234,7 +246,7 @@ export function GatehouseDemo() {
             </Show>
 
             {/* Placeholder */}
-            <Show when={!result() && !trace()}>
+            <Show when={!(result() || trace())}>
               <div class="flex min-h-[200px] items-center justify-center text-muted-foreground">
                 Click "Check Access" to see the authorization result
               </div>
@@ -256,13 +268,15 @@ export function GatehouseDemo() {
             <div class="space-y-1">
               <h4 class="font-semibold">RBAC (Role-Based)</h4>
               <p class="text-muted-foreground text-sm">
-                Access based on user roles. Viewers can read, editors can write, admins can delete.
+                Access based on user roles. Viewers can read, editors can write,
+                admins can delete.
               </p>
             </div>
             <div class="space-y-1">
               <h4 class="font-semibold">ABAC (Attribute-Based)</h4>
               <p class="text-muted-foreground text-sm">
-                Access based on attributes like public/private status or department matching.
+                Access based on attributes like public/private status or
+                department matching.
               </p>
             </div>
             <div class="space-y-1">
@@ -274,7 +288,8 @@ export function GatehouseDemo() {
             <div class="space-y-1">
               <h4 class="font-semibold">Combined (OR)</h4>
               <p class="text-muted-foreground text-sm">
-                Grants access if ANY policy allows (owner OR public OR has role).
+                Grants access if ANY policy allows (owner OR public OR has
+                role).
               </p>
             </div>
             <div class="space-y-1">

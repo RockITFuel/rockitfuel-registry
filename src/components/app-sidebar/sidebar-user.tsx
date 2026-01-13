@@ -5,13 +5,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
+  DropdownMenuPortal,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-  DropdownMenuPortal,
 } from "~/components/ui/dropdown-menu";
 
 /**
@@ -25,28 +25,28 @@ export default function SidebarUser() {
     <DropdownMenu placement="right-end">
       <DropdownMenuTrigger
         as={Button}
+        class="group h-12 w-full rounded-xl border border-transparent px-4 py-3 transition-all duration-300 hover:scale-[1.02] hover:border-accent/20 hover:shadow-md"
         variant="ghost"
-        class="w-full h-12 px-4 py-3 rounded-xl transition-all duration-300 hover:scale-[1.02] group border border-transparent hover:border-accent/20 hover:shadow-md"
       >
-        <div class="flex items-center gap-3 w-full">
-          <SunMoonIcon class="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-          <span class="text-sm font-medium">Theme</span>
+        <div class="flex w-full items-center gap-3">
+          <SunMoonIcon class="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
+          <span class="font-medium text-sm">Theme</span>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent class="w-fit bg-card dark:bg-popover border-border">
+      <DropdownMenuContent class="w-fit border-border bg-card dark:bg-popover">
         <DropdownMenuGroup>
           <DropdownMenuSub overlap>
             <DropdownMenuSubTrigger>
-              <SunMoonIcon class="h-4 w-4 mr-2" />
+              <SunMoonIcon class="mr-2 h-4 w-4" />
               <span>Theme</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
                 <DropdownMenuRadioGroup
-                  value={colorMode()}
                   onChange={(value) =>
                     setColorMode(value as "system" | "dark" | "light")
                   }
+                  value={colorMode()}
                 >
                   <DropdownMenuRadioItem value="system">
                     System

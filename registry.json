@@ -46,7 +46,11 @@
       "type": "registry:block",
       "title": "App Sidebar",
       "description": "Responsive sidebar navigation with mobile support, keyboard shortcuts, and theme toggle",
-      "dependencies": ["@solid-primitives/storage", "@kobalte/core", "lucide-solid"],
+      "dependencies": [
+        "@solid-primitives/storage",
+        "@kobalte/core",
+        "lucide-solid"
+      ],
       "files": [
         {
           "path": "src/components/app-sidebar/index.ts",
@@ -115,7 +119,14 @@
       "type": "registry:block",
       "title": "Super Form",
       "description": "Form components integrated with @modular-forms/solid - includes input, select, combobox, date picker, color picker, and more",
-      "dependencies": ["@modular-forms/solid", "@ark-ui/solid", "@internationalized/date", "date-fns", "solid-motionone", "debounce"],
+      "dependencies": [
+        "@modular-forms/solid",
+        "@ark-ui/solid",
+        "@internationalized/date",
+        "date-fns",
+        "solid-motionone",
+        "debounce"
+      ],
       "files": [
         {
           "path": "src/components/super-form/super-input.tsx",
@@ -305,7 +316,11 @@
       "type": "registry:ui",
       "title": "Button",
       "description": "Button component with variants, loading state, and button group support",
-      "dependencies": ["@kobalte/core", "class-variance-authority", "lucide-solid"],
+      "dependencies": [
+        "@kobalte/core",
+        "class-variance-authority",
+        "lucide-solid"
+      ],
       "files": [
         {
           "path": "src/components/ui/button.tsx",

@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Avatar",
   "description": "User avatar component",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/avatar.tsx",

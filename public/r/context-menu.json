@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Context Menu",
   "description": "Right-click context menu",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/context-menu.tsx",

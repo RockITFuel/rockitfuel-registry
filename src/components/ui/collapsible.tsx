@@ -10,24 +10,24 @@ const Collapsible = CollapsiblePrimitive;
 const CollapsibleTrigger = CollapsiblePrimitive.Trigger;
 
 type collapsibleContentProps<T extends ValidComponent = "div"> =
-	CollapsibleContentProps<T> & {
-		class?: string;
-	};
+  CollapsibleContentProps<T> & {
+    class?: string;
+  };
 
 const CollapsibleContent = <T extends ValidComponent = "div">(
-	props: PolymorphicProps<T, collapsibleContentProps<T>>,
+  props: PolymorphicProps<T, collapsibleContentProps<T>>
 ) => {
-	const [local, rest] = splitProps(props as collapsibleContentProps, ["class"]);
+  const [local, rest] = splitProps(props as collapsibleContentProps, ["class"]);
 
-	return (
-		<CollapsiblePrimitive.Content
-			class={cn(
-				"animate-collapsible-up overflow-hidden data-[expanded]:animate-collapsible-down",
-				local.class,
-			)}
-			{...rest}
-		/>
-	);
+  return (
+    <CollapsiblePrimitive.Content
+      class={cn(
+        "animate-collapsible-up overflow-hidden data-[expanded]:animate-collapsible-down",
+        local.class
+      )}
+      {...rest}
+    />
+  );
 };
 
 export { Collapsible, CollapsibleTrigger, CollapsibleContent };

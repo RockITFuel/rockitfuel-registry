@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Combobox",
   "description": "Searchable dropdown with autocomplete",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/combobox.tsx",

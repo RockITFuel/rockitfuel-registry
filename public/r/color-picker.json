@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Color Picker",
   "description": "Full-featured color picker with swatches and channel sliders",
-  "dependencies": [
-    "@ark-ui/solid"
-  ],
+  "dependencies": ["@ark-ui/solid"],
   "files": [
     {
       "path": "components/ui/color-picker.tsx",

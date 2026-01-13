@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Dropdown Menu",
   "description": "Dropdown menu with submenus, radio groups, and checkboxes",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/dropdown-menu.tsx",

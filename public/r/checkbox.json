@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Checkbox",
   "description": "Checkbox input component",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/checkbox.tsx",

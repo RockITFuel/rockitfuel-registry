@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Hover Card",
   "description": "Card that appears on hover",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/hover-card.tsx",

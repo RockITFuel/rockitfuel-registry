@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Popover",
   "description": "Popover component",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/popover.tsx",

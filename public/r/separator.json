@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Separator",
   "description": "Visual separator/divider",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/separator.tsx",

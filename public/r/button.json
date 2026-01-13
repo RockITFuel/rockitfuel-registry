@@ -4,11 +4,7 @@
   "type": "registry:ui",
   "title": "Button",
   "description": "Button component with variants, loading state, and button group support",
-  "dependencies": [
-    "@kobalte/core",
-    "class-variance-authority",
-    "lucide-solid"
-  ],
+  "dependencies": ["@kobalte/core", "class-variance-authority", "lucide-solid"],
   "files": [
     {
       "path": "components/ui/button.tsx",

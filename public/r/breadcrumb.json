@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Breadcrumb",
   "description": "Navigation breadcrumb trail",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/breadcrumb.tsx",

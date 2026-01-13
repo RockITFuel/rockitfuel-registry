@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Dialog",
   "description": "Modal dialog component",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/dialog.tsx",

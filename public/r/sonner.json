@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Sonner",
   "description": "Toast notifications using sonner",
-  "dependencies": [
-    "solid-sonner"
-  ],
+  "dependencies": ["solid-sonner"],
   "files": [
     {
       "path": "components/ui/sonner.tsx",

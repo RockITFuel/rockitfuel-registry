@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Switch",
   "description": "Toggle switch component",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/switch.tsx",

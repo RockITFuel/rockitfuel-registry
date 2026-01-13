@@ -1,6 +1,6 @@
 import { For } from "solid-js";
-import SidebarButton from "./sidebar-button";
 import type { Route } from "~/types/route";
+import SidebarButton from "./sidebar-button";
 
 export type SidebarButtonListProps = {
   title?: string;
@@ -11,7 +11,7 @@ export default function SidebarButtonList(props: SidebarButtonListProps) {
   return (
     <nav class="space-y-3">
       <div class="px-3 py-1.5">
-        <span class="text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">
+        <span class="font-medium text-muted-foreground text-xs uppercase tracking-wider dark:text-muted-foreground">
           {props.title || "Menu"}
         </span>
       </div>
@@ -19,9 +19,9 @@ export default function SidebarButtonList(props: SidebarButtonListProps) {
         <For each={props.routes}>
           {(route) => (
             <SidebarButton
-              title={route.title}
               href={route.href}
               icon={route.icon}
+              title={route.title}
             />
           )}
         </For>

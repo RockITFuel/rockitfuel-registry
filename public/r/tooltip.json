@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Tooltip",
   "description": "Tooltip component",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/tooltip.tsx",

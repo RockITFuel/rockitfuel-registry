@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Command",
   "description": "Command palette/menu (cmdk-style)",
-  "dependencies": [
-    "cmdk-solid"
-  ],
+  "dependencies": ["cmdk-solid"],
   "files": [
     {
       "path": "components/ui/command.tsx",

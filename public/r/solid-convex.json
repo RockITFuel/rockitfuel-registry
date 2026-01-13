@@ -4,10 +4,7 @@
   "type": "registry:lib",
   "title": "Solid Convex",
   "description": "Reactive Convex integration for SolidJS with caching, optimistic updates, and SSR support",
-  "dependencies": [
-    "convex",
-    "@solid-primitives/map"
-  ],
+  "dependencies": ["convex", "@solid-primitives/map"],
   "files": [
     {
       "path": "lib/solid-convex/index.tsx",

@@ -1,10 +1,10 @@
 /**
  * Gatehouse-TS - A flexible, zero-dependencies authorization TypeScript library
  * Supports RBAC, ABAC, and ReBAC access control patterns
- * 
+ *
  * Based on the Gatehouse library for Rust by Hardbyte and Partly
  * TypeScript port by gr4vityWall (9Morello)
- * 
+ *
  * @license Apache-2.0
  * @see https://github.com/9Morello/gatehouse-ts
  */
@@ -13,9 +13,9 @@
  * Operation types for combining policies.
  */
 const CombineOp = Object.freeze({
-  And: 'AND',
-  Or: 'OR',
-  Not: 'NOT',
+  And: "AND",
+  Or: "OR",
+  Not: "NOT",
 });
 
 type Operation = (typeof CombineOp)[keyof typeof CombineOp];
@@ -27,7 +27,10 @@ type Operation = (typeof CombineOp)[keyof typeof CombineOp];
 abstract class PolicyEvalResult {
   public readonly policyType: string;
   public readonly reason: string | null;
-  constructor({ policyType, reason }: { policyType: string; reason?: string | null }) {
+  constructor({
+    policyType,
+    reason,
+  }: { policyType: string; reason?: string | null }) {
     this.policyType = policyType;
     this.reason = reason ?? null;
   }
@@ -44,7 +47,7 @@ class GrantedAccessResult extends PolicyEvalResult {
     return true;
   }
   format(): string {
-    return `[GRANTED] ${this.policyType}${this.reason ? ' ' + this.reason : ''}`;
+    return `[GRANTED] ${this.policyType}${this.reason ? " " + this.reason : ""}`;
   }
 }
 
@@ -56,7 +59,7 @@ class DeniedAccessResult extends PolicyEvalResult {
     return false;
   }
   format(): string {
-    return `[DENIED] ${this.policyType}: ${this.reason ? ' ' + this.reason : ''}`;
+    return `[DENIED] ${this.policyType}: ${this.reason ? " " + this.reason : ""}`;
   }
 }
 
@@ -89,11 +92,12 @@ class CombinedResult extends PolicyEvalResult {
     return this.outcome;
   }
   format(): string {
-    const outcomeChar: string = this.outcome ? '[GRANTED]' : '[DENIED]';
+    const outcomeChar: string = this.outcome ? "[GRANTED]" : "[DENIED]";
     const toplevelMessage = `${outcomeChar} ${this.policyType} (${this.operation})`;
-    return [toplevelMessage, ...this.children.map((child) => '  ' + child.format())].join(
-      '\n'
-    );
+    return [
+      toplevelMessage,
+      ...this.children.map((child) => "  " + child.format()),
+    ].join("\n");
   }
 
   display() {
@@ -112,7 +116,7 @@ class EvalTrace {
   }
 
   format(): string {
-    return this.root?.format() || 'No evaluation trace available';
+    return this.root?.format() || "No evaluation trace available";
   }
 }
 
@@ -135,7 +139,7 @@ class EvalTrace {
  * }
  */
 class AccessEvaluation {
-  private readonly outcome: 'Granted' | 'Denied';
+  private readonly outcome: "Granted" | "Denied";
   private readonly trace: EvalTrace;
   private readonly policyType: string | null;
   public readonly reason: string | null;
@@ -146,13 +150,13 @@ class AccessEvaluation {
     trace,
   }:
     | {
-        outcome: 'Granted';
+        outcome: "Granted";
         reason?: string | null;
         policyType: string;
         trace: EvalTrace;
       }
     | {
-        outcome: 'Denied';
+        outcome: "Denied";
         reason: string;
         policyType?: null;
         trace: EvalTrace;
@@ -168,7 +172,7 @@ class AccessEvaluation {
       reason,
       policyType: null,
       trace,
-      outcome: 'Denied',
+      outcome: "Denied",
     });
   }
 
@@ -181,7 +185,7 @@ class AccessEvaluation {
       reason,
       policyType,
       trace,
-      outcome: 'Granted',
+      outcome: "Granted",
     });
   }
 
@@ -191,7 +195,7 @@ class AccessEvaluation {
    * @returns true if access was granted, false otherwise
    */
   isGranted(): boolean {
-    return this.outcome === 'Granted';
+    return this.outcome === "Granted";
   }
 
   /**
@@ -201,7 +205,7 @@ class AccessEvaluation {
    */
   getDisplayTrace(): string {
     const traceString = this.trace.format();
-    return traceString !== 'No evaluation trace available'
+    return traceString !== "No evaluation trace available"
       ? `\nEvaluation Trace:\n${traceString}`
       : `\n(${traceString})`;
   }
@@ -210,9 +214,9 @@ class AccessEvaluation {
    * Prints the evaluation result to the console.
    */
   print() {
-    if (this.outcome === 'Granted') {
+    if (this.outcome === "Granted") {
       console.log(
-        `[GRANTED] by ${this.policyType}${this.reason ? ` - ${this.reason}` : ''}`
+        `[GRANTED] by ${this.policyType}${this.reason ? ` - ${this.reason}` : ""}`
       );
     } else {
       console.log(`[DENIED] - ${this.reason}`);
@@ -288,7 +292,7 @@ interface Policy<Subject, Resource, Action, Context> {
  */
 class PermissionChecker<Sub, Res, Act, Ctx> {
   private policies: Policy<Sub, Res, Act, Ctx>[];
-  public readonly name: string = 'PermissionChecker';
+  public readonly name: string = "PermissionChecker";
   constructor() {
     this.policies = [];
   }
@@ -325,10 +329,10 @@ class PermissionChecker<Sub, Res, Act, Ctx> {
     context: Ctx;
   }): Promise<AccessEvaluation> {
     if (!this.policies.length) {
-      const reason: string = 'No policies configured';
+      const reason: string = "No policies configured";
       console.warn(reason);
       const result = new DeniedAccessResult({
-        policyType: 'PermissionChecker',
+        policyType: "PermissionChecker",
         reason,
       });
       return AccessEvaluation.denied(reason, new EvalTrace(result));
@@ -347,22 +351,28 @@ class PermissionChecker<Sub, Res, Act, Ctx> {
 
       if (resultPassed) {
         const combined = new CombinedResult({
-          policyType: 'PermissionChecker',
+          policyType: "PermissionChecker",
           outcome: true,
           operation: CombineOp.Or,
           children: policyResults,
         });
-        return AccessEvaluation.granted(result.policyType, new EvalTrace(combined));
+        return AccessEvaluation.granted(
+          result.policyType,
+          new EvalTrace(combined)
+        );
       }
     }
 
     const combined = new CombinedResult({
-      policyType: 'PermissionChecker',
+      policyType: "PermissionChecker",
       outcome: false,
       operation: CombineOp.Or,
       children: policyResults,
     });
-    return AccessEvaluation.denied('All policies denied access', new EvalTrace(combined));
+    return AccessEvaluation.denied(
+      "All policies denied access",
+      new EvalTrace(combined)
+    );
   }
 }
 
@@ -371,8 +381,8 @@ class PermissionChecker<Sub, Res, Act, Ctx> {
  * `Allow` means the policy grants access; `Deny` means it denies access.
  */
 const Effect = Object.freeze({
-  Allow: 'Allow',
-  Deny: 'Deny',
+  Allow: "Allow",
+  Deny: "Deny",
 });
 
 type IntendedEffect = (typeof Effect)[keyof typeof Effect];
@@ -418,19 +428,19 @@ function transformInternalPolicy<Sub, Res, Act, Ctx>(
         if (effect === Effect.Allow) {
           return new GrantedAccessResult({
             policyType: policyName,
-            reason: 'Policy allowed access',
+            reason: "Policy allowed access",
           });
         }
 
         return new DeniedAccessResult({
           policyType: policyName,
-          reason: 'Policy denied access',
+          reason: "Policy denied access",
         });
       }
 
       return new DeniedAccessResult({
         policyType: policyName,
-        reason: 'Policy predicate did not match',
+        reason: "Policy predicate did not match",
       });
     },
   });
@@ -577,16 +587,13 @@ class PolicyBuilder<Sub, Res, Act, Ctx> {
       resource: Res,
       action: Act,
       context: Ctx
-    ): Promise<boolean> => {
-      return (
-        (subjectPred === null || (await subjectPred(subject))) &&
-        (resPred === null || (await resPred(resource))) &&
-        (actionPred === null || (await actionPred(action))) &&
-        (ctxPred === null || (await ctxPred(context))) &&
-        (extraConditionPred === null ||
-          (await extraConditionPred({ subject, resource, action, context })))
-      );
-    };
+    ): Promise<boolean> =>
+      (subjectPred === null || (await subjectPred(subject))) &&
+      (resPred === null || (await resPred(resource))) &&
+      (actionPred === null || (await actionPred(action))) &&
+      (ctxPred === null || (await ctxPred(context))) &&
+      (extraConditionPred === null ||
+        (await extraConditionPred({ subject, resource, action, context })));
 
     const internalPolicy = {
       name,
@@ -609,7 +616,10 @@ class PolicyBuilder<Sub, Res, Act, Ctx> {
  */
 interface RoleBasedPolicy<Subject, Resource, Action, Context, Role>
   extends Policy<Subject, Resource, Action, Context> {
-  requiredRolesResolver: (res: Resource, act: Action) => Role[] | Promise<Role[]>;
+  requiredRolesResolver: (
+    res: Resource,
+    act: Action
+  ) => Role[] | Promise<Role[]>;
   userRolesResolver: (subject: Subject) => Role[] | Promise<Role[]>;
   name: string;
 }
@@ -634,17 +644,15 @@ interface RoleBasedPolicy<Subject, Resource, Action, Context, Role>
  *   userRolesResolver: (user) => user.roles
  * });
  */
-function buildRbacPolicy<Sub, Res, Act, Ctx, Role>(
-  {
-    requiredRolesResolver,
-    userRolesResolver,
-    name = 'RbacPolicy',
-  }: {
-    requiredRolesResolver: (res: Res, act: Act) => Role[] | Promise<Role[]>;
-    userRolesResolver: (sub: Sub) => Role[] | Promise<Role[]>;
-    name?: string;
-  }
-): RoleBasedPolicy<Sub, Res, Act, Ctx, Role> {
+function buildRbacPolicy<Sub, Res, Act, Ctx, Role>({
+  requiredRolesResolver,
+  userRolesResolver,
+  name = "RbacPolicy",
+}: {
+  requiredRolesResolver: (res: Res, act: Act) => Role[] | Promise<Role[]>;
+  userRolesResolver: (sub: Sub) => Role[] | Promise<Role[]>;
+  name?: string;
+}): RoleBasedPolicy<Sub, Res, Act, Ctx, Role> {
   const policyType = name;
   const evaluateAccess = async ({
     subject,
@@ -658,11 +666,13 @@ function buildRbacPolicy<Sub, Res, Act, Ctx, Role>(
   }): Promise<PolicyEvalResult> => {
     const requiredRoles: Role[] = await requiredRolesResolver(resource, action);
     const userRoles: Role[] = await userRolesResolver(subject);
-    const hasRole: boolean = requiredRoles.some((role) => userRoles.includes(role));
+    const hasRole: boolean = requiredRoles.some((role) =>
+      userRoles.includes(role)
+    );
     if (hasRole) {
       return new GrantedAccessResult({
         policyType: name,
-        reason: 'User has required role',
+        reason: "User has required role",
       });
     }
 
@@ -710,15 +720,13 @@ interface AttributeBasedPolicy<Subject, Resource, Action, Context>
  *     resource.isPublic || subject.id === resource.ownerId
  * );
  */
-function buildAbacPolicy<Sub, Res, Act, Ctx>(
-  {
-    condition,
-    name = 'AbacPolicy',
-  }: {
-    condition: Condition<Sub, Res, Act, Ctx>;
-    name?: string;
-  }
-): AttributeBasedPolicy<Sub, Res, Act, Ctx> {
+function buildAbacPolicy<Sub, Res, Act, Ctx>({
+  condition,
+  name = "AbacPolicy",
+}: {
+  condition: Condition<Sub, Res, Act, Ctx>;
+  name?: string;
+}): AttributeBasedPolicy<Sub, Res, Act, Ctx> {
   const policyType = name;
   const evaluateAccess: EvaluateAccess<Sub, Res, Act, Ctx> = async ({
     subject,
@@ -736,13 +744,13 @@ function buildAbacPolicy<Sub, Res, Act, Ctx>(
     if (conditionMet) {
       return new GrantedAccessResult({
         policyType,
-        reason: 'Condition evaluated to true',
+        reason: "Condition evaluated to true",
       });
     }
 
     return new DeniedAccessResult({
       policyType,
-      reason: 'Condition evaluated to false',
+      reason: "Condition evaluated to false",
     });
   };
 
@@ -774,7 +782,8 @@ type RelationshipResolver<Subject, Resource> = ({
  * @template Act - The action type
  * @template Ctx - The context type
  */
-interface RelationshipBasedPolicy<Sub, Res, Act, Ctx> extends Policy<Sub, Res, Act, Ctx> {
+interface RelationshipBasedPolicy<Sub, Res, Act, Ctx>
+  extends Policy<Sub, Res, Act, Ctx> {
   readonly relationship: string;
   readonly resolver: RelationshipResolver<Sub, Res>;
   name: string;
@@ -801,7 +810,7 @@ interface RelationshipBasedPolicy<Sub, Res, Act, Ctx> extends Policy<Sub, Res, A
 function buildRebacPolicy<Sub, Res, Act, Ctx>({
   relationship,
   resolver,
-  name = 'RebacPolicy',
+  name = "RebacPolicy",
 }: {
   relationship: string;
   resolver: RelationshipResolver<Sub, Res>;
@@ -866,17 +875,15 @@ interface AndPolicy<Sub, Res, Act, Ctx> extends Policy<Sub, Res, Act, Ctx> {
  * @example
  * const policy = buildAndPolicy([adminRolePolicy, documentOwnerPolicy]);
  */
-function buildAndPolicy<Sub, Res, Act, Ctx>(
-  {
-    policies,
-    name = 'AndPolicy',
-  }: {
-    policies: Policy<Sub, Res, Act, Ctx>[];
-    name?: string;
-  }
-): AndPolicy<Sub, Res, Act, Ctx> {
+function buildAndPolicy<Sub, Res, Act, Ctx>({
+  policies,
+  name = "AndPolicy",
+}: {
+  policies: Policy<Sub, Res, Act, Ctx>[];
+  name?: string;
+}): AndPolicy<Sub, Res, Act, Ctx> {
   if (!policies.length) {
-    throw new Error('AndPolicy must have at least one policy');
+    throw new Error("AndPolicy must have at least one policy");
   }
 
   const policyType = name;
@@ -948,17 +955,15 @@ interface OrPolicy<Sub, Res, Act, Ctx> extends Policy<Sub, Res, Act, Ctx> {
  * @example
  * const policy = buildOrPolicy([adminRolePolicy, documentOwnerPolicy]);
  */
-function buildOrPolicy<Sub, Res, Act, Ctx>(
-  {
-    policies,
-    name = 'OrPolicy',
-  }: {
-    policies: Policy<Sub, Res, Act, Ctx>[];
-    name?: string;
-  }
-): OrPolicy<Sub, Res, Act, Ctx> {
+function buildOrPolicy<Sub, Res, Act, Ctx>({
+  policies,
+  name = "OrPolicy",
+}: {
+  policies: Policy<Sub, Res, Act, Ctx>[];
+  name?: string;
+}): OrPolicy<Sub, Res, Act, Ctx> {
   if (!policies.length) {
-    throw new Error('OrPolicy must have at least one policy');
+    throw new Error("OrPolicy must have at least one policy");
   }
 
   const policyType = name;
@@ -1030,15 +1035,13 @@ interface NotPolicy<Sub, Res, Act, Ctx> extends Policy<Sub, Res, Act, Ctx> {
  * // Grant access to non-public resources
  * const policy = buildNotPolicy(publicResourcePolicy);
  */
-function buildNotPolicy<Sub, Res, Act, Ctx>(
-  {
-    policy,
-    name = 'NotPolicy',
-  }: {
-    policy: Policy<Sub, Res, Act, Ctx>;
-    name?: string;
-  }
-): NotPolicy<Sub, Res, Act, Ctx> {
+function buildNotPolicy<Sub, Res, Act, Ctx>({
+  policy,
+  name = "NotPolicy",
+}: {
+  policy: Policy<Sub, Res, Act, Ctx>;
+  name?: string;
+}): NotPolicy<Sub, Res, Act, Ctx> {
   const policyType = name;
   const evaluateAccess: EvaluateAccess<Sub, Res, Act, Ctx> = async ({
     subject,

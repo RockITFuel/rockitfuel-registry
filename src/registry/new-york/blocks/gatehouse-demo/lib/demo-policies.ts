@@ -1,16 +1,16 @@
 /**
  * Demo Policies for Gatehouse Authorization Library
- * 
+ *
  * This file demonstrates how to set up RBAC, ABAC, and ReBAC policies
  * using the Gatehouse-TS authorization library.
  */
 
 import {
-  buildRbacPolicy,
   buildAbacPolicy,
-  buildRebacPolicy,
-  buildOrPolicy,
   buildAndPolicy,
+  buildOrPolicy,
+  buildRbacPolicy,
+  buildRebacPolicy,
   PermissionChecker,
 } from "@/lib/gatehouse";
 
@@ -48,37 +48,42 @@ export const sampleUsers: User[] = [
   { id: 1, name: "Alice (Admin)", roles: ["admin"], department: "Engineering" },
   { id: 2, name: "Bob (Editor)", roles: ["editor"], department: "Marketing" },
   { id: 3, name: "Charlie (Viewer)", roles: ["viewer"], department: "Sales" },
-  { id: 4, name: "Diana (Engineer)", roles: ["viewer"], department: "Engineering" },
+  {
+    id: 4,
+    name: "Diana (Engineer)",
+    roles: ["viewer"],
+    department: "Engineering",
+  },
 ];
 
 export const sampleDocuments: Document[] = [
-  { 
-    id: 101, 
-    title: "Public Announcement", 
-    ownerId: 1, 
-    isPublic: true, 
-    requiredDepartment: null 
+  {
+    id: 101,
+    title: "Public Announcement",
+    ownerId: 1,
+    isPublic: true,
+    requiredDepartment: null,
   },
-  { 
-    id: 102, 
-    title: "Engineering Specs", 
-    ownerId: 1, 
-    isPublic: false, 
-    requiredDepartment: "Engineering" 
+  {
+    id: 102,
+    title: "Engineering Specs",
+    ownerId: 1,
+    isPublic: false,
+    requiredDepartment: "Engineering",
   },
-  { 
-    id: 103, 
-    title: "Bob's Draft", 
-    ownerId: 2, 
-    isPublic: false, 
-    requiredDepartment: null 
+  {
+    id: 103,
+    title: "Bob's Draft",
+    ownerId: 2,
+    isPublic: false,
+    requiredDepartment: null,
   },
-  { 
-    id: 104, 
-    title: "Marketing Strategy", 
-    ownerId: 2, 
-    isPublic: false, 
-    requiredDepartment: "Marketing" 
+  {
+    id: 104,
+    title: "Marketing Strategy",
+    ownerId: 2,
+    isPublic: false,
+    requiredDepartment: "Marketing",
   },
 ];
 
@@ -88,13 +93,19 @@ export const sampleDocuments: Document[] = [
 
 /**
  * RBAC Policy - Role-Based Access Control
- * 
+ *
  * Grants access based on user roles:
  * - read: viewer, editor, admin
  * - write: editor, admin
  * - delete: admin only
  */
-export const rbacPolicy = buildRbacPolicy<User, Document, Action, Context, string>({
+export const rbacPolicy = buildRbacPolicy<
+  User,
+  Document,
+  Action,
+  Context,
+  string
+>({
   name: "RBAC Policy",
   requiredRolesResolver: (_resource, action) => {
     switch (action) {
@@ -113,29 +124,36 @@ export const rbacPolicy = buildRbacPolicy<User, Document, Action, Context, strin
 
 /**
  * ABAC Policy - Attribute-Based Access Control (Public Documents)
- * 
+ *
  * Grants read access to any public document, regardless of user roles.
  */
-export const publicDocPolicy = buildAbacPolicy<User, Document, Action, Context>({
-  name: "Public Document Policy",
-  condition: ({ resource, action }) => resource.isPublic && action === "read",
-});
+export const publicDocPolicy = buildAbacPolicy<User, Document, Action, Context>(
+  {
+    name: "Public Document Policy",
+    condition: ({ resource, action }) => resource.isPublic && action === "read",
+  }
+);
 
 /**
  * ABAC Policy - Department-Based Access
- * 
+ *
  * Grants access when the user's department matches the document's required department.
  */
-export const departmentPolicy = buildAbacPolicy<User, Document, Action, Context>({
+export const departmentPolicy = buildAbacPolicy<
+  User,
+  Document,
+  Action,
+  Context
+>({
   name: "Department Policy",
-  condition: ({ subject, resource }) => 
-    resource.requiredDepartment !== null && 
+  condition: ({ subject, resource }) =>
+    resource.requiredDepartment !== null &&
     subject.department === resource.requiredDepartment,
 });
 
 /**
  * ReBAC Policy - Relationship-Based Access Control (Ownership)
- * 
+ *
  * Grants full access when the user owns the document.
  */
 export const ownerPolicy = buildRebacPolicy<User, Document, Action, Context>({
@@ -150,7 +168,7 @@ export const ownerPolicy = buildRebacPolicy<User, Document, Action, Context>({
 
 /**
  * Combined OR Policy
- * 
+ *
  * Grants access if ANY of these conditions are met:
  * 1. User is the document owner (ReBAC)
  * 2. Document is public and action is read (ABAC)
@@ -163,7 +181,7 @@ export const combinedOrPolicy = buildOrPolicy<User, Document, Action, Context>({
 
 /**
  * Strict AND Policy
- * 
+ *
  * Requires BOTH conditions:
  * 1. User must have correct role (RBAC)
  * 2. User must be in the correct department (ABAC)
@@ -181,7 +199,7 @@ export type PolicyMode = "combined" | "rbac" | "abac" | "rebac" | "strict";
 
 /**
  * Creates a PermissionChecker configured with the specified policy mode.
- * 
+ *
  * @param mode - The policy configuration to use
  * @returns A configured PermissionChecker instance
  */

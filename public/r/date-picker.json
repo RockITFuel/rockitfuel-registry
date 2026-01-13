@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Date Picker",
   "description": "Date selection component with calendar",
-  "dependencies": [
-    "@ark-ui/solid",
-    "@internationalized/date"
-  ],
+  "dependencies": ["@ark-ui/solid", "@internationalized/date"],
   "files": [
     {
       "path": "components/ui/date-picker.tsx",

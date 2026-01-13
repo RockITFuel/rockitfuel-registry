@@ -25,7 +25,7 @@ export const initConvex = async (): Promise<ConvexClient> => {
 
     if (!CONVEX_URL) {
       throw new Error(
-        "CONVEX_URL is not configured. Please set the CONVEX_URL environment variable in your container/server.",
+        "CONVEX_URL is not configured. Please set the CONVEX_URL environment variable in your container/server."
       );
     }
 
@@ -42,7 +42,7 @@ export const initConvex = async (): Promise<ConvexClient> => {
 export function getConvexClient(): ConvexClient {
   if (!convexClientInstance) {
     throw new Error(
-      "Convex client not initialized. Call initConvex() first or ensure CONVEX_URL is set.",
+      "Convex client not initialized. Call initConvex() first or ensure CONVEX_URL is set."
     );
   }
   return convexClientInstance;
@@ -50,7 +50,7 @@ export function getConvexClient(): ConvexClient {
 
 // Optional: Setup function for auth
 export function setupConvexAuth(
-  fetchToken: (opts: { forceRefreshToken: boolean }) => Promise<string | null>,
+  fetchToken: (opts: { forceRefreshToken: boolean }) => Promise<string | null>
 ) {
   if (!convexClientInstance) {
     throw new Error("Convex client not initialized. Call initConvex() first.");

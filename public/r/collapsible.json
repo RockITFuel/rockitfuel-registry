@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Collapsible",
   "description": "Collapsible/accordion section",
-  "dependencies": [
-    "@kobalte/core"
-  ],
+  "dependencies": ["@kobalte/core"],
   "files": [
     {
       "path": "components/ui/collapsible.tsx",

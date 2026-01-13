@@ -4,10 +4,7 @@
   "type": "registry:lib",
   "title": "Date Utilities",
   "description": "Date conversion and parsing utilities for Dutch date format support",
-  "dependencies": [
-    "@internationalized/date",
-    "date-fns"
-  ],
+  "dependencies": ["@internationalized/date", "date-fns"],
   "files": [
     {
       "path": "lib/date-utils.ts",

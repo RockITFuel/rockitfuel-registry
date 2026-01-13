@@ -7,19 +7,19 @@
  * to avoid circular dependency issues during server function extraction.
  */
 export const getPublicEnv = (): Promise<{
-	CONVEX_URL: string;
+  CONVEX_URL: string;
 }> => {
-	"use server";
+  "use server";
 
-	const convexUrl = process.env.CONVEX_URL;
+  const convexUrl = process.env.CONVEX_URL;
 
-	if (!convexUrl) {
-		throw new Error(
-			"CONVEX_URL environment variable is not set. Please configure it in your deployment environment.",
-		);
-	}
+  if (!convexUrl) {
+    throw new Error(
+      "CONVEX_URL environment variable is not set. Please configure it in your deployment environment."
+    );
+  }
 
-	return Promise.resolve({
-		CONVEX_URL: convexUrl,
-	});
+  return Promise.resolve({
+    CONVEX_URL: convexUrl,
+  });
 };

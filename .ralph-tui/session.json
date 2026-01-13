@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "sessionId": "ad03bd81-c304-4d9b-a135-fa545b37f875",
+  "status": "running",
+  "startedAt": "2026-01-13T17:02:35.454Z",
+  "updatedAt": "2026-01-13T17:02:48.208Z",
+  "currentIteration": 0,
+  "maxIterations": 10,
+  "tasksCompleted": 0,
+  "isPaused": false,
+  "agentPlugin": "claude",
+  "trackerState": {
+    "plugin": "json",
+    "prdPath": "./tasks/prd.json",
+    "totalTasks": 12,
+    "tasks": [
+      {
+        "id": "US-001",
+        "title": "Add collapse state management",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-002",
+        "title": "Add chevron toggle icons to section headers",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-003",
+        "title": "Implement expand/collapse toggle on chevron click",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-004",
+        "title": "Persist collapse state to localStorage",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-005",
+        "title": "Section title navigates independently of collapse",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-006",
+        "title": "Install and configure Playwright",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-007",
+        "title": "Add Playwright npm scripts and test directory",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-008",
+        "title": "Playwright test: Default collapsed state",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-009",
+        "title": "Playwright test: Expand and collapse sections",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-010",
+        "title": "Playwright test: Multiple sections independent behavior",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-011",
+        "title": "Playwright test: LocalStorage persistence",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-012",
+        "title": "Playwright test: Section title navigation",
+        "status": "open",
+        "completedInSession": false
+      }
+    ]
+  },
+  "iterations": [],
+  "skippedTaskIds": [],
+  "cwd": "/home/luka/projects/rockitfuel-registry",
+  "activeTaskIds": ["US-001"],
+  "subagentPanelVisible": false
+}
