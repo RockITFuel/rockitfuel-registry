@@ -1,6 +1,9 @@
+import { useLocation } from "@solidjs/router";
 import type { ComponentProps } from "solid-js";
-import { splitProps } from "solid-js";
-
+import { createSignal, splitProps } from "solid-js";
+import { toast } from "solid-sonner";
+import { IconCheck, IconLink } from "~/components/icons";
+import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 
 export function PageHeader(props: ComponentProps<"section">) {
@@ -48,5 +51,25 @@ export function PageHeaderActions(props: ComponentProps<"div">) {
       )}
       {...others}
     />
+  );
+}
+
+export function CopyPageUrlButton() {
+  const location = useLocation();
+  const [copied, setCopied] = createSignal(false);
+
+  const copyUrl = async () => {
+    const url = window.location.origin + location.pathname;
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    toast.success("Page URL copied to clipboard");
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <Button class="h-8 gap-1.5" onClick={copyUrl} size="sm" variant="outline">
+      {copied() ? <IconCheck class="size-4" /> : <IconLink class="size-4" />}
+      <span>Copy Link</span>
+    </Button>
   );
 }

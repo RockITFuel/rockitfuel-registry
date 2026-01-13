@@ -3,7 +3,9 @@ import type { JSX } from "solid-js";
 import { Show } from "solid-js";
 import { InstallCommand } from "~/components/install-command";
 import {
+  CopyPageUrlButton,
   PageHeader,
+  PageHeaderActions,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "~/components/page-header";
@@ -25,6 +27,9 @@ export function ComponentPage(props: ComponentPageProps) {
       <PageHeader>
         <PageHeaderHeading>{props.title}</PageHeaderHeading>
         <PageHeaderDescription>{props.description}</PageHeaderDescription>
+        <PageHeaderActions>
+          <CopyPageUrlButton />
+        </PageHeaderActions>
       </PageHeader>
 
       <div class="space-y-8">

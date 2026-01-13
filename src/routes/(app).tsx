@@ -2,6 +2,7 @@ import { type ParentProps, Suspense } from "solid-js";
 
 import Footer from "~/components/footer";
 import Navbar from "~/components/navbar";
+import { Toaster } from "~/components/ui/sonner";
 
 export default function AppLayout(props: ParentProps) {
   return (
@@ -13,6 +14,7 @@ export default function AppLayout(props: ParentProps) {
         </div>
         <Footer />
       </div>
+      <Toaster />
     </div>
   );
 }
