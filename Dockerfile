@@ -1,11 +1,14 @@
 # RockITFuel Registry - Dockerfile for Coolify/Dokploy deployment
-# Multi-stage build for optimized production image
+# Using Node.js for compatibility with servers lacking AVX CPU support
 
 # ============================================================================
-# Base stage - Bun runtime
+# Base stage - Node.js runtime
 # ============================================================================
-FROM oven/bun:1 AS base
+FROM node:20-alpine AS base
 WORKDIR /app
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # ============================================================================
 # Dependencies stage - Install node_modules
@@ -13,10 +16,10 @@ WORKDIR /app
 FROM base AS deps
 
 # Copy package files
-COPY package.json bun.lock ./
+COPY package.json ./
 
-# Install dependencies
-RUN bun install --frozen-lockfile
+# Install dependencies using pnpm (generates its own lockfile)
+RUN pnpm install
 
 # ============================================================================
 # Builder stage - Build the application
@@ -30,15 +33,15 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build the registry JSON files
-RUN bun run build:registry
+RUN node scripts/build-registry.mjs
 
 # Build the SolidStart application
-RUN bun run build
+RUN pnpm run build
 
 # ============================================================================
 # Runner stage - Production image
 # ============================================================================
-FROM base AS runner
+FROM node:20-alpine AS runner
 WORKDIR /app
 
 # Set production environment
@@ -57,7 +60,7 @@ EXPOSE 3000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3000/ || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1
 
 # Start the application
-CMD ["bun", "run", ".output/server/index.mjs"]
+CMD ["node", ".output/server/index.mjs"]
