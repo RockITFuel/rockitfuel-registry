@@ -1,66 +1,52 @@
 # RockITFuel Registry - Dockerfile for Coolify/Dokploy deployment
-# Using Node.js for compatibility with servers lacking AVX CPU support
+# Hybrid build: Node.js for compilation (AVX-safe), Bun for runtime
 
 # ============================================================================
-# Base stage - Node.js runtime
+# Dependencies stage - Install with Bun (fast)
 # ============================================================================
-FROM node:20-alpine AS base
+FROM oven/bun:debian AS deps
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
 # ============================================================================
-# Dependencies stage - Install node_modules
+# Builder stage - Build with Node.js (AVX-compatible)
+# Bun's Vite integration crashes on CPUs without AVX during build
 # ============================================================================
-FROM base AS deps
+FROM node:20-slim AS builder
+WORKDIR /app
 
-# Copy package files
-COPY package.json ./
-
-# Install dependencies using pnpm (generates its own lockfile)
-RUN pnpm install
-
-# ============================================================================
-# Builder stage - Build the application
-# ============================================================================
-FROM base AS builder
-
-# Copy dependencies from deps stage
+# Copy dependencies
 COPY --from=deps /app/node_modules ./node_modules
-
-# Copy source code
 COPY . .
 
-# Build the registry JSON files
+# Build registry JSON files
 RUN node scripts/build-registry.mjs
 
-# Build the SolidStart application
-RUN pnpm run build
+# Build SolidStart application
+RUN npm run build
 
 # ============================================================================
-# Runner stage - Production image
+# Runner stage - Run with Bun (fast runtime)
 # ============================================================================
-FROM node:20-alpine AS runner
+FROM oven/bun:debian AS runner
 WORKDIR /app
 
-# Set production environment
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
 
+# Install curl for health check
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
 # Copy built output
 COPY --from=builder /app/.output ./.output
-
-# Copy public directory (contains registry JSON files)
 COPY --from=builder /app/public ./public
 
-# Expose port
 EXPOSE 3000
 
-# Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1
+  CMD curl -f http://localhost:3000/ || exit 1
 
-# Start the application
-CMD ["node", ".output/server/index.mjs"]
+CMD ["bun", "run", ".output/server/index.mjs"]
