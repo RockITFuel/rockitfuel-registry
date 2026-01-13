@@ -18,7 +18,7 @@ const [isOpen, setIsOpen] = makePersisted(createSignal(true), {
 type ExpandedSections = Record<string, boolean>;
 const [expandedSections, setExpandedSections] = makePersisted(
   createStore<ExpandedSections>({}),
-  { name: "sidebar-expanded-sections" }
+  { name: "sidebar-collapsed-sections" }
 );
 
 function useProviderValue() {
