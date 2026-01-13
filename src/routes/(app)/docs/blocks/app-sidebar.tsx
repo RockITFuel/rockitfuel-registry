@@ -101,7 +101,7 @@ function App() {
           <h1>My App</h1>
         </SidebarHeader>
         <SidebarContent>
-          <SidebarButtonList routes={routes} />
+          <SidebarButtonList id="main" routes={routes} />
         </SidebarContent>
       </SidebarContainer>
       <SidebarScreenContent>
