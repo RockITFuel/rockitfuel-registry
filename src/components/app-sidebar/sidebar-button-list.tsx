@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 import { ChevronDown, ChevronRight } from "lucide-solid";
 import { For, Show } from "solid-js";
 import type { Route } from "~/types/route";
@@ -15,23 +16,28 @@ export default function SidebarButtonList(props: SidebarButtonListProps) {
 
   return (
     <nav class="space-y-3">
-      <button
-        class="group flex w-full cursor-pointer items-center justify-between px-3 py-1.5 transition-colors hover:bg-accent/50"
-        onClick={() => toggleSection(props.id)}
-        type="button"
-      >
-        <span class="font-medium text-muted-foreground text-xs uppercase tracking-wider transition-colors group-hover:text-foreground dark:text-muted-foreground dark:group-hover:text-foreground">
-          {props.title || "Menu"}
-        </span>
-        <Show
-          fallback={
-            <ChevronRight class="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
-          }
-          when={isSectionExpanded(props.id)}
+      <div class="group flex w-full items-center justify-between px-3 py-1.5 transition-colors hover:bg-accent/50">
+        <A
+          class="cursor-pointer font-medium text-muted-foreground text-xs uppercase tracking-wider transition-colors group-hover:text-foreground dark:text-muted-foreground dark:group-hover:text-foreground"
+          href={props.routes[0]?.href ?? "#"}
         >
-          <ChevronDown class="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
-        </Show>
-      </button>
+          {props.title || "Menu"}
+        </A>
+        <button
+          class="cursor-pointer rounded p-0.5 transition-colors hover:bg-accent"
+          onClick={() => toggleSection(props.id)}
+          type="button"
+        >
+          <Show
+            fallback={
+              <ChevronRight class="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+            }
+            when={isSectionExpanded(props.id)}
+          >
+            <ChevronDown class="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+          </Show>
+        </button>
+      </div>
       <Show when={isSectionExpanded(props.id)}>
         <div class="space-y-1 px-2">
           <For each={props.routes}>
