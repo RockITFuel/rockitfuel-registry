@@ -27,7 +27,9 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "build:registry": "node scripts/build-registry.mjs"
+    "build:registry": "node scripts/build-registry.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@ark-ui/solid": "^5.25.1",
