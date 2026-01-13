@@ -3,6 +3,7 @@ import { A } from "@solidjs/router";
 import type { JSX } from "solid-js";
 import { For, Show } from "solid-js";
 import { CodeBlock } from "~/components/code-block";
+import { DependencyChips } from "~/components/dependency-chips";
 import { InstallCommand } from "~/components/install-command";
 import {
   CopyPageUrlButton,
@@ -11,7 +12,6 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "~/components/page-header";
-import { Badge } from "~/components/ui/badge";
 
 type Example = {
   title: string;
@@ -60,11 +60,7 @@ export function ComponentPage(props: ComponentPageProps) {
         <Show when={props.dependencies && props.dependencies.length > 0}>
           <section>
             <h2 class="mb-4 font-semibold text-xl">Dependencies</h2>
-            <div class="flex flex-wrap gap-2">
-              <For each={props.dependencies}>
-                {(dep) => <Badge variant="secondary">{dep}</Badge>}
-              </For>
-            </div>
+            <DependencyChips dependencies={props.dependencies} />
           </section>
         </Show>
 
