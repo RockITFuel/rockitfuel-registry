@@ -42,9 +42,9 @@ import {
 import { cn } from "~/lib/utils";
 import { Expandable } from "../helpers/expandable";
 import { Button } from "../ui/button";
-import { SuperLabel } from "./super-label";
+import { ModularLabel } from "./modular-label";
 
-type SuperDatePickerProps = Component<
+type ModularDatePickerProps = Component<
   Omit<ComponentProps<"input">, "value"> & {
     value?: number | Date;
     label?: string;
@@ -72,7 +72,7 @@ type SuperDatePickerProps = Component<
 >;
 
 /**
- * SuperDatePicker component that seamlessly converts between JavaScript Date objects
+ * ModularDatePicker component that seamlessly converts between JavaScript Date objects
  * (used by validation libraries) and @internationalized/date CalendarDate objects
  * (used by the Ark UI DatePicker component).
  *
@@ -90,7 +90,7 @@ type SuperDatePickerProps = Component<
  *
  * @returns A date picker component with proper type conversions
  */
-const SuperDatePicker: SuperDatePickerProps = (props) => {
+const ModularDatePicker: ModularDatePickerProps = (props) => {
   const [local, others] = splitProps(props, [
     "wrapperClass",
     "labelClass",
@@ -198,7 +198,7 @@ const SuperDatePicker: SuperDatePickerProps = (props) => {
 
   const inputId = () => {
     const prefix = local.prefixId ? `${local.prefixId}-` : "";
-    return `${prefix}${props.name}-super-date-picker`;
+    return `${prefix}${props.name}-modular-date-picker`;
   };
 
   // Handle input changes (user typing)
@@ -334,7 +334,7 @@ const SuperDatePicker: SuperDatePickerProps = (props) => {
 
   return (
     <div class={cn("w-full items-center space-y-1.5", local.wrapperClass)}>
-      <SuperLabel
+      <ModularLabel
         label={local.label}
         name={others.name}
         required={others.required}
@@ -550,4 +550,4 @@ const SuperDatePicker: SuperDatePickerProps = (props) => {
   );
 };
 
-export default SuperDatePicker;
+export default ModularDatePicker;

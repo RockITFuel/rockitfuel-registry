@@ -3,10 +3,10 @@ import type { Component, ComponentProps, JSX } from "solid-js";
 import { createEffect, createSignal, Show, splitProps } from "solid-js";
 import { Motion, Presence } from "solid-motionone";
 import { cn } from "~/lib/utils";
-import { SuperError } from "./super-error";
-import { SuperLabel } from "./super-label";
+import { ModularError } from "./modular-error";
+import { ModularLabel } from "./modular-label";
 
-const SuperInput: Component<
+const ModularInput: Component<
   ComponentProps<"input"> & {
     label?: string;
     error?: string;
@@ -54,16 +54,16 @@ const SuperInput: Component<
   const dispatchInputEvent = () => {
     //https://github.com/fabian-hiller/modular-forms/issues/221#issuecomment-2212450429
     const input = document.getElementById(
-      `${others.name}-super-input`
+      `${others.name}-modular-input`
     ) as HTMLInputElement;
     input.dispatchEvent(new Event("input", { bubbles: true, composed: true }));
   };
 
-  const inputId = () => `${others.name}-super-input`;
+  const inputId = () => `${others.name}-modular-input`;
 
   return (
     <div class={cn("w-full items-center space-y-1.5", local.wrapperClass)}>
-      <SuperLabel
+      <ModularLabel
         label={local.label}
         name={inputId()}
         required={others.required}
@@ -111,9 +111,9 @@ const SuperInput: Component<
           </Show>
         </Presence>
       </div>
-      <SuperError error={props.error} name={inputId()} />
+      <ModularError error={props.error} name={inputId()} />
     </div>
   );
 };
 
-export default SuperInput;
+export default ModularInput;

@@ -14,8 +14,8 @@ import { useBindSignal } from "~/hooks/use-bind-signal";
 import { cn } from "~/lib/utils";
 import { Expandable } from "../helpers/expandable";
 import { Button } from "../ui/button";
-import { SuperError } from "./super-error";
-import { SuperLabel } from "./super-label";
+import { ModularError } from "./modular-error";
+import { ModularLabel } from "./modular-label";
 
 type FileInputProps = {
   ref: (element: HTMLInputElement) => void;
@@ -44,7 +44,7 @@ type FileInputProps = {
  * decorations can be displayed in or around the field to communicate the entry
  * requirements.
  */
-export function FileInputList(props: FileInputProps) {
+export function ModularFileInputList(props: FileInputProps) {
   const [expanded, setExpanded] = useBindSignal({
     value: () => false,
   });
@@ -79,7 +79,7 @@ export function FileInputList(props: FileInputProps) {
 
   return (
     <div class={clsx("space-y-1.5", props.wrapperClass)}>
-      <SuperLabel
+      <ModularLabel
         class={props.labelClass}
         label={props.label}
         name={props.name}
@@ -152,7 +152,7 @@ export function FileInputList(props: FileInputProps) {
         </div>
       </Expandable>
 
-      <SuperError
+      <ModularError
         class={props.errorClass}
         error={props.error}
         name={props.name}

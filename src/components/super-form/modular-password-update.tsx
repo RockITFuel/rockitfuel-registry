@@ -3,10 +3,10 @@ import type { Component, ComponentProps } from "solid-js";
 import { createEffect, createSignal, Show, splitProps } from "solid-js";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
-import { SuperError } from "./super-error";
-import { SuperLabel } from "./super-label";
+import { ModularError } from "./modular-error";
+import { ModularLabel } from "./modular-label";
 
-const SuperPasswordUpdate: Component<
+const ModularPasswordUpdate: Component<
   ComponentProps<"input"> & {
     label?: string;
     error?: string;
@@ -45,7 +45,7 @@ const SuperPasswordUpdate: Component<
 
   const dispatchInputEvent = () => {
     const input = document.getElementById(
-      `${others.name}-super-password-update`
+      `${others.name}-modular-password-update`
     ) as HTMLInputElement;
     input.dispatchEvent(new Event("input", { bubbles: true, composed: true }));
   };
@@ -74,11 +74,11 @@ const SuperPasswordUpdate: Component<
     setCurrentValue(target.value);
   };
 
-  const inputId = () => `${others.name}-super-password-update`;
+  const inputId = () => `${others.name}-modular-password-update`;
 
   return (
     <div class={cn("w-full items-center space-y-1.5", local.wrapperClass)}>
-      <SuperLabel
+      <ModularLabel
         label={local.label}
         name={inputId()}
         required={others.required}
@@ -122,9 +122,9 @@ const SuperPasswordUpdate: Component<
       <Show when={local.helpText}>
         <p class="text-muted-foreground text-sm">{local.helpText}</p>
       </Show>
-      <SuperError error={props.error} name={inputId()} />
+      <ModularError error={props.error} name={inputId()} />
     </div>
   );
 };
 
-export default SuperPasswordUpdate;
+export default ModularPasswordUpdate;

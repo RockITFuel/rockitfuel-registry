@@ -23,9 +23,9 @@ import {
   ComboboxItemLabel,
   ComboboxTrigger,
 } from "../ui/combobox";
-import { SuperLabel } from "./super-label";
+import { ModularLabel } from "./modular-label";
 
-type SuperComboboxPropsBase = Omit<ComponentProps<"input">, "value"> & {
+type ModularComboboxPropsBase = Omit<ComponentProps<"input">, "value"> & {
   value?: ComponentProps<"input">["value"] | null;
   label?: string;
   clearable?: boolean;
@@ -42,7 +42,7 @@ type SuperComboboxPropsBase = Omit<ComponentProps<"input">, "value"> & {
   triggerMode?: ComboboxTriggerMode;
 };
 
-type SuperComboboxPropsWithOptions<T> = SuperComboboxPropsBase & {
+type ModularComboboxPropsWithOptions<T> = ModularComboboxPropsBase & {
   options: T[];
   lastActionOptions?: (T & { action: (v: T) => void; icon?: JSX.Element })[];
   firstActionOptions?: (T & { action: (v: T) => void; icon?: JSX.Element })[];
@@ -50,9 +50,9 @@ type SuperComboboxPropsWithOptions<T> = SuperComboboxPropsBase & {
   idSuffix?: string;
 };
 
-type SuperComboboxProps<T> = SuperComboboxPropsWithOptions<T>;
+type ModularComboboxProps<T> = ModularComboboxPropsWithOptions<T>;
 
-const SuperCombobox = <T,>(props: SuperComboboxProps<T>) => {
+const ModularCombobox = <T,>(props: ModularComboboxProps<T>) => {
   const [local, others] = splitProps(props, [
     "class",
     "label",
@@ -120,7 +120,7 @@ const SuperCombobox = <T,>(props: SuperComboboxProps<T>) => {
     //This doesnt work with playwright though
     //Need to have a onValueChange prop that is called when the value is changed
     const input = document.getElementById(
-      `${others.name}-super-combobox`
+      `${others.name}-modular-combobox`
     ) as HTMLInputElement;
     input.dispatchEvent(new Event("input", { bubbles: true, composed: true }));
   };
@@ -131,7 +131,7 @@ const SuperCombobox = <T,>(props: SuperComboboxProps<T>) => {
   return (
     <>
       <div class={cn("w-full items-center space-y-1.5", local.wrapperClass)}>
-        <SuperLabel
+        <ModularLabel
           label={local.label}
           name={others.name}
           required={others.required}
@@ -140,7 +140,7 @@ const SuperCombobox = <T,>(props: SuperComboboxProps<T>) => {
           disabled={others.disabled}
           itemComponent={(props) => (
             <ComboboxItem
-              data-test-id={`${idSuffic()}-super-combobox-item-${props.item.textValue}`}
+              data-test-id={`${idSuffic()}-modular-combobox-item-${props.item.textValue}`}
               item={props.item}
             >
               <ComboboxItemLabel class="flex items-center gap-2">
@@ -183,7 +183,7 @@ const SuperCombobox = <T,>(props: SuperComboboxProps<T>) => {
             {(state) => (
               <>
                 <ComboboxInput
-                  id={`${idSuffic()}-super-combobox-input`}
+                  id={`${idSuffic()}-modular-combobox-input`}
                   onInput={(e) => {
                     //@ts-expect-error
                     // setUISearchValue(e.target.value);
@@ -225,4 +225,4 @@ const SuperCombobox = <T,>(props: SuperComboboxProps<T>) => {
   );
 };
 
-export default SuperCombobox;
+export default ModularCombobox;

@@ -3,9 +3,9 @@ import { splitProps } from "solid-js";
 
 import { cn } from "~/lib/utils";
 import { Expandable } from "../helpers/expandable";
-import { SuperLabel } from "./super-label";
+import { ModularLabel } from "./modular-label";
 
-const SuperTextArea: Component<
+const ModularTextArea: Component<
   Omit<ComponentProps<"textarea">, "value" | "error"> & {
     value?: ComponentProps<"textarea">["value"] | null;
     label?: string;
@@ -27,11 +27,11 @@ const SuperTextArea: Component<
     "disableResize",
   ]);
 
-  const textAreaId = () => `${others.name}-super-text-area`;
+  const textAreaId = () => `${others.name}-modular-text-area`;
 
   return (
     <div class={cn("w-full items-center space-y-1.5", local.wrapperClass)}>
-      <SuperLabel
+      <ModularLabel
         label={local.label}
         name={textAreaId()}
         required={others.required}
@@ -58,4 +58,4 @@ const SuperTextArea: Component<
   );
 };
 
-export { SuperTextArea };
+export { ModularTextArea };

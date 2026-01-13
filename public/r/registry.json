@@ -22,9 +22,9 @@
       "description": "Responsive sidebar navigation with mobile support, keyboard shortcuts, and theme toggle"
     },
     {
-      "name": "super-form",
-      "type": "registry:block",
-      "title": "Super Form",
+      "name": "modular-form",
+      "type": "registry:modular",
+      "title": "Modular Form",
       "description": "Form components integrated with @modular-forms/solid - includes input, select, combobox, date picker, color picker, and more"
     },
     {

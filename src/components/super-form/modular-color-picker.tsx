@@ -24,10 +24,10 @@ import {
   ColorPickerValueSwatch,
   ColorPickerView,
 } from "../ui/color-picker";
-import { SuperError } from "./super-error";
-import { SuperLabel } from "./super-label";
+import { ModularError } from "./modular-error";
+import { ModularLabel } from "./modular-label";
 
-type SuperColorPickerProps = Omit<ComponentProps<"input">, "value"> & {
+type ModularColorPickerProps = Omit<ComponentProps<"input">, "value"> & {
   value?: string;
   label?: string;
   error?: string;
@@ -43,7 +43,7 @@ type SuperColorPickerProps = Omit<ComponentProps<"input">, "value"> & {
   alphaDisabled?: boolean;
 };
 
-const SuperColorPicker: Component<SuperColorPickerProps> = (props) => {
+const ModularColorPicker: Component<ModularColorPickerProps> = (props) => {
   const [local, others] = splitProps(props, [
     "class",
     "label",
@@ -90,7 +90,7 @@ const SuperColorPicker: Component<SuperColorPickerProps> = (props) => {
 
   return (
     <div class={cn("w-full items-center space-y-1.5", local.wrapperClass)}>
-      <SuperLabel
+      <ModularLabel
         class={local.labelClass}
         label={local.label}
         name={local.name}
@@ -194,7 +194,7 @@ const SuperColorPicker: Component<SuperColorPickerProps> = (props) => {
         <ColorPickerHiddenInput {...others} name={local.name} />
       </ColorPicker.Root>
 
-      <SuperError
+      <ModularError
         class={local.errorClass}
         error={local.error}
         name={local.name}
@@ -203,4 +203,4 @@ const SuperColorPicker: Component<SuperColorPickerProps> = (props) => {
   );
 };
 
-export default SuperColorPicker;
+export default ModularColorPicker;

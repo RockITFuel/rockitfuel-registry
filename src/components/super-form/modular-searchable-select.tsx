@@ -11,9 +11,9 @@ import {
 import { cn } from "~/lib/utils";
 import { Expandable } from "../helpers/expandable";
 import { SearchableSelect } from "../ui/searchable-select";
-import { SuperLabel } from "./super-label";
+import { ModularLabel } from "./modular-label";
 
-type SuperSearchableSelectPropsBase<T> = Omit<
+type ModularSearchableSelectPropsBase<T> = Omit<
   ComponentProps<"input">,
   "value" | "onChange"
 > & {
@@ -57,26 +57,26 @@ type SuperSearchableSelectPropsBase<T> = Omit<
   contentClass?: string;
 };
 
-type SuperSearchableSelectPropsWithOptions<T> =
-  SuperSearchableSelectPropsBase<T> & {
+type ModularSearchableSelectPropsWithOptions<T> =
+  ModularSearchableSelectPropsBase<T> & {
     options: T[];
     queryFn?: never;
     queryFnParams?: never;
   };
 
-type SuperSearchableSelectPropsWithQueryFn<T> =
-  SuperSearchableSelectPropsBase<T> & {
+type ModularSearchableSelectPropsWithQueryFn<T> =
+  ModularSearchableSelectPropsBase<T> & {
     queryFn: (params: { where?: Record<string, unknown> }) => Promise<T[]>;
     queryFnParams?: { where?: Record<string, unknown> };
     options?: never;
   };
 
-export type SuperSearchableSelectProps<T> =
-  | SuperSearchableSelectPropsWithOptions<T>
-  | SuperSearchableSelectPropsWithQueryFn<T>;
+export type ModularSearchableSelectProps<T> =
+  | ModularSearchableSelectPropsWithOptions<T>
+  | ModularSearchableSelectPropsWithQueryFn<T>;
 
-export function SuperSearchableSelect<T extends Record<string, unknown>>(
-  props: SuperSearchableSelectProps<T>
+export function ModularSearchableSelect<T extends Record<string, unknown>>(
+  props: ModularSearchableSelectProps<T>
 ): JSX.Element {
   const [local, others] = splitProps(props, [
     "class",
@@ -201,7 +201,7 @@ export function SuperSearchableSelect<T extends Record<string, unknown>>(
   // Dispatch events to notify modular-forms
   const dispatchInputEvent = () => {
     const input = document.getElementById(
-      `${others.name}-super-searchable-select`
+      `${others.name}-modular-searchable-select`
     ) as HTMLInputElement;
     if (input) {
       input.dispatchEvent(
@@ -236,12 +236,12 @@ export function SuperSearchableSelect<T extends Record<string, unknown>>(
       <input
         {...others}
         class="!h-0"
-        id={`${others.name}-super-searchable-select`}
+        id={`${others.name}-modular-searchable-select`}
         type="hidden"
         value={getHiddenInputValue()}
       />
       <div class={cn("w-full items-center space-y-1.5", local.wrapperClass)}>
-        <SuperLabel
+        <ModularLabel
           class={local.labelClass}
           label={local.label}
           name={others.name}
@@ -279,4 +279,4 @@ export function SuperSearchableSelect<T extends Record<string, unknown>>(
   );
 }
 
-export default SuperSearchableSelect;
+export default ModularSearchableSelect;

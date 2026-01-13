@@ -86,7 +86,7 @@ export const docsConfig: Config = {
           href: "/docs/blocks/app-sidebar",
           status: "new",
         },
-        { title: "Super Form", href: "/docs/blocks/super-form", status: "new" },
+        { title: "Modular Form", href: "/docs/blocks/modular-form", status: "new" },
         { title: "Helpers", href: "/docs/blocks/helpers" },
       ],
     },
@@ -107,6 +107,11 @@ export const docsConfig: Config = {
       items: [
         { title: "useBindSignal", href: "/docs/hooks/use-bind-signal" },
         { title: "useLoading", href: "/docs/hooks/use-loading" },
+        {
+          title: "useValidatedSearchParams",
+          href: "/docs/hooks/use-validated-search-params",
+          status: "new",
+        },
       ],
     },
   ],

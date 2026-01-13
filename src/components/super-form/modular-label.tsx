@@ -17,7 +17,7 @@ type InputLabelProps = {
 /**
  * Input label for a form field.
  */
-export function SuperLabel(props: InputLabelProps) {
+export function ModularLabel(props: InputLabelProps) {
   return (
     <Show when={props.label}>
       <label

@@ -115,9 +115,9 @@
       ]
     },
     {
-      "name": "super-form",
-      "type": "registry:block",
-      "title": "Super Form",
+      "name": "modular-form",
+      "type": "registry:modular",
+      "title": "Modular Form",
       "description": "Form components integrated with @modular-forms/solid - includes input, select, combobox, date picker, color picker, and more",
       "dependencies": [
         "@modular-forms/solid",
@@ -129,84 +129,84 @@
       ],
       "files": [
         {
-          "path": "src/components/super-form/super-input.tsx",
+          "path": "src/components/super-form/modular-input.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-input.tsx"
+          "target": "components/modular-form/modular-input.tsx"
         },
         {
-          "path": "src/components/super-form/super-text-area.tsx",
+          "path": "src/components/super-form/modular-text-area.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-text-area.tsx"
+          "target": "components/modular-form/modular-text-area.tsx"
         },
         {
-          "path": "src/components/super-form/super-select.tsx",
+          "path": "src/components/super-form/modular-select.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-select.tsx"
+          "target": "components/modular-form/modular-select.tsx"
         },
         {
-          "path": "src/components/super-form/super-searchable-select.tsx",
+          "path": "src/components/super-form/modular-searchable-select.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-searchable-select.tsx"
+          "target": "components/modular-form/modular-searchable-select.tsx"
         },
         {
-          "path": "src/components/super-form/super-combobox.tsx",
+          "path": "src/components/super-form/modular-combobox.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-combobox.tsx"
+          "target": "components/modular-form/modular-combobox.tsx"
         },
         {
-          "path": "src/components/super-form/super-date-picker.tsx",
+          "path": "src/components/super-form/modular-date-picker.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-date-picker.tsx"
+          "target": "components/modular-form/modular-date-picker.tsx"
         },
         {
-          "path": "src/components/super-form/super-color-picker.tsx",
+          "path": "src/components/super-form/modular-color-picker.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-color-picker.tsx"
+          "target": "components/modular-form/modular-color-picker.tsx"
         },
         {
-          "path": "src/components/super-form/super-checkbox.tsx",
+          "path": "src/components/super-form/modular-checkbox.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-checkbox.tsx"
+          "target": "components/modular-form/modular-checkbox.tsx"
         },
         {
-          "path": "src/components/super-form/super-file-input-list.tsx",
+          "path": "src/components/super-form/modular-file-input-list.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-file-input-list.tsx"
+          "target": "components/modular-form/modular-file-input-list.tsx"
         },
         {
-          "path": "src/components/super-form/super-password-update.tsx",
+          "path": "src/components/super-form/modular-password-update.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-password-update.tsx"
+          "target": "components/modular-form/modular-password-update.tsx"
         },
         {
-          "path": "src/components/super-form/super-label.tsx",
+          "path": "src/components/super-form/modular-label.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-label.tsx"
+          "target": "components/modular-form/modular-label.tsx"
         },
         {
-          "path": "src/components/super-form/super-error.tsx",
+          "path": "src/components/super-form/modular-error.tsx",
           "type": "registry:component",
-          "target": "components/super-form/super-error.tsx"
+          "target": "components/modular-form/modular-error.tsx"
         },
         {
           "path": "src/components/super-form/modular-forms-select.tsx",
           "type": "registry:component",
-          "target": "components/super-form/modular-forms-select.tsx"
+          "target": "components/modular-form/modular-forms-select.tsx"
         },
         {
           "path": "src/components/super-form/modular-forms-combobox.tsx",
           "type": "registry:component",
-          "target": "components/super-form/modular-forms-combobox.tsx"
+          "target": "components/modular-form/modular-forms-combobox.tsx"
         },
         {
           "path": "src/components/super-form/modular-forms-toggle-button.tsx",
           "type": "registry:component",
-          "target": "components/super-form/modular-forms-toggle-button.tsx"
+          "target": "components/modular-form/modular-forms-toggle-button.tsx"
         },
         {
           "path": "src/components/super-form/modular-forms-toggle-button-group.tsx",
           "type": "registry:component",
-          "target": "components/super-form/modular-forms-toggle-button-group.tsx"
+          "target": "components/modular-form/modular-forms-toggle-button-group.tsx"
         }
       ]
     },

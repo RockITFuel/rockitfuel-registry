@@ -1,7 +1,7 @@
 import { cn } from "~/lib/utils";
 import { Expandable } from "../helpers/expandable";
 
-type SuperErrorProps = {
+type ModularErrorProps = {
   name: string;
   error?: string;
   class?: string;
@@ -10,7 +10,7 @@ type SuperErrorProps = {
 /**
  * Input error that tells the user what to do to fix the problem.
  */
-export function SuperError(props: SuperErrorProps) {
+export function ModularError(props: ModularErrorProps) {
   return (
     <Expandable expanded={!!props.error}>
       <div

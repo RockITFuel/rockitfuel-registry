@@ -23,7 +23,7 @@ type CheckboxProps = {
   errorClass?: string;
 };
 
-const SuperCheckbox: Component<CheckboxProps> = (props) => {
+const ModularCheckbox: Component<CheckboxProps> = (props) => {
   const [extraProps, remainingProps] = splitProps(props, [
     "label",
     "helperText",
@@ -51,7 +51,7 @@ const SuperCheckbox: Component<CheckboxProps> = (props) => {
           }}
         >
           <CheckboxPrimitive.Input
-            id={`${rootProps.name}-super-checkbox`}
+            id={`${rootProps.name}-modular-checkbox`}
             {...rootProps}
             {...inputProps}
             disabled={props.disabled}
@@ -63,10 +63,10 @@ const SuperCheckbox: Component<CheckboxProps> = (props) => {
               "peer size-4 shrink-0 cursor-pointer rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[checked]:border-none data-[checked]:bg-primary data-[checked]:text-primary-foreground",
               props.disabled && "cursor-not-allowed opacity-50"
             )}
-            id={`${rootProps.name}-super-checkbox-control`}
+            id={`${rootProps.name}-modular-checkbox-control`}
           >
             <CheckboxPrimitive.Indicator
-              id={`${rootProps.name}-super-checkbox-indicator`}
+              id={`${rootProps.name}-modular-checkbox-indicator`}
             >
               <svg
                 aria-label="Checked"
@@ -121,4 +121,4 @@ const SuperCheckbox: Component<CheckboxProps> = (props) => {
   );
 };
 
-export default SuperCheckbox;
+export default ModularCheckbox;

@@ -8,21 +8,27 @@ import {
 } from "~/components/page-header";
 
 const components = [
-  { name: "super-input", description: "Text input with label and validation" },
-  { name: "super-text-area", description: "Multi-line text input" },
-  { name: "super-select", description: "Select dropdown" },
   {
-    name: "super-searchable-select",
+    name: "modular-input",
+    description: "Text input with label and validation",
+  },
+  { name: "modular-text-area", description: "Multi-line text input" },
+  { name: "modular-select", description: "Select dropdown" },
+  {
+    name: "modular-searchable-select",
     description: "Searchable select with filtering",
   },
-  { name: "super-combobox", description: "Combobox with autocomplete" },
-  { name: "super-date-picker", description: "Date selection with calendar" },
-  { name: "super-color-picker", description: "Color selection" },
-  { name: "super-checkbox", description: "Checkbox with label" },
-  { name: "super-file-input-list", description: "Multiple file upload" },
-  { name: "super-password-update", description: "Password change form" },
-  { name: "super-label", description: "Form field label" },
-  { name: "super-error", description: "Error message display" },
+  { name: "modular-combobox", description: "Combobox with autocomplete" },
+  {
+    name: "modular-date-picker",
+    description: "Date selection with calendar",
+  },
+  { name: "modular-color-picker", description: "Color selection" },
+  { name: "modular-checkbox", description: "Checkbox with label" },
+  { name: "modular-file-input-list", description: "Multiple file upload" },
+  { name: "modular-password-update", description: "Password change form" },
+  { name: "modular-label", description: "Form field label" },
+  { name: "modular-error", description: "Error message display" },
   {
     name: "modular-forms-select",
     description: "Select integrated with modular-forms",
@@ -38,13 +44,13 @@ const components = [
   },
 ];
 
-export default function SuperFormPage() {
+export default function ModularFormPage() {
   return (
     <>
-      <Title>Super Form - ArchiTechs Registry</Title>
+      <Title>Modular Form - ArchiTechs Registry</Title>
 
       <PageHeader>
-        <PageHeaderHeading>Super Form</PageHeaderHeading>
+        <PageHeaderHeading>Modular Form</PageHeaderHeading>
         <PageHeaderDescription>
           A comprehensive set of form components integrated with
           @modular-forms/solid for validation and state management. Includes 16
@@ -55,7 +61,7 @@ export default function SuperFormPage() {
       <div class="space-y-8">
         <section>
           <h2 class="mb-4 font-semibold text-xl">Installation</h2>
-          <InstallCommand component="super-form" />
+          <InstallCommand component="modular-form" />
         </section>
 
         <section>

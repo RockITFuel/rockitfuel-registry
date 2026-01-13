@@ -17,9 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { SuperLabel } from "./super-label";
+import { ModularLabel } from "./modular-label";
 
-type SuperSelectPropsBase<T> = Omit<ComponentProps<"input">, "value"> & {
+type ModularSelectPropsBase<T> = Omit<ComponentProps<"input">, "value"> & {
   value?: ComponentProps<"input">["value"] | null;
   label?: string;
   onValueChange?: (v: T | null) => void;
@@ -35,22 +35,22 @@ type SuperSelectPropsBase<T> = Omit<ComponentProps<"input">, "value"> & {
   errorClass?: string;
 };
 
-type SuperSelectPropsWithOptions<T> = SuperSelectPropsBase<T> & {
+type ModularSelectPropsWithOptions<T> = ModularSelectPropsBase<T> & {
   options: any[];
   queryFn?: never; // Ensure queryFn is not provided when options are provided
 };
 
-type SuperSelectPropsWithQueryFn<T> = SuperSelectPropsBase<T> & {
+type ModularSelectPropsWithQueryFn<T> = ModularSelectPropsBase<T> & {
   queryFn: (params: { where?: any }) => Promise<any[]>;
   queryFnParams?: { where?: any };
   options?: never; // Ensure options is not provided when queryFn is provided
 };
 
-type SuperSelectProps<T> =
-  | SuperSelectPropsWithOptions<T>
-  | SuperSelectPropsWithQueryFn<T>;
+type ModularSelectProps<T> =
+  | ModularSelectPropsWithOptions<T>
+  | ModularSelectPropsWithQueryFn<T>;
 
-const SuperSelect = <T,>(props: SuperSelectProps<T>): JSX.Element => {
+const ModularSelect = <T,>(props: ModularSelectProps<T>): JSX.Element => {
   const [local, others] = splitProps(props, [
     "class",
     "label",
@@ -109,7 +109,7 @@ const SuperSelect = <T,>(props: SuperSelectProps<T>): JSX.Element => {
           setValue(found);
           //https://github.com/fabian-hiller/modular-forms/issues/221#issuecomment-2212450429
           const input = document.getElementById(
-            `${others.name}-super-select`
+            `${others.name}-modular-select`
           ) as HTMLInputElement;
           input.dispatchEvent(
             new Event("input", { bubbles: true, composed: true })
@@ -125,12 +125,12 @@ const SuperSelect = <T,>(props: SuperSelectProps<T>): JSX.Element => {
       <input
         {...others}
         class="!h-0"
-        id={`${others.name}-super-select`}
+        id={`${others.name}-modular-select`}
         type="hidden"
         value={getValue()}
       />
       <div class={cn("w-full items-center space-y-1.5", local.wrapperClass)}>
-        <SuperLabel
+        <ModularLabel
           label={local.label}
           name={others.name}
           required={others.required}
@@ -149,7 +149,7 @@ const SuperSelect = <T,>(props: SuperSelectProps<T>): JSX.Element => {
             }
             //https://github.com/fabian-hiller/modular-forms/issues/221#issuecomment-2212450429
             const input = document.getElementById(
-              `${others.name}-super-select`
+              `${others.name}-modular-select`
             ) as HTMLInputElement;
             if (input)
               input.dispatchEvent(
@@ -194,4 +194,4 @@ const SuperSelect = <T,>(props: SuperSelectProps<T>): JSX.Element => {
   );
 };
 
-export default SuperSelect;
+export default ModularSelect;
