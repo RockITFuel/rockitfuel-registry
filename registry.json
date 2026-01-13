@@ -1,8 +1,45 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "acme",
-  "homepage": "https://acme.com",
+  "name": "rockitfuel",
+  "homepage": "https://solid-registry.coolify.wearearchitechs.dev",
   "items": [
+    {
+      "name": "gatehouse",
+      "type": "registry:lib",
+      "title": "Gatehouse",
+      "description": "A flexible, zero-dependencies authorization TypeScript library supporting RBAC, ABAC, and ReBAC",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "src/registry/new-york/lib/gatehouse/gatehouse.ts",
+          "type": "registry:lib",
+          "target": "lib/gatehouse.ts"
+        }
+      ]
+    },
+    {
+      "name": "gatehouse-demo",
+      "type": "registry:block",
+      "title": "Gatehouse Demo",
+      "description": "Interactive demo showing RBAC, ABAC, and ReBAC authorization policies with evaluation tracing",
+      "dependencies": [
+        "@/registry/new-york/lib/gatehouse",
+        "@/registry/new-york/ui/card",
+        "@/registry/new-york/ui/button"
+      ],
+      "files": [
+        {
+          "path": "src/registry/new-york/blocks/gatehouse-demo/page.tsx",
+          "type": "registry:page",
+          "target": "routes/gatehouse-demo.tsx"
+        },
+        {
+          "path": "src/registry/new-york/blocks/gatehouse-demo/lib/demo-policies.ts",
+          "type": "registry:lib",
+          "target": "lib/demo-policies.ts"
+        }
+      ]
+    },
     {
       "name": "hello-world",
       "type": "registry:block",

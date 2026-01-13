@@ -1,6 +1,25 @@
 {
-  "name": "shadcn-solid-registry-template",
+  "name": "rockitfuel-registry",
   "version": "0.1.0",
+  "description": "RockITFuel shadcn component registry for SolidJS - featuring Gatehouse authorization library",
+  "author": "RockITFuel",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RockITFuel/rockitfuel-registry"
+  },
+  "homepage": "https://solid-registry.coolify.wearearchitechs.dev",
+  "keywords": [
+    "solidjs",
+    "shadcn",
+    "registry",
+    "components",
+    "gatehouse",
+    "authorization",
+    "rbac",
+    "abac",
+    "rebac"
+  ],
   "type": "module",
   "scripts": {
     "format": "bunx -b ultracite@latest fix",
