@@ -1,0 +1,48 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "rockitfuel-categories",
+  "categories": [
+    {
+      "name": "components",
+      "title": "UI Components",
+      "description": "Reusable UI components built with SolidJS and Kobalte",
+      "type": "registry:ui"
+    },
+    {
+      "name": "modular",
+      "title": "Modular Forms",
+      "description": "Form components integrated with @modular-forms/solid",
+      "type": "registry:modular"
+    },
+    {
+      "name": "blocks",
+      "title": "Blocks",
+      "description": "Pre-built, composable component blocks for common patterns",
+      "type": "registry:block"
+    },
+    {
+      "name": "charts",
+      "title": "Charts",
+      "description": "Data visualization components",
+      "type": "registry:chart"
+    },
+    {
+      "name": "libraries",
+      "title": "Libraries",
+      "description": "Standalone utility libraries",
+      "type": "registry:lib"
+    },
+    {
+      "name": "hooks",
+      "title": "Hooks",
+      "description": "Custom SolidJS reactive primitives",
+      "type": "registry:hook"
+    },
+    {
+      "name": "functions",
+      "title": "Functions",
+      "description": "Utility functions and helpers",
+      "type": "registry:function"
+    }
+  ]
+}
