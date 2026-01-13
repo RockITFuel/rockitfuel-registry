@@ -10,64 +10,220 @@
       "description": "A flexible, zero-dependencies authorization TypeScript library supporting RBAC, ABAC, and ReBAC"
     },
     {
-      "name": "gatehouse-demo",
-      "type": "registry:block",
-      "title": "Gatehouse Demo",
-      "description": "Interactive demo showing RBAC, ABAC, and ReBAC authorization policies with evaluation tracing"
+      "name": "solid-convex",
+      "type": "registry:lib",
+      "title": "Solid Convex",
+      "description": "Reactive Convex integration for SolidJS with caching, optimistic updates, and SSR support"
     },
     {
-      "name": "hello-world",
+      "name": "app-sidebar",
       "type": "registry:block",
-      "title": "Hello World",
-      "description": "A simple hello world component"
+      "title": "App Sidebar",
+      "description": "Responsive sidebar navigation with mobile support, keyboard shortcuts, and theme toggle"
     },
     {
-      "name": "example-form",
+      "name": "super-form",
       "type": "registry:block",
-      "title": "Example Form",
-      "description": "A contact form with Zod validation"
+      "title": "Super Form",
+      "description": "Form components integrated with @modular-forms/solid - includes input, select, combobox, date picker, color picker, and more"
     },
     {
-      "name": "complex-component",
+      "name": "helpers",
       "type": "registry:block",
-      "title": "Complex Component",
-      "description": "A complex component showing hooks, libs and components"
+      "title": "Helper Components",
+      "description": "Utility components for actions, empty states, loading states, and more"
     },
     {
-      "name": "example-with-css",
-      "type": "registry:block",
-      "title": "Example with CSS",
-      "description": "A login form with a CSS file"
+      "name": "date-utils",
+      "type": "registry:lib",
+      "title": "Date Utilities",
+      "description": "Date conversion and parsing utilities for Dutch date format support"
+    },
+    {
+      "name": "use-bind-signal",
+      "type": "registry:hook",
+      "title": "useBindSignal",
+      "description": "Two-way binding hook for controlled components in SolidJS"
+    },
+    {
+      "name": "use-loading",
+      "type": "registry:hook",
+      "title": "useLoading",
+      "description": "Loading state hook with delayed activation to prevent flicker"
     },
     {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "A button component"
+      "description": "Button component with variants, loading state, and button group support"
     },
     {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "A card component"
+      "description": "Card container component"
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Modal dialog component"
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Dropdown menu with submenus, radio groups, and checkboxes"
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Select dropdown component"
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Searchable dropdown with autocomplete"
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Date selection component with calendar"
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "Full-featured color picker with swatches and channel sliders"
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Table component"
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Tabbed interface component"
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Tooltip component"
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Popover component"
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Slide-out panel/drawer component"
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Checkbox input component"
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Toggle switch component"
     },
     {
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "An input component"
+      "description": "Text input component"
     },
     {
-      "name": "label",
+      "name": "separator",
       "type": "registry:ui",
-      "title": "Label",
-      "description": "A label component"
+      "title": "Separator",
+      "description": "Visual separator/divider"
     },
     {
-      "name": "textarea",
+      "name": "badge",
       "type": "registry:ui",
-      "title": "Textarea",
-      "description": "A textarea component"
+      "title": "Badge",
+      "description": "Badge/tag component"
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "User avatar component"
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Alert/notification component"
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Progress bar component"
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Loading skeleton placeholder"
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "Toast notifications using sonner"
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Image/content carousel"
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Collapsible/accordion section"
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Command palette/menu (cmdk-style)"
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Right-click context menu"
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Card that appears on hover"
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Navigation breadcrumb trail"
     }
   ]
 }

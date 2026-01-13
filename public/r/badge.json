@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "title": "Badge",
+  "description": "Badge/tag component",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "type": "registry:ui",
+      "content": "import type { VariantProps } from \"class-variance-authority\";\nimport { cva } from \"class-variance-authority\";\nimport type { Component, ComponentProps } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\n\nimport { cn } from \"~/lib/utils\";\n\nconst badgeVariants = cva(\n\t\"inline-flex items-center rounded-md border px-2.5 py-0.5 font-semibold text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",\n\t{\n\t\tvariants: {\n\t\t\tvariant: {\n\t\t\t\tdefault: \"border-transparent bg-primary text-primary-foreground\",\n\t\t\t\tsecondary: \"border-transparent bg-secondary text-secondary-foreground\",\n\t\t\t\toutline: \"text-foreground\",\n\t\t\t\tsuccess: \"border-success-foreground bg-success text-success-foreground\",\n\t\t\t\twarning: \"border-warning-foreground bg-warning text-warning-foreground\",\n\t\t\t\terror: \"border-error-foreground bg-error text-error-foreground\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: {\n\t\t\tvariant: \"default\",\n\t\t},\n\t},\n);\n\ntype BadgeProps = ComponentProps<\"div\"> &\n\tVariantProps<typeof badgeVariants> & {\n\t\tround?: boolean;\n\t};\n\nconst Badge: Component<BadgeProps> = (props) => {\n\tconst [local, others] = splitProps(props, [\"class\", \"variant\", \"round\"]);\n\treturn (\n\t\t<div\n\t\t\tclass={cn(\n\t\t\t\tbadgeVariants({ variant: local.variant }),\n\t\t\t\tlocal.round && \"rounded-full\",\n\t\t\t\tlocal.class,\n\t\t\t)}\n\t\t\t{...others}\n\t\t/>\n\t);\n};\n\nexport type { BadgeProps };\nexport { Badge, badgeVariants };\n"
+    }
+  ]
+}

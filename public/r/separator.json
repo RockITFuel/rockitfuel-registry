@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "type": "registry:ui",
+  "title": "Separator",
+  "description": "Visual separator/divider",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "components/ui/separator.tsx",
+      "type": "registry:ui",
+      "content": "import type { PolymorphicProps } from \"@kobalte/core/polymorphic\";\nimport * as SeparatorPrimitive from \"@kobalte/core/separator\";\nimport type { ValidComponent } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\n\nimport { cn } from \"~/lib/utils\";\n\ntype SeparatorRootProps<T extends ValidComponent = \"hr\"> =\n\tSeparatorPrimitive.SeparatorRootProps<T> & { class?: string | undefined };\n\nconst Separator = <T extends ValidComponent = \"hr\">(\n\tprops: PolymorphicProps<T, SeparatorRootProps<T>>,\n) => {\n\tconst [local, others] = splitProps(props as SeparatorRootProps, [\n\t\t\"class\",\n\t\t\"orientation\",\n\t]);\n\treturn (\n\t\t<SeparatorPrimitive.Root\n\t\t\tclass={cn(\n\t\t\t\t\"shrink-0 bg-border\",\n\t\t\t\tlocal.orientation === \"vertical\" ? \"h-full w-px\" : \"h-px w-full\",\n\t\t\t\tlocal.class,\n\t\t\t)}\n\t\t\torientation={local.orientation ?? \"horizontal\"}\n\t\t\t{...others}\n\t\t/>\n\t);\n};\n\nexport { Separator };\n"
+    }
+  ]
+}

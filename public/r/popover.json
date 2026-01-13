@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "popover",
+  "type": "registry:ui",
+  "title": "Popover",
+  "description": "Popover component",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "components/ui/popover.tsx",
+      "type": "registry:ui",
+      "content": "import type { PolymorphicProps } from \"@kobalte/core/polymorphic\";\nimport * as PopoverPrimitive from \"@kobalte/core/popover\";\nimport type { Component, ValidComponent } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\n\nimport { cn } from \"~/lib/utils\";\n\nconst PopoverTrigger = PopoverPrimitive.Trigger;\n\nconst Popover: Component<PopoverPrimitive.PopoverRootProps> = (props) => (\n\t<PopoverPrimitive.Root gutter={4} {...props} />\n);\n\ntype PopoverContentProps = PopoverPrimitive.PopoverContentProps & {\n\tclass?: string | undefined;\n};\n\nconst PopoverContent = <T extends ValidComponent = \"div\">(\n\tprops: PolymorphicProps<T, PopoverContentProps>,\n) => {\n\tconst [local, others] = splitProps(props as PopoverContentProps, [\"class\"]);\n\treturn (\n\t\t<PopoverPrimitive.Portal>\n\t\t\t<PopoverPrimitive.Content\n\t\t\t\tclass={cn(\n\t\t\t\t\t\"data-[closed]:fade-out-0 data-[expanded]:fade-in-0 data-[closed]:zoom-out-95 data-[expanded]:zoom-in-95 z-50 w-72 origin-[var(--kb-popover-content-transform-origin)] rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[closed]:animate-out data-[expanded]:animate-in\",\n\t\t\t\t\tlocal.class,\n\t\t\t\t)}\n\t\t\t\t{...others}\n\t\t\t/>\n\t\t</PopoverPrimitive.Portal>\n\t);\n};\n\nexport { Popover, PopoverTrigger, PopoverContent };\n"
+    }
+  ]
+}

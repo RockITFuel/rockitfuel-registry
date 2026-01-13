@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "User avatar component",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "components/ui/avatar.tsx",
+      "type": "registry:ui",
+      "content": "import * as ImagePrimitive from \"@kobalte/core/image\";\nimport type { PolymorphicProps } from \"@kobalte/core/polymorphic\";\nimport type { ValidComponent } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\n\nimport { cn } from \"~/lib/utils\";\n\ntype AvatarRootProps<T extends ValidComponent = \"span\"> =\n\tImagePrimitive.ImageRootProps<T> & {\n\t\tclass?: string | undefined;\n\t};\n\nconst Avatar = <T extends ValidComponent = \"span\">(\n\tprops: PolymorphicProps<T, AvatarRootProps<T>>,\n) => {\n\tconst [local, others] = splitProps(props as AvatarRootProps, [\"class\"]);\n\treturn (\n\t\t<ImagePrimitive.Root\n\t\t\tclass={cn(\n\t\t\t\t\"relative flex size-10 shrink-0 overflow-hidden rounded-full\",\n\t\t\t\tlocal.class,\n\t\t\t)}\n\t\t\t{...others}\n\t\t/>\n\t);\n};\n\ntype AvatarImageProps<T extends ValidComponent = \"img\"> =\n\tImagePrimitive.ImageImgProps<T> & {\n\t\tclass?: string | undefined;\n\t};\n\nconst AvatarImage = <T extends ValidComponent = \"img\">(\n\tprops: PolymorphicProps<T, AvatarImageProps<T>>,\n) => {\n\tconst [local, others] = splitProps(props as AvatarImageProps, [\"class\"]);\n\treturn (\n\t\t<ImagePrimitive.Img\n\t\t\tclass={cn(\"aspect-square size-full\", local.class)}\n\t\t\t{...others}\n\t\t/>\n\t);\n};\n\ntype AvatarFallbackProps<T extends ValidComponent = \"span\"> =\n\tImagePrimitive.ImageFallbackProps<T> & { class?: string | undefined };\n\nconst AvatarFallback = <T extends ValidComponent = \"span\">(\n\tprops: PolymorphicProps<T, AvatarFallbackProps<T>>,\n) => {\n\tconst [local, others] = splitProps(props as AvatarFallbackProps, [\"class\"]);\n\treturn (\n\t\t<ImagePrimitive.Fallback\n\t\t\tclass={cn(\n\t\t\t\t\"flex size-full items-center justify-center bg-muted\",\n\t\t\t\tlocal.class,\n\t\t\t)}\n\t\t\t{...others}\n\t\t/>\n\t);\n};\n\nexport { Avatar, AvatarImage, AvatarFallback };\n"
+    }
+  ]
+}

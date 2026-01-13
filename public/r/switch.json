@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "title": "Switch",
+  "description": "Toggle switch component",
+  "dependencies": [
+    "@kobalte/core"
+  ],
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "type": "registry:ui",
+      "content": "import type { PolymorphicProps } from \"@kobalte/core\";\nimport * as SwitchPrimitive from \"@kobalte/core/switch\";\nimport type { JSX, ValidComponent } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\n\nimport { cn } from \"~/lib/utils\";\n\nconst Switch = SwitchPrimitive.Root;\nconst SwitchDescription = SwitchPrimitive.Description;\nconst SwitchErrorMessage = SwitchPrimitive.ErrorMessage;\n\ntype SwitchControlProps = SwitchPrimitive.SwitchControlProps & {\n\tclass?: string | undefined;\n\tchildren?: JSX.Element;\n};\n\nconst SwitchControl = <T extends ValidComponent = \"input\">(\n\tprops: PolymorphicProps<T, SwitchControlProps>,\n) => {\n\tconst [local, others] = splitProps(props as SwitchControlProps, [\n\t\t\"class\",\n\t\t\"children\",\n\t]);\n\treturn (\n\t\t<>\n\t\t\t<SwitchPrimitive.Input\n\t\t\t\tclass={cn(\n\t\t\t\t\t\"[&:focus-visible+div]:outline-none [&:focus-visible+div]:ring-2 [&:focus-visible+div]:ring-ring [&:focus-visible+div]:ring-offset-2 [&:focus-visible+div]:ring-offset-background\",\n\t\t\t\t\tlocal.class,\n\t\t\t\t)}\n\t\t\t/>\n\t\t\t<SwitchPrimitive.Control\n\t\t\t\tclass={cn(\n\t\t\t\t\t\"inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent bg-input transition-[color,background-color,box-shadow] data-[disabled]:cursor-not-allowed data-[checked]:bg-primary data-[disabled]:opacity-50\",\n\t\t\t\t\tlocal.class,\n\t\t\t\t)}\n\t\t\t\t{...others}\n\t\t\t>\n\t\t\t\t{local.children}\n\t\t\t</SwitchPrimitive.Control>\n\t\t</>\n\t);\n};\n\ntype SwitchThumbProps = SwitchPrimitive.SwitchThumbProps & {\n\tclass?: string | undefined;\n};\n\nconst SwitchThumb = <T extends ValidComponent = \"div\">(\n\tprops: PolymorphicProps<T, SwitchThumbProps>,\n) => {\n\tconst [local, others] = splitProps(props as SwitchThumbProps, [\"class\"]);\n\treturn (\n\t\t<SwitchPrimitive.Thumb\n\t\t\tclass={cn(\n\t\t\t\t\"pointer-events-none block size-5 translate-x-0 rounded-full bg-background shadow-lg ring-0 transition-transform data-[checked]:translate-x-5\",\n\t\t\t\tlocal.class,\n\t\t\t)}\n\t\t\t{...others}\n\t\t/>\n\t);\n};\n\ntype SwitchLabelProps = SwitchPrimitive.SwitchLabelProps & {\n\tclass?: string | undefined;\n};\n\nconst SwitchLabel = <T extends ValidComponent = \"label\">(\n\tprops: PolymorphicProps<T, SwitchLabelProps>,\n) => {\n\tconst [local, others] = splitProps(props as SwitchLabelProps, [\"class\"]);\n\treturn (\n\t\t<SwitchPrimitive.Label\n\t\t\tclass={cn(\n\t\t\t\t\"font-medium text-sm leading-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-70\",\n\t\t\t\tlocal.class,\n\t\t\t)}\n\t\t\t{...others}\n\t\t/>\n\t);\n};\n\nexport {\n\tSwitch,\n\tSwitchControl,\n\tSwitchThumb,\n\tSwitchLabel,\n\tSwitchDescription,\n\tSwitchErrorMessage,\n};\n"
+    }
+  ]
+}

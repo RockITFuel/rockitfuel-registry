@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "title": "Skeleton",
+  "description": "Loading skeleton placeholder",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "type": "registry:ui",
+      "content": "import type { PolymorphicProps } from \"@kobalte/core/polymorphic\";\nimport * as SkeletonPrimitive from \"@kobalte/core/skeleton\";\nimport type { ValidComponent } from \"solid-js\";\nimport { splitProps } from \"solid-js\";\n\nimport { cn } from \"~/lib/utils\";\n\ntype SkeletonRootProps<T extends ValidComponent = \"div\"> =\n\tSkeletonPrimitive.SkeletonRootProps<T> & { class?: string | undefined };\n\nconst Skeleton = <T extends ValidComponent = \"div\">(\n\tprops: PolymorphicProps<T, SkeletonRootProps<T>>,\n) => {\n\tconst [local, others] = splitProps(props as SkeletonRootProps, [\"class\"]);\n\treturn (\n\t\t<SkeletonPrimitive.Root\n\t\t\tclass={cn(\n\t\t\t\t\"bg-primary/10 data-[animate='true']:animate-pulse\",\n\t\t\t\tlocal.class,\n\t\t\t)}\n\t\t\t{...others}\n\t\t/>\n\t);\n};\n\nexport { Skeleton };\n"
+    }
+  ]
+}

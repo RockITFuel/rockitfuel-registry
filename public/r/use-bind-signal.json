@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-bind-signal",
+  "type": "registry:hook",
+  "title": "useBindSignal",
+  "description": "Two-way binding hook for controlled components in SolidJS",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "hooks/use-bind-signal.ts",
+      "type": "registry:hook",
+      "content": "import { type Accessor, createEffect, createSignal, on } from \"solid-js\";\n\nexport type BindSignal<T> = {\n\tvalue: Accessor<T> | (() => T);\n\tsetValue?: (value: T) => void;\n};\n\nexport type ComponentBindSignalProps<T> = {\n\tvalue?: Accessor<T> | (() => T);\n\tsetValue?: (value: T) => void;\n};\n\nexport function useBindSignal<T>(props: BindSignal<T>) {\n\tconst [internalValue, setInternalValue] = createSignal<T>(props?.value?.());\n\t// When the external value changes, update the internal value\n\tcreateEffect(\n\t\ton(props.value, () => {\n\t\t\tsetInternalValue(() => props.value());\n\t\t}),\n\t);\n\t// When the internal value changes, update the external value\n\tcreateEffect(\n\t\ton(internalValue, () => {\n\t\t\tprops.setValue?.(internalValue());\n\t\t}),\n\t);\n\n\treturn [internalValue, setInternalValue] as const;\n}\n"
+    }
+  ]
+}

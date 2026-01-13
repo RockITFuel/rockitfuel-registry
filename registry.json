@@ -18,112 +18,285 @@
       ]
     },
     {
-      "name": "gatehouse-demo",
-      "type": "registry:block",
-      "title": "Gatehouse Demo",
-      "description": "Interactive demo showing RBAC, ABAC, and ReBAC authorization policies with evaluation tracing",
-      "dependencies": [
-        "@/registry/new-york/lib/gatehouse",
-        "@/registry/new-york/ui/card",
-        "@/registry/new-york/ui/button"
-      ],
+      "name": "solid-convex",
+      "type": "registry:lib",
+      "title": "Solid Convex",
+      "description": "Reactive Convex integration for SolidJS with caching, optimistic updates, and SSR support",
+      "dependencies": ["convex", "@solid-primitives/map"],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/gatehouse-demo/page.tsx",
-          "type": "registry:page",
-          "target": "routes/gatehouse-demo.tsx"
-        },
-        {
-          "path": "src/registry/new-york/blocks/gatehouse-demo/lib/demo-policies.ts",
+          "path": "src/lib/solid-convex/index.tsx",
           "type": "registry:lib",
-          "target": "lib/demo-policies.ts"
-        }
-      ]
-    },
-    {
-      "name": "hello-world",
-      "type": "registry:block",
-      "title": "Hello World",
-      "description": "A simple hello world component",
-      "dependencies": ["@/registry/new-york/ui/button"],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/hello-world/hello-world.tsx",
-          "type": "registry:component",
-          "target": "components/hello-world.tsx"
-        }
-      ]
-    },
-    {
-      "name": "example-form",
-      "type": "registry:block",
-      "title": "Example Form",
-      "description": "A contact form with Zod validation",
-      "dependencies": [
-        "zod",
-        "@/registry/new-york/ui/button",
-        "@/registry/new-york/ui/input",
-        "@/registry/new-york/ui/label",
-        "@/registry/new-york/ui/textarea",
-        "@/registry/new-york/ui/card"
-      ],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/example-form/example-form.tsx",
-          "type": "registry:component",
-          "target": "components/example-form.tsx"
-        }
-      ]
-    },
-    {
-      "name": "complex-component",
-      "type": "registry:block",
-      "title": "Complex Component",
-      "description": "A complex component showing hooks, libs and components",
-      "dependencies": ["zod", "@/registry/new-york/ui/card"],
-      "files": [
-        {
-          "path": "src/registry/new-york/blocks/complex-component/page.tsx",
-          "type": "registry:page",
-          "target": "app/pokemon/page.tsx"
+          "target": "lib/solid-convex/index.tsx"
         },
         {
-          "path": "src/registry/new-york/blocks/complex-component/components/pokemon-card.tsx",
-          "type": "registry:component",
-          "target": "components/pokemon-card.tsx"
-        },
-        {
-          "path": "src/registry/new-york/blocks/complex-component/components/pokemon-image.tsx",
-          "type": "registry:component",
-          "target": "components/pokemon-image.tsx"
-        },
-        {
-          "path": "src/registry/new-york/blocks/complex-component/lib/pokemon.ts",
+          "path": "src/lib/solid-convex/convex-client.ts",
           "type": "registry:lib",
-          "target": "lib/pokemon.ts"
+          "target": "lib/solid-convex/convex-client.ts"
         },
         {
-          "path": "src/registry/new-york/blocks/complex-component/hooks/use-pokemon.ts",
+          "path": "src/lib/solid-convex/server.ts",
+          "type": "registry:lib",
+          "target": "lib/solid-convex/server.ts"
+        }
+      ]
+    },
+    {
+      "name": "app-sidebar",
+      "type": "registry:block",
+      "title": "App Sidebar",
+      "description": "Responsive sidebar navigation with mobile support, keyboard shortcuts, and theme toggle",
+      "dependencies": ["@solid-primitives/storage", "@kobalte/core", "lucide-solid"],
+      "files": [
+        {
+          "path": "src/components/app-sidebar/index.ts",
+          "type": "registry:lib",
+          "target": "components/app-sidebar/index.ts"
+        },
+        {
+          "path": "src/components/app-sidebar/sidebar-provider.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/sidebar-provider.tsx"
+        },
+        {
+          "path": "src/components/app-sidebar/sidebar-container.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/sidebar-container.tsx"
+        },
+        {
+          "path": "src/components/app-sidebar/sidebar-content.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/sidebar-content.tsx"
+        },
+        {
+          "path": "src/components/app-sidebar/sidebar-header.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/sidebar-header.tsx"
+        },
+        {
+          "path": "src/components/app-sidebar/sidebar-footer.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/sidebar-footer.tsx"
+        },
+        {
+          "path": "src/components/app-sidebar/sidebar-trigger.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/sidebar-trigger.tsx"
+        },
+        {
+          "path": "src/components/app-sidebar/sidebar-button.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/sidebar-button.tsx"
+        },
+        {
+          "path": "src/components/app-sidebar/sidebar-button-list.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/sidebar-button-list.tsx"
+        },
+        {
+          "path": "src/components/app-sidebar/sidebar-user.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/sidebar-user.tsx"
+        },
+        {
+          "path": "src/components/app-sidebar/side-bar-seperator.tsx",
+          "type": "registry:component",
+          "target": "components/app-sidebar/side-bar-seperator.tsx"
+        },
+        {
+          "path": "src/types/route.ts",
+          "type": "registry:lib",
+          "target": "types/route.ts"
+        }
+      ]
+    },
+    {
+      "name": "super-form",
+      "type": "registry:block",
+      "title": "Super Form",
+      "description": "Form components integrated with @modular-forms/solid - includes input, select, combobox, date picker, color picker, and more",
+      "dependencies": ["@modular-forms/solid", "@ark-ui/solid", "@internationalized/date", "date-fns", "solid-motionone", "debounce"],
+      "files": [
+        {
+          "path": "src/components/super-form/super-input.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-input.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-text-area.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-text-area.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-select.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-select.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-searchable-select.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-searchable-select.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-combobox.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-combobox.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-date-picker.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-date-picker.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-color-picker.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-color-picker.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-checkbox.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-checkbox.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-file-input-list.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-file-input-list.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-password-update.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-password-update.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-label.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-label.tsx"
+        },
+        {
+          "path": "src/components/super-form/super-error.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/super-error.tsx"
+        },
+        {
+          "path": "src/components/super-form/modular-forms-select.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/modular-forms-select.tsx"
+        },
+        {
+          "path": "src/components/super-form/modular-forms-combobox.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/modular-forms-combobox.tsx"
+        },
+        {
+          "path": "src/components/super-form/modular-forms-toggle-button.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/modular-forms-toggle-button.tsx"
+        },
+        {
+          "path": "src/components/super-form/modular-forms-toggle-button-group.tsx",
+          "type": "registry:component",
+          "target": "components/super-form/modular-forms-toggle-button-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "helpers",
+      "type": "registry:block",
+      "title": "Helper Components",
+      "description": "Utility components for actions, empty states, loading states, and more",
+      "dependencies": ["debounce", "lucide-solid"],
+      "files": [
+        {
+          "path": "src/components/helpers/action-wrapper.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/action-wrapper.tsx"
+        },
+        {
+          "path": "src/components/helpers/action-button.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/action-button.tsx"
+        },
+        {
+          "path": "src/components/helpers/empty-state.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/empty-state.tsx"
+        },
+        {
+          "path": "src/components/helpers/empty-table.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/empty-table.tsx"
+        },
+        {
+          "path": "src/components/helpers/loading-table.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/loading-table.tsx"
+        },
+        {
+          "path": "src/components/helpers/expandable.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/expandable.tsx"
+        },
+        {
+          "path": "src/components/helpers/re-route.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/re-route.tsx"
+        },
+        {
+          "path": "src/components/helpers/role-badge.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/role-badge.tsx"
+        },
+        {
+          "path": "src/components/helpers/upsert-dialog-trigger.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/upsert-dialog-trigger.tsx"
+        },
+        {
+          "path": "src/components/helpers/date-range-with-popover.tsx",
+          "type": "registry:component",
+          "target": "components/helpers/date-range-with-popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-utils",
+      "type": "registry:lib",
+      "title": "Date Utilities",
+      "description": "Date conversion and parsing utilities for Dutch date format support",
+      "dependencies": ["@internationalized/date", "date-fns"],
+      "files": [
+        {
+          "path": "src/lib/date-utils.ts",
+          "type": "registry:lib",
+          "target": "lib/date-utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-bind-signal",
+      "type": "registry:hook",
+      "title": "useBindSignal",
+      "description": "Two-way binding hook for controlled components in SolidJS",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "src/hooks/use-bind-signal.ts",
           "type": "registry:hook",
-          "target": "hooks/use-pokemon.ts"
+          "target": "hooks/use-bind-signal.ts"
         }
       ]
     },
     {
-      "name": "example-with-css",
-      "type": "registry:block",
-      "title": "Example with CSS",
-      "description": "A login form with a CSS file",
+      "name": "use-loading",
+      "type": "registry:hook",
+      "title": "useLoading",
+      "description": "Loading state hook with delayed activation to prevent flicker",
+      "dependencies": [],
       "files": [
         {
-          "path": "src/registry/new-york/blocks/example-with-css/example-card.tsx",
-          "type": "registry:component",
-          "target": "components/example-card.tsx"
-        },
-        {
-          "path": "src/registry/new-york/blocks/example-with-css/example-card.css",
-          "type": "registry:style",
-          "target": "components/example-card.css"
+          "path": "src/hooks/use-loading.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-loading.ts"
         }
       ]
     },
@@ -131,11 +304,11 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "A button component",
-      "dependencies": ["class-variance-authority"],
+      "description": "Button component with variants, loading state, and button group support",
+      "dependencies": ["@kobalte/core", "class-variance-authority", "lucide-solid"],
       "files": [
         {
-          "path": "src/registry/new-york/ui/button.tsx",
+          "path": "src/components/ui/button.tsx",
           "type": "registry:ui",
           "target": "components/ui/button.tsx"
         }
@@ -145,12 +318,195 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "A card component",
+      "description": "Card container component",
+      "dependencies": [],
       "files": [
         {
-          "path": "src/registry/new-york/ui/card.tsx",
+          "path": "src/components/ui/card.tsx",
           "type": "registry:ui",
           "target": "components/ui/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Modal dialog component",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Dropdown menu with submenus, radio groups, and checkboxes",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Select dropdown component",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Searchable dropdown with autocomplete",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/combobox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/combobox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Date selection component with calendar",
+      "dependencies": ["@ark-ui/solid", "@internationalized/date"],
+      "files": [
+        {
+          "path": "src/components/ui/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/date-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "Full-featured color picker with swatches and channel sliders",
+      "dependencies": ["@ark-ui/solid"],
+      "files": [
+        {
+          "path": "src/components/ui/color-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/color-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Table component",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Tabbed interface component",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Tooltip component",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Popover component",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Slide-out panel/drawer component",
+      "dependencies": ["@kobalte/core", "class-variance-authority"],
+      "files": [
+        {
+          "path": "src/components/ui/sheet.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sheet.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Checkbox input component",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Toggle switch component",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch.tsx"
         }
       ]
     },
@@ -158,38 +514,195 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "An input component",
+      "description": "Text input component",
+      "dependencies": [],
       "files": [
         {
-          "path": "src/registry/new-york/ui/input.tsx",
+          "path": "src/components/ui/input.tsx",
           "type": "registry:ui",
           "target": "components/ui/input.tsx"
         }
       ]
     },
     {
-      "name": "label",
+      "name": "separator",
       "type": "registry:ui",
-      "title": "Label",
-      "description": "A label component",
+      "title": "Separator",
+      "description": "Visual separator/divider",
+      "dependencies": ["@kobalte/core"],
       "files": [
         {
-          "path": "src/registry/new-york/ui/label.tsx",
+          "path": "src/components/ui/separator.tsx",
           "type": "registry:ui",
-          "target": "components/ui/label.tsx"
+          "target": "components/ui/separator.tsx"
         }
       ]
     },
     {
-      "name": "textarea",
+      "name": "badge",
       "type": "registry:ui",
-      "title": "Textarea",
-      "description": "A textarea component",
+      "title": "Badge",
+      "description": "Badge/tag component",
+      "dependencies": ["class-variance-authority"],
       "files": [
         {
-          "path": "src/registry/new-york/ui/textarea.tsx",
+          "path": "src/components/ui/badge.tsx",
           "type": "registry:ui",
-          "target": "components/ui/textarea.tsx"
+          "target": "components/ui/badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "User avatar component",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/avatar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Alert/notification component",
+      "dependencies": ["class-variance-authority"],
+      "files": [
+        {
+          "path": "src/components/ui/alert.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Progress bar component",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/progress.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/progress.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Loading skeleton placeholder",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "Toast notifications using sonner",
+      "dependencies": ["solid-sonner"],
+      "files": [
+        {
+          "path": "src/components/ui/sonner.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sonner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Image/content carousel",
+      "dependencies": ["embla-carousel-solid"],
+      "files": [
+        {
+          "path": "src/components/ui/carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Collapsible/accordion section",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/collapsible.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Command palette/menu (cmdk-style)",
+      "dependencies": ["cmdk-solid"],
+      "files": [
+        {
+          "path": "src/components/ui/command.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/command.tsx"
+        }
+      ]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Right-click context menu",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/context-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/context-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Card that appears on hover",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/hover-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hover-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Navigation breadcrumb trail",
+      "dependencies": ["@kobalte/core"],
+      "files": [
+        {
+          "path": "src/components/ui/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/breadcrumb.tsx"
         }
       ]
     }

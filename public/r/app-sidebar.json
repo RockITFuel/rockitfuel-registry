@@ -1,0 +1,74 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "app-sidebar",
+  "type": "registry:block",
+  "title": "App Sidebar",
+  "description": "Responsive sidebar navigation with mobile support, keyboard shortcuts, and theme toggle",
+  "dependencies": [
+    "@solid-primitives/storage",
+    "@kobalte/core",
+    "lucide-solid"
+  ],
+  "files": [
+    {
+      "path": "components/app-sidebar/index.ts",
+      "type": "registry:lib",
+      "content": "export { SidebarProvider, useSidebar } from \"./sidebar-provider\";\nexport { default as SidebarContainer, SideNavBarBreadcrumb } from \"./sidebar-container\";\nexport { default as SidebarContent } from \"./sidebar-content\";\nexport { default as SidebarHeader } from \"./sidebar-header\";\nexport { default as SidebarFooter } from \"./sidebar-footer\";\nexport { SidebarTrigger } from \"./sidebar-trigger\";\nexport { default as SidebarButton } from \"./sidebar-button\";\nexport { default as SidebarButtonList } from \"./sidebar-button-list\";\nexport { default as SidebarUser } from \"./sidebar-user\";\nexport { default as SideBarSeperator } from \"./side-bar-seperator\";\n"
+    },
+    {
+      "path": "components/app-sidebar/sidebar-provider.tsx",
+      "type": "registry:component",
+      "content": "import { makePersisted } from \"@solid-primitives/storage\";\nimport {\n  Accessor,\n  createContext,\n  createSignal,\n  onCleanup,\n  onMount,\n  ParentProps,\n  useContext,\n} from \"solid-js\";\n\nconst [isOpen, setIsOpen] = makePersisted(createSignal(true), {\n  name: \"sidebar-open\",\n});\n\nfunction useProviderValue() {\n  const [isMobile, setIsMobile] = createSignal(false);\n\n  const toggle = () => setIsOpen((prev) => !prev);\n  const close = () => setIsOpen(false);\n\n  onMount(() => {\n    // Mobile detection using matchMedia\n    const mediaQuery = window.matchMedia(\"(max-width: 767px)\");\n    setIsMobile(mediaQuery.matches);\n\n    const handleMediaChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);\n    mediaQuery.addEventListener(\"change\", handleMediaChange);\n\n    // Keyboard shortcut: Cmd/Ctrl + B\n    const handleKeydown = (e: KeyboardEvent) => {\n      if ((e.metaKey || e.ctrlKey) && e.key === \"b\") {\n        e.preventDefault();\n        toggle();\n      }\n    };\n    document.addEventListener(\"keydown\", handleKeydown);\n\n    onCleanup(() => {\n      mediaQuery.removeEventListener(\"change\", handleMediaChange);\n      document.removeEventListener(\"keydown\", handleKeydown);\n    });\n  });\n\n  return {\n    isOpen,\n    setIsOpen,\n    toggle,\n    close,\n    isMobile: isMobile as Accessor<boolean>,\n  };\n}\n\nexport type ContextType = ReturnType<typeof useProviderValue>;\n\nconst SidebarContext = createContext<ContextType | undefined>(undefined);\n\nexport const SidebarProvider = (props: ParentProps) => {\n  const value = useProviderValue();\n  return (\n    <SidebarContext.Provider value={value}>\n      {props.children}\n    </SidebarContext.Provider>\n  );\n};\n\nexport const useSidebar = () => {\n  const context = useContext(SidebarContext);\n  if (!context)\n    throw new Error(\"useSidebar must be used within a SidebarProvider\");\n  return context;\n};\n"
+    },
+    {
+      "path": "components/app-sidebar/sidebar-container.tsx",
+      "type": "registry:component",
+      "content": "import { createSignal, JSX, onMount, Show } from \"solid-js\";\nimport { useSidebar } from \"./sidebar-provider\";\nimport { SidebarTrigger } from \"./sidebar-trigger\";\nimport { cn } from \"~/lib/utils\";\n\ntype SidebarContainerProps = {\n  children: JSX.Element;\n  appContent: JSX.Element;\n  enableBreadcrumbs?: boolean;\n};\n\nconst [breadcrumbs, setBreadcrumbs] = createSignal<JSX.Element>(<></>);\n\nexport default function SidebarContainer(props: SidebarContainerProps) {\n  const { isOpen, isMobile, close } = useSidebar();\n\n  const handleBackdropClick = () => {\n    if (isMobile()) {\n      close();\n    }\n  };\n\n  return (\n    <div class=\"flex flex-row w-full h-screen relative\">\n      {/* Mobile Backdrop Overlay */}\n      <Show when={isMobile() && isOpen()}>\n        <div\n          class=\"fixed inset-0 z-40 bg-black/50 transition-opacity duration-300\"\n          onClick={handleBackdropClick}\n          aria-hidden=\"true\"\n        />\n      </Show>\n\n      {/* Sidebar */}\n      <div\n        class={cn(\n          \"flex flex-col h-screen transition-all duration-300 bg-background\",\n          // Mobile: fixed overlay from left\n          \"fixed inset-y-0 left-0 z-50 md:relative md:z-auto\",\n          // Width and visibility\n          isOpen()\n            ? \"w-72\"\n            : \"-translate-x-full md:translate-x-0 md:w-0 md:overflow-hidden\"\n        )}\n      >\n        {props.children}\n      </div>\n\n      {/* Main Content Area */}\n      <div class=\"flex-1 h-screen p-2 overflow-y-auto\">\n        <div class=\"min-h-full w-full bg-card dark:bg-card rounded-2xl shadow-md dark:shadow-none dark:border dark:border-border flex flex-col\">\n          <div class=\"border-b border-border py-3 px-3 flex items-center gap-4\">\n            <SidebarTrigger />\n            <div class=\"w-full\">\n              <span class=\"text-base font-medium text-foreground\" data-testid=\"page-title\">\n                {breadcrumbs()}\n              </span>\n            </div>\n          </div>\n          {props.appContent}\n        </div>\n      </div>\n    </div>\n  );\n}\n\nexport function SideNavBarBreadcrumb(props: { children: JSX.Element }) {\n  onMount(() => {\n    setBreadcrumbs(props.children);\n  });\n  return null;\n}\n"
+    },
+    {
+      "path": "components/app-sidebar/sidebar-content.tsx",
+      "type": "registry:component",
+      "content": "import { JSX } from \"solid-js\";\nimport { cn } from \"~/lib/utils\";\n\ntype SidebarContentProps = {\n  children: JSX.Element;\n  class?: string;\n};\n\nexport default function SidebarContent(props: SidebarContentProps) {\n  return (\n    <div class={cn(\"flex-1 w-full flex flex-col py-6 min-h-0 overflow-y-auto\", props.class)}>\n      {props.children}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "components/app-sidebar/sidebar-header.tsx",
+      "type": "registry:component",
+      "content": "import { JSX } from \"solid-js\";\n\ntype SidebarHeaderProps = {\n  children: JSX.Element;\n};\n\nexport default function SidebarHeader(props: SidebarHeaderProps) {\n  return <div class=\"flex-none w-full\">{props.children}</div>;\n}\n"
+    },
+    {
+      "path": "components/app-sidebar/sidebar-footer.tsx",
+      "type": "registry:component",
+      "content": "import { JSX } from \"solid-js\";\n\ntype SidebarFooterProps = {\n  children: JSX.Element;\n};\n\nexport default function SidebarFooter(props: SidebarFooterProps) {\n  return <div class=\"flex-none w-full\">{props.children}</div>;\n}\n"
+    },
+    {
+      "path": "components/app-sidebar/sidebar-trigger.tsx",
+      "type": "registry:component",
+      "content": "import { PanelLeft } from \"lucide-solid\";\nimport { Button } from \"~/components/ui/button\";\nimport { useSidebar } from \"./sidebar-provider\";\n\nexport function SidebarTrigger() {\n  const { toggle } = useSidebar();\n  return (\n    <Button variant=\"ghost\" size=\"icon\" onClick={toggle}>\n      <PanelLeft class=\"h-4 w-4\" />\n    </Button>\n  );\n}\n"
+    },
+    {
+      "path": "components/app-sidebar/sidebar-button.tsx",
+      "type": "registry:component",
+      "content": "import { A, useLocation } from \"@solidjs/router\";\nimport { Component, createMemo, Show } from \"solid-js\";\nimport { Button } from \"~/components/ui/button\";\n\nexport type SidebarButtonProps = {\n  title: string;\n  href: string;\n  icon: Component;\n};\n\nexport default function SidebarButton(props: SidebarButtonProps) {\n  const location = useLocation();\n\n  const isActiveRoute = createMemo(() => {\n    return location.pathname.startsWith(props.href);\n  });\n\n  return (\n    <Button\n      as={A}\n      href={props.href}\n      variant=\"ghost\"\n      class=\"w-full justify-start gap-3 px-3 py-2 h-9 rounded-lg transition-all duration-300 ease-out group relative overflow-hidden border border-transparent\"\n      classList={{\n        \"bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground shadow-lg shadow-primary/25 border-primary/20 dark:shadow-primary/10\":\n          isActiveRoute(),\n        \"hover:bg-gradient-to-r hover:from-accent/80 hover:to-accent/60 hover:shadow-md hover:shadow-accent/20 hover:border-accent/20 dark:hover:from-accent/60 dark:hover:to-accent/40\":\n          !isActiveRoute(),\n      }}\n    >\n      {/* Active indicator */}\n      <Show when={isActiveRoute()}>\n        <div class=\"absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary-foreground dark:bg-primary-foreground rounded-r-full shadow-sm\" />\n      </Show>\n\n      <div class=\"relative z-10 flex items-center gap-2 w-full\">\n        <div\n          class=\"flex items-center justify-center w-5 h-5 rounded-md transition-all duration-300\"\n          classList={{\n            \"bg-primary-foreground/20 dark:bg-primary-foreground/30\":\n              isActiveRoute(),\n            \"bg-muted/50 group-hover:bg-primary/10 dark:bg-muted/30 dark:group-hover:bg-primary/20\":\n              !isActiveRoute(),\n          }}\n        >\n          <props.icon\n            class=\"h-3.5 w-3.5 transition-all duration-300 group-hover:scale-110\"\n            classList={{\n              \"text-primary-foreground dark:text-primary-foreground\":\n                isActiveRoute(),\n              \"text-muted-foreground group-hover:text-primary dark:text-muted-foreground dark:group-hover:text-primary\":\n                !isActiveRoute(),\n            }}\n          />\n        </div>\n        <span\n          class=\"text-sm font-medium tracking-wide truncate transition-all duration-300 group-hover:translate-x-0.5\"\n          classList={{\n            \"text-primary-foreground dark:text-primary-foreground\":\n              isActiveRoute(),\n            \"text-foreground group-hover:text-foreground dark:text-foreground dark:group-hover:text-foreground\":\n              !isActiveRoute(),\n          }}\n        >\n          {props.title}\n        </span>\n      </div>\n\n      {/* Subtle glow effect for active state */}\n      <Show when={isActiveRoute()}>\n        <div class=\"absolute inset-0 bg-gradient-to-r from-white/10 to-transparent dark:from-white/5 rounded-lg\" />\n      </Show>\n    </Button>\n  );\n}\n"
+    },
+    {
+      "path": "components/app-sidebar/sidebar-button-list.tsx",
+      "type": "registry:component",
+      "content": "import { For } from \"solid-js\";\nimport SidebarButton from \"./sidebar-button\";\nimport type { Route } from \"~/types/route\";\n\nexport type SidebarButtonListProps = {\n  title?: string;\n  routes: Route[];\n};\n\nexport default function SidebarButtonList(props: SidebarButtonListProps) {\n  return (\n    <nav class=\"space-y-3\">\n      <div class=\"px-3 py-1.5\">\n        <span class=\"text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider\">\n          {props.title || \"Menu\"}\n        </span>\n      </div>\n      <div class=\"space-y-1 px-2\">\n        <For each={props.routes}>\n          {(route) => (\n            <SidebarButton\n              title={route.title}\n              href={route.href}\n              icon={route.icon}\n            />\n          )}\n        </For>\n      </div>\n    </nav>\n  );\n}\n"
+    },
+    {
+      "path": "components/app-sidebar/sidebar-user.tsx",
+      "type": "registry:component",
+      "content": "import { useColorMode } from \"@kobalte/core\";\nimport { SunMoonIcon } from \"lucide-solid\";\nimport { Button } from \"~/components/ui/button\";\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuRadioGroup,\n  DropdownMenuRadioItem,\n  DropdownMenuSub,\n  DropdownMenuSubContent,\n  DropdownMenuSubTrigger,\n  DropdownMenuTrigger,\n  DropdownMenuPortal,\n} from \"~/components/ui/dropdown-menu\";\n\n/**\n * Simplified SidebarUser component - theme toggle only.\n * Auth-related features removed for registry demo.\n */\nexport default function SidebarUser() {\n  const { setColorMode, colorMode } = useColorMode();\n\n  return (\n    <DropdownMenu placement=\"right-end\">\n      <DropdownMenuTrigger\n        as={Button}\n        variant=\"ghost\"\n        class=\"w-full h-12 px-4 py-3 rounded-xl transition-all duration-300 hover:scale-[1.02] group border border-transparent hover:border-accent/20 hover:shadow-md\"\n      >\n        <div class=\"flex items-center gap-3 w-full\">\n          <SunMoonIcon class=\"h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors\" />\n          <span class=\"text-sm font-medium\">Theme</span>\n        </div>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent class=\"w-fit bg-card dark:bg-popover border-border\">\n        <DropdownMenuGroup>\n          <DropdownMenuSub overlap>\n            <DropdownMenuSubTrigger>\n              <SunMoonIcon class=\"h-4 w-4 mr-2\" />\n              <span>Theme</span>\n            </DropdownMenuSubTrigger>\n            <DropdownMenuPortal>\n              <DropdownMenuSubContent>\n                <DropdownMenuRadioGroup\n                  value={colorMode()}\n                  onChange={(value) =>\n                    setColorMode(value as \"system\" | \"dark\" | \"light\")\n                  }\n                >\n                  <DropdownMenuRadioItem value=\"system\">\n                    System\n                  </DropdownMenuRadioItem>\n                  <DropdownMenuRadioItem value=\"dark\">\n                    Dark Mode\n                  </DropdownMenuRadioItem>\n                  <DropdownMenuRadioItem value=\"light\">\n                    Light Mode\n                  </DropdownMenuRadioItem>\n                </DropdownMenuRadioGroup>\n              </DropdownMenuSubContent>\n            </DropdownMenuPortal>\n          </DropdownMenuSub>\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  );\n}\n"
+    },
+    {
+      "path": "components/app-sidebar/side-bar-seperator.tsx",
+      "type": "registry:component",
+      "content": "import { Separator } from \"../ui/separator\";\n\nexport default function SideBarSeperator() {\n  return (\n    <div class=\"px-4\">\n      <Separator />\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "types/route.ts",
+      "type": "registry:lib",
+      "content": "import type { Component } from \"solid-js\";\n\nexport type Route = {\n  title: string;\n  href: string;\n  icon: Component;\n  roles?: string[];\n};\n"
+    }
+  ]
+}
