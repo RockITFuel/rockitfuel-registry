@@ -1,5 +1,6 @@
 import type { RouteProps } from "@solidjs/router";
 
+import { DocsPager } from "~/components/docs-pager";
 import Sidebar from "~/components/sidebar";
 
 export default function DocsLayout(props: RouteProps<string>) {
@@ -9,6 +10,7 @@ export default function DocsLayout(props: RouteProps<string>) {
       <main class="relative py-6 lg:gap-10 lg:py-8">
         <div class="mx-auto w-full min-w-0">
           <article>{props.children}</article>
+          <DocsPager />
         </div>
       </main>
     </div>
