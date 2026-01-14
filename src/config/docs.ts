@@ -93,6 +93,41 @@ export const docsConfig: Config = {
           href: "/docs/blocks/modular-form",
           status: "new",
         },
+        {
+          title: "Modular Input",
+          href: "/docs/blocks/modular-input",
+          status: "new",
+        },
+        {
+          title: "Modular Textarea",
+          href: "/docs/blocks/modular-textarea",
+          status: "new",
+        },
+        {
+          title: "Modular Select",
+          href: "/docs/blocks/modular-select",
+          status: "new",
+        },
+        {
+          title: "Modular Searchable Select",
+          href: "/docs/blocks/modular-searchable-select",
+          status: "new",
+        },
+        {
+          title: "Modular Combobox",
+          href: "/docs/blocks/modular-combobox",
+          status: "new",
+        },
+        {
+          title: "Modular Date Picker",
+          href: "/docs/blocks/modular-date-picker",
+          status: "new",
+        },
+        {
+          title: "Modular Checkbox",
+          href: "/docs/blocks/modular-checkbox",
+          status: "new",
+        },
         { title: "Helpers", href: "/docs/blocks/helpers" },
       ],
     },
