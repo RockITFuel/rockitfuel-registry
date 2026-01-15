@@ -8,7 +8,7 @@ FROM oven/bun:debian AS deps
 WORKDIR /app
 
 COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile
+RUN bun install
 
 # ============================================================================
 # Builder stage - Build with Node.js (AVX-compatible)
