@@ -10,9 +10,16 @@ type NavCategory = {
   items: NavElement[];
 };
 
+type QuickLink = {
+  title: string;
+  sectionTitle: string; // matches sidebarNav category title
+  href: string;
+};
+
 type Config = {
   mainNav: NavElement[];
   sidebarNav: NavCategory[];
+  sectionQuickLinks: QuickLink[];
 };
 
 export const docsConfig: Config = {
@@ -88,48 +95,45 @@ export const docsConfig: Config = {
           href: "/docs/blocks/app-sidebar",
           status: "new",
         },
-        {
-          title: "Modular Form",
-          href: "/docs/blocks/modular-form",
-          status: "new",
-        },
-        {
-          title: "Modular Input",
-          href: "/docs/blocks/modular-input",
-          status: "new",
-        },
-        {
-          title: "Modular Textarea",
-          href: "/docs/blocks/modular-textarea",
-          status: "new",
-        },
-        {
-          title: "Modular Select",
-          href: "/docs/blocks/modular-select",
-          status: "new",
-        },
-        {
-          title: "Modular Searchable Select",
-          href: "/docs/blocks/modular-searchable-select",
-          status: "new",
-        },
-        {
-          title: "Modular Combobox",
-          href: "/docs/blocks/modular-combobox",
-          status: "new",
-        },
-        {
-          title: "Modular Date Picker",
-          href: "/docs/blocks/modular-date-picker",
-          status: "new",
-        },
-        {
-          title: "Modular Checkbox",
-          href: "/docs/blocks/modular-checkbox",
-          status: "new",
-        },
         { title: "Helpers", href: "/docs/blocks/helpers" },
       ],
+    },
+    {
+      title: "Modular Form",
+      items: [
+        { title: "Overview", href: "/docs/modular-form", status: "new" },
+        { title: "Input", href: "/docs/modular-form/input", status: "new" },
+        {
+          title: "Textarea",
+          href: "/docs/modular-form/textarea",
+          status: "new",
+        },
+        { title: "Select", href: "/docs/modular-form/select", status: "new" },
+        {
+          title: "Searchable Select",
+          href: "/docs/modular-form/searchable-select",
+          status: "new",
+        },
+        {
+          title: "Combobox",
+          href: "/docs/modular-form/combobox",
+          status: "new",
+        },
+        {
+          title: "Date Picker",
+          href: "/docs/modular-form/date-picker",
+          status: "new",
+        },
+        {
+          title: "Checkbox",
+          href: "/docs/modular-form/checkbox",
+          status: "new",
+        },
+      ],
+    },
+    {
+      title: "Charts",
+      items: [{ title: "Overview", href: "/docs/charts", status: "new" }],
     },
     {
       title: "Libraries",
@@ -155,6 +159,31 @@ export const docsConfig: Config = {
         },
       ],
     },
+  ],
+  sectionQuickLinks: [
+    {
+      title: "Getting Started",
+      sectionTitle: "Getting Started",
+      href: "/docs/getting-started",
+    },
+    {
+      title: "Components",
+      sectionTitle: "UI Components",
+      href: "/docs/components",
+    },
+    { title: "Blocks", sectionTitle: "Blocks", href: "/docs/blocks" },
+    {
+      title: "Forms",
+      sectionTitle: "Modular Form",
+      href: "/docs/modular-form",
+    },
+    {
+      title: "Charts",
+      sectionTitle: "Charts",
+      href: "/docs/charts",
+    },
+    { title: "Libraries", sectionTitle: "Libraries", href: "/docs/libraries" },
+    { title: "Hooks", sectionTitle: "Hooks", href: "/docs/hooks" },
   ],
 };
 
