@@ -4,12 +4,8 @@
   "type": "registry:chart",
   "title": "Bar Chart",
   "description": "D3-powered bar chart component with grouped bars, multiple series support, tooltips, and responsive sizing",
-  "dependencies": [
-    "d3"
-  ],
-  "registryDependencies": [
-    "chart-utils"
-  ],
+  "dependencies": ["d3"],
+  "registryDependencies": ["chart-utils"],
   "files": [
     {
       "path": "components/charts/bar-chart.tsx",

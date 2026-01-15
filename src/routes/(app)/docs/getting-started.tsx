@@ -1,6 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
-import { CopyButton } from "~/components/copy-button";
+import { CodeBlock } from "~/components/code-block";
 import {
   PageHeader,
   PageHeaderDescription,
@@ -9,8 +9,8 @@ import {
 import { REGISTRY_URL } from "~/config/docs";
 
 export default function GettingStarted() {
-  const initCommand = "npx shadcn@latest init";
-  const addCommand = `npx shadcn@latest add ${REGISTRY_URL}/r/button.json`;
+  const initCommand = "bunx shadcn@latest init";
+  const addCommand = `bunx shadcn@latest add ${REGISTRY_URL}/r/button.json`;
 
   return (
     <>
@@ -58,12 +58,7 @@ export default function GettingStarted() {
             Before installing components, make sure your project is set up with
             shadcn:
           </p>
-          <div class="relative rounded-md bg-muted">
-            <pre class="overflow-x-auto p-4 pr-12 text-sm">
-              <code>{initCommand}</code>
-            </pre>
-            <CopyButton class="absolute top-2 right-2" value={initCommand} />
-          </div>
+          <CodeBlock code={initCommand} lang="bash" />
           <p class="mt-4 text-muted-foreground text-sm">
             Follow the prompts to configure your project. Make sure to select
             SolidJS as your framework.
@@ -76,12 +71,7 @@ export default function GettingStarted() {
             Install components from this registry using the shadcn CLI with our
             registry URL:
           </p>
-          <div class="relative rounded-md bg-muted">
-            <pre class="overflow-x-auto p-4 pr-12 text-sm">
-              <code>{addCommand}</code>
-            </pre>
-            <CopyButton class="absolute top-2 right-2" value={addCommand} />
-          </div>
+          <CodeBlock code={addCommand} lang="bash" />
           <p class="mt-4 text-muted-foreground text-sm">
             Replace{" "}
             <code class="rounded bg-muted-foreground/20 px-1.5 py-0.5">

@@ -1,3 +1,23 @@
+# RockITFuel Registry
+
+## Codebase Overview
+
+A **SolidJS component registry website** (similar to shadcn/ui) for distributing reusable components, form blocks, libraries, and hooks via CLI installation.
+
+**Stack**: SolidJS + SolidStart, Tailwind CSS + CVA, Kobalte primitives, D3 charts, Convex (optional)
+
+**Structure**:
+- `src/components/ui/` - 50+ accessible UI components
+- `src/components/super-form/` - Modular-forms integration
+- `src/lib/` - Gatehouse auth, chart utilities, Convex hooks
+- `src/hooks/` - Custom hooks (useBindSignal, useLoading, etc.)
+- `src/routes/(app)/docs/` - Documentation pages
+- `public/r/` - Registry JSON for CLI installation
+
+For detailed architecture, see [docs/CODEBASE_MAP.md](../docs/CODEBASE_MAP.md).
+
+---
+
 # Ultracite Code Standards
 
 This project uses **Ultracite**, a zero-config Biome preset that enforces strict code quality standards through automated formatting and linting.

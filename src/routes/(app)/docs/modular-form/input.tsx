@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
+import { CodeBlock } from "~/components/code-block";
 import { DependencyChips } from "~/components/dependency-chips";
 import { InstallCommand } from "~/components/install-command";
 import {
@@ -8,35 +9,47 @@ import {
   PageHeaderHeading,
 } from "~/components/page-header";
 
-const usage = `import { createForm, required } from "@modular-forms/solid";
-import ModularSelect from "~/components/modular-form/modular-select";
+const usage = `import { createForm, required, email } from "@modular-forms/solid";
+import ModularInput from "~/components/modular-form/modular-input";
 
-type ProfileForm = {
-  country: string;
-  language: string;
+type LoginForm = {
+  email: string;
+  password: string;
 };
 
-const countries = [
-  { value: "us", label: "United States" },
-  { value: "uk", label: "United Kingdom" },
-  { value: "nl", label: "Netherlands" },
-  { value: "de", label: "Germany" },
-];
-
-export function ProfileForm() {
-  const [form, { Form, Field }] = createForm<ProfileForm>();
+export function LoginForm() {
+  const [form, { Form, Field }] = createForm<LoginForm>();
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field name="country" validate={required("Country is required")}>
+      <Field
+        name="email"
+        validate={[
+          required("Email is required"),
+          email("Please enter a valid email"),
+        ]}
+      >
         {(field, props) => (
-          <ModularSelect
+          <ModularInput
             {...props}
-            label="Country"
+            type="email"
+            label="Email"
             value={field.value}
             error={field.error}
-            options={countries}
-            placeholder="Select a country"
+            placeholder="Enter your email"
+          />
+        )}
+      </Field>
+
+      <Field name="password" validate={required("Password is required")}>
+        {(field, props) => (
+          <ModularInput
+            {...props}
+            type="password"
+            label="Password"
+            value={field.value}
+            error={field.error}
+            placeholder="Enter your password"
           />
         )}
       </Field>
@@ -44,65 +57,53 @@ export function ProfileForm() {
   );
 }`;
 
-const requiredExample = `<Field name="status" validate={required("Status is required")}>
+const requiredExample = `<Field name="email" validate={required("Email is required")}>
   {(field, props) => (
-    <ModularSelect
+    <ModularInput
       {...props}
-      label="Status"
+      label="Email"
       value={field.value}
       error={field.error}
-      options={[
-        { value: "active", label: "Active" },
-        { value: "inactive", label: "Inactive" },
-      ]}
       required
     />
   )}
 </Field>`;
 
-const disabledExample = `<ModularSelect
+const disabledExample = `<ModularInput
   name="readonly-field"
-  label="Disabled Select"
-  value="option1"
-  options={[{ value: "option1", label: "Option 1" }]}
+  label="Disabled Input"
+  value="Cannot edit this"
   disabled
 />`;
 
-const errorExample = `<ModularSelect
+const errorExample = `<ModularInput
   name="error-field"
   label="With Error"
   value=""
-  options={[]}
-  error="Please select an option"
+  error="This field has an error"
 />`;
 
-const queryFnExample = `// Fetch options from an API
-<ModularSelect
-  {...props}
-  label="Category"
-  value={field.value}
-  error={field.error}
-  queryFn={async () => {
-    const response = await fetch("/api/categories");
-    return response.json();
-  }}
-  optionValue="id"
-  optionTextValue="name"
+const clearableExample = `<ModularInput
+  name="search"
+  label="Search"
+  value={searchValue()}
+  clearable
+  icon={<SearchIcon class="size-4" />}
 />`;
 
-const dependencies = ["@modular-forms/solid"];
+const dependencies = ["@modular-forms/solid", "solid-motionone"];
 
-export default function ModularSelectPage() {
+export default function ModularInputPage() {
   return (
     <>
-      <Title>Modular Select - ArchiTechs Registry</Title>
+      <Title>Modular Input - ArchiTechs Registry</Title>
 
       <PageHeader>
-        <PageHeaderHeading>Modular Select</PageHeaderHeading>
+        <PageHeaderHeading>Modular Input</PageHeaderHeading>
         <PageHeaderDescription>
-          A select dropdown component integrated with @modular-forms/solid for
-          validation and state management. Supports static options or async data
-          fetching.
+          A text input component integrated with @modular-forms/solid for
+          validation and state management. Includes label, error display, and
+          optional clearable functionality.
         </PageHeaderDescription>
       </PageHeader>
 
@@ -125,9 +126,7 @@ export default function ModularSelectPage() {
           <p class="mb-4 text-muted-foreground text-sm">
             Use with @modular-forms/solid Field component:
           </p>
-          <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-            <code>{usage}</code>
-          </pre>
+          <CodeBlock code={usage} lang="tsx" />
         </section>
 
         <section>
@@ -158,45 +157,7 @@ export default function ModularSelectPage() {
                   <td class="py-2 pr-4">
                     <code>string</code>
                   </td>
-                  <td class="py-2">Label text displayed above select</td>
-                </tr>
-                <tr class="border-b">
-                  <td class="py-2 pr-4">
-                    <code>options</code>
-                  </td>
-                  <td class="py-2 pr-4">
-                    <code>array</code>
-                  </td>
-                  <td class="py-2">Array of option objects</td>
-                </tr>
-                <tr class="border-b">
-                  <td class="py-2 pr-4">
-                    <code>queryFn</code>
-                  </td>
-                  <td class="py-2 pr-4">
-                    <code>function</code>
-                  </td>
-                  <td class="py-2">
-                    Async function to fetch options (alternative to options)
-                  </td>
-                </tr>
-                <tr class="border-b">
-                  <td class="py-2 pr-4">
-                    <code>optionValue</code>
-                  </td>
-                  <td class="py-2 pr-4">
-                    <code>string</code>
-                  </td>
-                  <td class="py-2">Key for option value (default: "value")</td>
-                </tr>
-                <tr class="border-b">
-                  <td class="py-2 pr-4">
-                    <code>optionTextValue</code>
-                  </td>
-                  <td class="py-2 pr-4">
-                    <code>string</code>
-                  </td>
-                  <td class="py-2">Key for option label (default: "label")</td>
+                  <td class="py-2">Label text displayed above input</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
@@ -209,12 +170,30 @@ export default function ModularSelectPage() {
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
-                    <code>placeholder</code>
+                    <code>clearable</code>
+                  </td>
+                  <td class="py-2 pr-4">
+                    <code>boolean</code>
+                  </td>
+                  <td class="py-2">Show clear button when input has value</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="py-2 pr-4">
+                    <code>icon</code>
+                  </td>
+                  <td class="py-2 pr-4">
+                    <code>JSX.Element</code>
+                  </td>
+                  <td class="py-2">Icon to display on the left side</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="py-2 pr-4">
+                    <code>wrapperClass</code>
                   </td>
                   <td class="py-2 pr-4">
                     <code>string</code>
                   </td>
-                  <td class="py-2">Placeholder text when no selection</td>
+                  <td class="py-2">Additional class for wrapper element</td>
                 </tr>
               </tbody>
             </table>
@@ -226,27 +205,19 @@ export default function ModularSelectPage() {
           <div class="space-y-6">
             <div>
               <h3 class="mb-2 font-medium">Required Field</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{requiredExample}</code>
-              </pre>
+              <CodeBlock code={requiredExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Disabled State</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{disabledExample}</code>
-              </pre>
+              <CodeBlock code={disabledExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Error State</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{errorExample}</code>
-              </pre>
+              <CodeBlock code={errorExample} lang="tsx" />
             </div>
             <div>
-              <h3 class="mb-2 font-medium">Async Options with queryFn</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{queryFnExample}</code>
-              </pre>
+              <h3 class="mb-2 font-medium">Clearable with Icon</h3>
+              <CodeBlock code={clearableExample} lang="tsx" />
             </div>
           </div>
         </section>
@@ -256,27 +227,16 @@ export default function ModularSelectPage() {
           <div class="grid gap-4 sm:grid-cols-2">
             <A
               class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              href="/docs/components/select"
+              href="/docs/components/input"
             >
-              <h3 class="font-medium group-hover:underline">Select</h3>
+              <h3 class="font-medium group-hover:underline">Input</h3>
               <p class="text-muted-foreground text-sm">
-                Base select component without form integration
+                Base input component without form integration
               </p>
             </A>
             <A
               class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              href="/docs/blocks/modular-searchable-select"
-            >
-              <h3 class="font-medium group-hover:underline">
-                Modular Searchable Select
-              </h3>
-              <p class="text-muted-foreground text-sm">
-                Select with search filtering capability
-              </p>
-            </A>
-            <A
-              class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              href="/docs/blocks/modular-form"
+              href="/docs/modular-form"
             >
               <h3 class="font-medium group-hover:underline">Modular Form</h3>
               <p class="text-muted-foreground text-sm">

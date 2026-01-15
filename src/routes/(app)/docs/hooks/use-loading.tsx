@@ -1,10 +1,35 @@
 import { Title } from "@solidjs/meta";
+import { CodeBlock } from "~/components/code-block";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "~/components/page-header";
+
+const usageExample = `import { useLoading } from "~/hooks/use-loading"
+
+function MyComponent() {
+  const { isLoading, startLoading, stopLoading } = useLoading({
+    delay: 200 // Only show loading after 200ms
+  })
+
+  const fetchData = async () => {
+    startLoading()
+    try {
+      await api.fetchData()
+    } finally {
+      stopLoading()
+    }
+  }
+
+  return (
+    <div>
+      {isLoading() && <Spinner />}
+      <button onClick={fetchData}>Load Data</button>
+    </div>
+  )
+}`;
 
 export default function UseLoadingPage() {
   return (
@@ -27,33 +52,7 @@ export default function UseLoadingPage() {
 
         <section>
           <h2 class="mb-4 font-semibold text-xl">Usage</h2>
-          <div class="rounded-md bg-muted p-4">
-            <pre class="overflow-x-auto text-sm">
-              <code>{`import { useLoading } from "~/hooks/use-loading"
-
-function MyComponent() {
-  const { isLoading, startLoading, stopLoading } = useLoading({
-    delay: 200 // Only show loading after 200ms
-  })
-
-  const fetchData = async () => {
-    startLoading()
-    try {
-      await api.fetchData()
-    } finally {
-      stopLoading()
-    }
-  }
-
-  return (
-    <div>
-      {isLoading() && <Spinner />}
-      <button onClick={fetchData}>Load Data</button>
-    </div>
-  )
-}`}</code>
-            </pre>
-          </div>
+          <CodeBlock code={usageExample} lang="tsx" />
         </section>
 
         <section>

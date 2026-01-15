@@ -1,170 +1,472 @@
 {
-  "name": "Collapsible Sidebar Navigation Sections",
-  "branchName": "feature/collapsible-sidebar",
+  "name": "ArchiTechs Registry",
+  "branchName": "feature/architechs-registry",
   "userStories": [
     {
       "id": "US-001",
-      "title": "Add collapse state management",
-      "description": "As a developer, I want to add state management for tracking which sidebar sections are expanded so that the collapse functionality has a foundation to work from.",
+      "title": "Implement clipboard utilities with toast feedback",
+      "description": "As a user, I want copy buttons on code blocks, install commands, and page URLs with toast notifications so that I can easily copy content and know when it succeeds.",
       "acceptanceCriteria": [
-        "State tracks which sections are expanded (array or object)",
-        "State defaults all sections to collapsed",
-        "State can be toggled for individual sections"
+        "Copy buttons appear on all code blocks",
+        "Copy buttons appear on all install commands",
+        "Copy page URL button is available",
+        "Toast notification shows on successful copy (using solid-sonner)"
       ],
       "priority": 1,
-      "passes": false,
-      "dependsOn": []
+      "passes": true,
+      "dependsOn": [],
+      "completionNotes": "Completed by agent"
     },
     {
       "id": "US-002",
-      "title": "Add chevron toggle icons to section headers",
-      "description": "As a user, I want to see a chevron icon on each sidebar section header so that I can visually identify collapsible sections and their current state.",
+      "title": "Build code block component with syntax highlighting",
+      "description": "As a user, I want code blocks with syntax highlighting, optional filename headers, and copy buttons so that code is readable and easy to use.",
       "acceptanceCriteria": [
-        "Each section header displays a chevron icon",
-        "Chevron points right when collapsed",
-        "Chevron points down when expanded",
-        "Chevron has appropriate hover state"
+        "Syntax highlighting using Shiki",
+        "Optional filename header display",
+        "Always-visible copy button",
+        "Bun-only commands (no package manager tabs)"
       ],
       "priority": 2,
-      "passes": false,
-      "dependsOn": ["US-001"]
+      "passes": true,
+      "dependsOn": ["US-001"],
+      "completionNotes": "Completed by agent"
     },
     {
       "id": "US-003",
-      "title": "Implement expand/collapse toggle on chevron click",
-      "description": "As a user, I want to click the chevron icon to expand or collapse a sidebar section so that I can manage which navigation items are visible.",
+      "title": "Implement prev/next navigation",
+      "description": "As a user, I want prev/next navigation at the bottom of content pages so that I can easily navigate between related pages.",
       "acceptanceCriteria": [
-        "Clicking chevron toggles section expanded/collapsed state",
-        "Section items are immediately shown/hidden (no animation)",
-        "Collapsed sections show only header with chevron",
-        "Expanded sections show header plus all child navigation items"
+        "Auto-generated from sidebar ordering",
+        "Displayed at bottom of content pages",
+        "Shows previous and next page titles",
+        "Links navigate to correct pages"
       ],
       "priority": 3,
-      "passes": false,
-      "dependsOn": ["US-002"]
+      "passes": true,
+      "dependsOn": [],
+      "completionNotes": "Completed by agent"
     },
     {
       "id": "US-004",
-      "title": "Persist collapse state to localStorage",
-      "description": "As a user, I want my expanded/collapsed section preferences to persist across page loads so that I don't have to re-expand sections every time I visit.",
+      "title": "Build on-page table of contents with scrollspy",
+      "description": "As a user, I want an auto-generated table of contents from page headings with scrollspy so that I can navigate long pages easily.",
       "acceptanceCriteria": [
-        "Expanded/collapsed state is saved to localStorage with key 'sidebar-collapsed-sections'",
-        "On page load, state is restored from localStorage",
-        "If no stored state exists, all sections default to collapsed"
+        "Auto-generated from h2 and h3 headings",
+        "Scrollspy highlighting for active section",
+        "Sticky positioning in right sidebar",
+        "Smooth scroll to sections on click"
       ],
       "priority": 4,
-      "passes": false,
-      "dependsOn": ["US-003"]
+      "passes": true,
+      "dependsOn": [],
+      "completionNotes": "Completed by agent"
     },
     {
       "id": "US-005",
-      "title": "Section title navigates independently of collapse",
-      "description": "As a user, I want clicking the section title text to navigate to the section's first item so that the title and chevron have separate behaviors.",
+      "title": "Implement command palette search",
+      "description": "As a user, I want a command palette (Cmd+K) with fuzzy search across all content so that I can quickly find components, hooks, and documentation.",
       "acceptanceCriteria": [
-        "Clicking section title text navigates to first item in section",
-        "Clicking section title does NOT toggle collapse state",
-        "Chevron click remains the only way to toggle collapse"
+        "Opens with Cmd+K keyboard shortcut",
+        "Client-side fuzzy search using FlexSearch or Fuse.js",
+        "Build-time index generation",
+        "Categories: Components, Modular, Blocks, Charts, Libraries, Functions, Hooks",
+        "Results navigate to correct pages"
       ],
       "priority": 5,
-      "passes": false,
-      "dependsOn": ["US-003"]
+      "passes": true,
+      "dependsOn": [],
+      "completionNotes": "Completed by agent"
     },
     {
       "id": "US-006",
-      "title": "Install and configure Playwright",
-      "description": "As a developer, I want Playwright installed and configured so that I can write E2E tests for the application.",
+      "title": "Create reusable page template component",
+      "description": "As a developer, I want a reusable page template for all registry items so that documentation is consistent across all sections.",
       "acceptanceCriteria": [
-        "Playwright is installed as a dev dependency",
-        "playwright.config.ts is created with appropriate settings",
-        "Chromium browser is configured for testing",
-        "Base URL points to local dev server"
+        "Title and description section",
+        "Install command with copy button",
+        "Dependencies chips (badge style)",
+        "Usage code snippet section",
+        "Live demo preview area (inline)",
+        "Examples section for variants/states",
+        "Related items links section"
       ],
       "priority": 6,
-      "passes": false,
-      "dependsOn": []
+      "passes": true,
+      "dependsOn": ["US-001", "US-002"],
+      "completionNotes": "Completed by agent"
     },
     {
       "id": "US-007",
-      "title": "Add Playwright npm scripts and test directory",
-      "description": "As a developer, I want npm scripts for running Playwright tests so that tests can be easily executed.",
+      "title": "Add categories.json registry endpoint",
+      "description": "As a developer, I want a categories.json endpoint so that the UI can display organized category listings.",
       "acceptanceCriteria": [
-        "tests/ directory is created at project root",
-        "package.json has 'test:e2e' script for running Playwright",
-        "package.json has 'test:e2e:ui' script for Playwright UI mode",
-        ".gitignore updated to ignore Playwright artifacts"
+        "GET /r/categories.json endpoint exists",
+        "Returns all registry categories",
+        "Categories include: components, modular, blocks, charts, libraries, hooks, functions"
       ],
       "priority": 7,
+      "passes": true,
+      "dependsOn": [],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-008",
+      "title": "Build dependency chips component",
+      "description": "As a user, I want dependencies displayed as styled chips/badges so that I can quickly see what a registry item requires.",
+      "acceptanceCriteria": [
+        "Chips/badges for each dependency",
+        "Links to npm or registry item where applicable",
+        "Visual distinction between runtime and dev dependencies (optional)"
+      ],
+      "priority": 8,
+      "passes": true,
+      "dependsOn": [],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-009",
+      "title": "Rename super-* components to modular-*",
+      "description": "As a developer, I want all super-* components renamed to modular-* so that naming is consistent with the Modular Forms integration.",
+      "acceptanceCriteria": [
+        "All file names changed from super-* to modular-*",
+        "All component names updated",
+        "All registry item names updated",
+        "All documentation references updated",
+        "Registry JSON files reflect new names"
+      ],
+      "priority": 9,
+      "passes": true,
+      "dependsOn": [],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-010",
+      "title": "Create Components section documentation pages",
+      "description": "As a user, I want documentation pages for all base UI components so that I can learn how to install and use them.",
+      "acceptanceCriteria": [
+        "Pages for: Alert, Avatar, Badge, Breadcrumb, Button",
+        "Pages for: Card, Carousel, Checkbox, Collapsible, Color Picker, Combobox, Command",
+        "Pages for: Context Menu, Date Picker, Dialog, Dropdown Menu",
+        "Pages for: Hover Card, Input, Label, Popover, Progress",
+        "Pages for: Select, Separator, Sheet, Skeleton, Switch",
+        "Pages for: Table, Tabs, Textarea, Tooltip",
+        "Each page uses standard template with demo, install, dependencies, usage, examples"
+      ],
+      "priority": 10,
+      "passes": true,
+      "dependsOn": ["US-006"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-011",
+      "title": "Create Modular Form bundle page",
+      "description": "As a user, I want a Modular Form bundle page so that I can install all form field components at once.",
+      "acceptanceCriteria": [
+        "Install command for bundle JSON",
+        "Aggregate dependencies chips",
+        "Included Components grid with links to each field",
+        "Usage patterns and validation behavior notes"
+      ],
+      "priority": 11,
+      "passes": true,
+      "dependsOn": ["US-006", "US-009"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-012",
+      "title": "Create individual Modular component pages",
+      "description": "As a user, I want documentation pages for each modular form field component so that I can install and use them individually.",
+      "acceptanceCriteria": [
+        "Pages for: modular-input, modular-textarea, modular-select",
+        "Pages for: modular-searchable-select, modular-combobox, modular-date-picker",
+        "Pages for: modular-checkbox, modular-switch",
+        "Each page has install command, dependencies, usage with @modular-forms/solid",
+        "Each page has examples: required, disabled, error states",
+        "Each page links to related base component"
+      ],
+      "priority": 12,
+      "passes": true,
+      "dependsOn": ["US-006", "US-009"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-013",
+      "title": "Build block viewer component",
+      "description": "As a user, I want a block viewer with preview/code toggle and file tree so that I can explore and install blocks.",
+      "acceptanceCriteria": [
+        "Preview/Code toggle",
+        "Open in New Tab button",
+        "Refresh Preview button",
+        "Install command with copy",
+        "File tree viewer",
+        "Code panel per file with syntax highlighting"
+      ],
+      "priority": 13,
+      "passes": true,
+      "dependsOn": ["US-002"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-014",
+      "title": "Create Blocks section with category tabs",
+      "description": "As a user, I want a Blocks section with category tabs so that I can browse and find blocks by category.",
+      "acceptanceCriteria": [
+        "Category tabs: Featured, Sidebar, Auth, Dashboard, Marketing",
+        "Grid display of available blocks",
+        "Each block links to its viewer page",
+        "Blocks registered with type: registry:block"
+      ],
+      "priority": 14,
+      "passes": true,
+      "dependsOn": ["US-013"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-015",
+      "title": "Build D3 chart core utilities",
+      "description": "As a developer, I want shared D3 chart utilities so that all charts have consistent behavior.",
+      "acceptanceCriteria": [
+        "Scale/axis utilities",
+        "Tooltip system",
+        "Formatting helpers",
+        "ResizeObserver for responsive charts",
+        "Theme-aware styling via CSS variables"
+      ],
+      "priority": 15,
+      "passes": true,
+      "dependsOn": [],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-016",
+      "title": "Create D3 line chart component",
+      "description": "As a user, I want a D3 line chart component for SolidJS so that I can display line chart data.",
+      "acceptanceCriteria": [
+        "Line chart renders correctly",
+        "Supports multiple data series",
+        "Responsive to container size",
+        "Theme-aware colors",
+        "Tooltip on hover",
+        "Registered as registry:chart type"
+      ],
+      "priority": 16,
+      "passes": true,
+      "dependsOn": ["US-015"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-017",
+      "title": "Create D3 area chart component",
+      "description": "As a user, I want a D3 area chart component for SolidJS so that I can display area chart data.",
+      "acceptanceCriteria": [
+        "Area chart renders correctly",
+        "Supports filled areas under lines",
+        "Responsive to container size",
+        "Theme-aware colors",
+        "Tooltip on hover",
+        "Registered as registry:chart type"
+      ],
+      "priority": 17,
+      "passes": true,
+      "dependsOn": ["US-015"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-018",
+      "title": "Create D3 bar chart component",
+      "description": "As a user, I want a D3 bar chart component for SolidJS so that I can display bar chart data.",
+      "acceptanceCriteria": [
+        "Bar chart renders correctly",
+        "Supports vertical bars",
+        "Responsive to container size",
+        "Theme-aware colors",
+        "Tooltip on hover",
+        "Registered as registry:chart type"
+      ],
+      "priority": 18,
+      "passes": true,
+      "dependsOn": ["US-015"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-019",
+      "title": "Create D3 stacked bar chart component",
+      "description": "As a user, I want a D3 stacked bar chart component for SolidJS so that I can display stacked data.",
+      "acceptanceCriteria": [
+        "Stacked bar chart renders correctly",
+        "Supports multiple data categories stacked",
+        "Responsive to container size",
+        "Theme-aware colors",
+        "Tooltip on hover",
+        "Registered as registry:chart type"
+      ],
+      "priority": 19,
+      "passes": true,
+      "dependsOn": ["US-015"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-020",
+      "title": "Create D3 scatter plot component",
+      "description": "As a user, I want a D3 scatter plot component for SolidJS so that I can display scatter data.",
+      "acceptanceCriteria": [
+        "Scatter plot renders correctly",
+        "Supports point data visualization",
+        "Responsive to container size",
+        "Theme-aware colors",
+        "Tooltip on hover",
+        "Registered as registry:chart type"
+      ],
+      "priority": 20,
+      "passes": true,
+      "dependsOn": ["US-015"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-021",
+      "title": "Create Charts section gallery",
+      "description": "As a user, I want a Charts gallery section so that I can browse and find chart types.",
+      "acceptanceCriteria": [
+        "Categories: Line, Area, Bar, Stacked Bar, Scatter",
+        "Each chart type links to example page",
+        "Example pages have live preview, install command, dependencies, code view"
+      ],
+      "priority": 21,
+      "passes": false,
+      "dependsOn": ["US-006", "US-016", "US-017", "US-018", "US-019", "US-020"]
+    },
+    {
+      "id": "US-022",
+      "title": "Create Libraries section pages",
+      "description": "As a user, I want documentation pages for internal libraries so that I can learn how to install and use them.",
+      "acceptanceCriteria": [
+        "Page for Gatehouse (authorization)",
+        "Page for Solid Convex (Convex integration)",
+        "Page for Date Utils",
+        "Each page has: install command, dependencies, usage, API docs, examples"
+      ],
+      "priority": 22,
       "passes": false,
       "dependsOn": ["US-006"]
     },
     {
-      "id": "US-008",
-      "title": "Playwright test: Default collapsed state",
-      "description": "As a developer, I want a Playwright test verifying all sections are collapsed on initial page load so that the default behavior is validated.",
+      "id": "US-023",
+      "title": "Create Hooks section pages",
+      "description": "As a user, I want documentation pages for hooks so that I can learn how to install and use them.",
       "acceptanceCriteria": [
-        "Test navigates to a page with sidebar",
-        "Test clears localStorage before checking",
-        "Test verifies all section items are hidden",
-        "Test verifies all chevrons point right (collapsed)"
+        "Page for use-bind-signal",
+        "Page for use-loading",
+        "Page for use-validated-search-params",
+        "Each page has: install command, dependencies, TypeScript signature, usage, examples"
       ],
-      "priority": 8,
+      "priority": 23,
       "passes": false,
-      "dependsOn": ["US-004", "US-007"]
+      "dependsOn": ["US-006"]
     },
     {
-      "id": "US-009",
-      "title": "Playwright test: Expand and collapse sections",
-      "description": "As a developer, I want Playwright tests verifying expand/collapse functionality so that toggle behavior is validated.",
+      "id": "US-024",
+      "title": "Create Functions section pages",
+      "description": "As a user, I want documentation pages for utility functions so that I can learn how to install and use them.",
       "acceptanceCriteria": [
-        "Test clicking chevron expands section and shows items",
-        "Test clicking chevron again collapses section and hides items",
-        "Test verifies chevron rotation changes with state"
+        "Function catalog with categories",
+        "Categories: Date utilities, String helpers, Array utilities, Object utilities, Validation, Formatting",
+        "Page for highlight function (from solid-morgo)",
+        "Each page has: install command, dependencies, function signature, TypeScript types, usage, examples"
       ],
-      "priority": 9,
+      "priority": 24,
       "passes": false,
-      "dependsOn": ["US-008"]
+      "dependsOn": ["US-006"]
     },
     {
-      "id": "US-010",
-      "title": "Playwright test: Multiple sections independent behavior",
-      "description": "As a developer, I want a Playwright test verifying multiple sections can be expanded simultaneously so that independent behavior is validated.",
+      "id": "US-025",
+      "title": "Implement keyboard navigation for sidebar",
+      "description": "As a user, I want full keyboard navigation for the sidebar so that I can navigate without a mouse.",
       "acceptanceCriteria": [
-        "Test expands multiple sections",
-        "Test verifies all expanded sections show their items",
-        "Test verifies collapsing one section doesn't affect others"
+        "Arrow keys navigate between items",
+        "Enter key selects/navigates to item",
+        "Tab key moves focus appropriately",
+        "Visible focus rings on all focusable elements"
       ],
-      "priority": 10,
+      "priority": 25,
       "passes": false,
-      "dependsOn": ["US-009"]
+      "dependsOn": []
     },
     {
-      "id": "US-011",
-      "title": "Playwright test: LocalStorage persistence",
-      "description": "As a developer, I want a Playwright test verifying state persists across page reloads so that localStorage functionality is validated.",
+      "id": "US-026",
+      "title": "Add ARIA labels and accessibility improvements",
+      "description": "As a user with assistive technology, I want proper ARIA labels and semantic HTML so that the site is accessible.",
       "acceptanceCriteria": [
-        "Test expands a section",
-        "Test reloads the page",
-        "Test verifies the section remains expanded after reload"
+        "ARIA labels for all icon buttons",
+        "Semantic HTML structure throughout",
+        "Proper heading hierarchy on all pages",
+        "Screen reader friendly navigation",
+        "Focus management for dialogs and menus"
       ],
-      "priority": 11,
+      "priority": 26,
       "passes": false,
-      "dependsOn": ["US-009"]
+      "dependsOn": []
     },
     {
-      "id": "US-012",
-      "title": "Playwright test: Section title navigation",
-      "description": "As a developer, I want a Playwright test verifying section title clicks navigate without toggling collapse so that title behavior is validated.",
+      "id": "US-027",
+      "title": "Implement route-level code splitting",
+      "description": "As a user, I want optimized bundle sizes through code splitting so that pages load quickly.",
       "acceptanceCriteria": [
-        "Test clicks section title (not chevron)",
-        "Test verifies navigation occurs",
-        "Test verifies collapse state is unchanged"
+        "Route-level code splitting configured in Vinxi",
+        "Each section loads its own bundle",
+        "Initial page load is optimized"
       ],
-      "priority": 12,
+      "priority": 27,
       "passes": false,
-      "dependsOn": ["US-005", "US-009"]
+      "dependsOn": []
+    },
+    {
+      "id": "US-028",
+      "title": "Configure Docker deployment",
+      "description": "As a developer, I want the site deployable via Docker with Bun so that it can run on Coolify.",
+      "acceptanceCriteria": [
+        "Dockerfile configured for Bun runtime",
+        "Build process works in Docker",
+        "Site runs correctly in container",
+        "Deploys successfully to Coolify"
+      ],
+      "priority": 28,
+      "passes": false,
+      "dependsOn": []
+    },
+    {
+      "id": "US-029",
+      "title": "Update sidebar navigation for all sections",
+      "description": "As a user, I want the sidebar to include navigation for all registry sections so that I can browse all content.",
+      "acceptanceCriteria": [
+        "Components section in sidebar",
+        "Modular section in sidebar",
+        "Blocks section in sidebar",
+        "Charts section in sidebar",
+        "Libraries section in sidebar",
+        "Hooks section in sidebar",
+        "Functions section in sidebar"
+      ],
+      "priority": 29,
+      "passes": false,
+      "dependsOn": []
+    },
+    {
+      "id": "US-030",
+      "title": "Ensure consistent styling across all sections",
+      "description": "As a user, I want consistent typography, badge styling, and interactions across all sections so that the site feels unified.",
+      "acceptanceCriteria": [
+        "Unified page template used everywhere",
+        "Consistent typography scale",
+        "Standardized badge/chip styling for dependencies",
+        "Single copy interaction pattern throughout"
+      ],
+      "priority": 30,
+      "passes": false,
+      "dependsOn": ["US-006", "US-008"]
     }
   ],
   "metadata": {
-    "updatedAt": "2026-01-13T17:02:48.200Z"
+    "updatedAt": "2026-01-14T02:24:48.374Z"
   }
 }

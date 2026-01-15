@@ -31,14 +31,14 @@ export function DependencyChips(props: DependencyChipsProps) {
           const parsed = parseDependency(dep);
           return (
             <a
-              href={getNpmUrl(parsed.name)}
-              target="_blank"
-              rel="noopener noreferrer"
               class="group"
+              href={getNpmUrl(parsed.name)}
+              rel="noopener noreferrer"
+              target="_blank"
             >
               <Badge
-                variant={parsed.dev ? "outline" : "secondary"}
                 class="cursor-pointer transition-opacity group-hover:opacity-80"
+                variant={parsed.dev ? "outline" : "secondary"}
               >
                 {parsed.name}
                 <Show when={parsed.dev}>

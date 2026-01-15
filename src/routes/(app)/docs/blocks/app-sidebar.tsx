@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { For } from "solid-js";
+import { CodeBlock } from "~/components/code-block";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -82,9 +83,8 @@ export default function AppSidebarPage() {
 
         <section>
           <h2 class="mb-4 font-semibold text-xl">Usage</h2>
-          <div class="rounded-md bg-muted p-4">
-            <pre class="overflow-x-auto text-sm">
-              <code>{`import {
+          <CodeBlock
+            code={`import {
   SidebarProvider,
   SidebarContainer,
   SidebarContent,
@@ -109,9 +109,9 @@ function App() {
       </SidebarScreenContent>
     </SidebarProvider>
   )
-}`}</code>
-            </pre>
-          </div>
+}`}
+            lang="tsx"
+          />
         </section>
       </div>
     </>

@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
+import { CodeBlock } from "~/components/code-block";
 import { DependencyChips } from "~/components/dependency-chips";
 import { InstallCommand } from "~/components/install-command";
 import {
@@ -8,46 +9,37 @@ import {
   PageHeaderHeading,
 } from "~/components/page-header";
 
-const usage = `import { createForm } from "@modular-forms/solid";
-import ModularCheckbox from "~/components/modular-form/modular-checkbox";
+const usage = `import { createForm, required } from "@modular-forms/solid";
+import ModularCombobox from "~/components/modular-form/modular-combobox";
 
-type SettingsForm = {
-  notifications: boolean;
-  marketing: boolean;
-  terms: boolean;
+type SearchForm = {
+  product: string;
 };
 
-export function SettingsForm() {
-  const [form, { Form, Field }] = createForm<SettingsForm>();
+const products = [
+  { value: "1", label: "MacBook Pro" },
+  { value: "2", label: "MacBook Air" },
+  { value: "3", label: "iPad Pro" },
+  { value: "4", label: "iPhone 15" },
+];
+
+export function SearchForm() {
+  const [form, { Form, Field }] = createForm<SearchForm>();
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field name="notifications" type="boolean">
+      <Field name="product" validate={required("Product is required")}>
         {(field, props) => (
-          <ModularCheckbox
+          <ModularCombobox
             {...props}
-            label="Enable notifications"
-            helperText="Receive updates about your account"
+            label="Product"
             value={field.value}
             error={field.error}
-            onCheckedChange={(checked) => {
-              // Handle change
+            options={products}
+            onValueChange={(value) => {
+              // Handle selection
             }}
-          />
-        )}
-      </Field>
-
-      <Field name="terms" type="boolean">
-        {(field, props) => (
-          <ModularCheckbox
-            {...props}
-            label="Accept terms and conditions"
-            value={field.value}
-            error={field.error}
-            onCheckedChange={(checked) => {
-              // Handle change
-            }}
-            required
+            placeholder="Search products..."
           />
         )}
       </Field>
@@ -55,65 +47,84 @@ export function SettingsForm() {
   );
 }`;
 
-const requiredExample = `<Field name="consent" type="boolean">
+const requiredExample = `<Field name="city" validate={required("City is required")}>
   {(field, props) => (
-    <ModularCheckbox
+    <ModularCombobox
       {...props}
-      label="I agree to the privacy policy"
+      label="City"
       value={field.value}
       error={field.error}
-      onCheckedChange={handleChange}
+      options={cities}
+      onValueChange={handleCityChange}
       required
     />
   )}
 </Field>`;
 
-const disabledExample = `<ModularCheckbox
+const clearableExample = `<ModularCombobox
+  {...props}
+  label="Search"
+  value={field.value}
+  options={options}
+  onValueChange={handleChange}
+  clearable
+/>`;
+
+const disabledExample = `<ModularCombobox
   name="readonly-field"
-  label="Disabled checkbox"
-  value={true}
-  onCheckedChange={() => {}}
+  label="Disabled Combobox"
+  value="option1"
+  options={[{ value: "option1", label: "Option 1" }]}
+  onValueChange={() => {}}
   disabled
 />`;
 
-const errorExample = `<ModularCheckbox
+const errorExample = `<ModularCombobox
   name="error-field"
-  label="Accept terms"
-  value={false}
-  onCheckedChange={() => {}}
-  error="You must accept the terms"
+  label="With Error"
+  value=""
+  options={[]}
+  onValueChange={() => {}}
+  error="Please select an option"
 />`;
 
-const helperTextExample = `<ModularCheckbox
+const actionOptionsExample = `// Add custom action items
+<ModularCombobox
   {...props}
-  label="Subscribe to newsletter"
-  helperText="We'll send you updates about new features and promotions"
-  value={field.value}
-  onCheckedChange={handleChange}
+  label="Category"
+  options={categories}
+  onValueChange={handleChange}
+  firstActionOptions={[
+    {
+      value: "create",
+      label: "Create new category",
+      icon: <PlusIcon class="size-4" />,
+      action: () => openCreateDialog(),
+    },
+  ]}
+  lastActionOptions={[
+    {
+      value: "manage",
+      label: "Manage categories",
+      icon: <SettingsIcon class="size-4" />,
+      action: () => openManageDialog(),
+    },
+  ]}
 />`;
 
-const noToggleLabelExample = `// Prevent clicking label from toggling
-<ModularCheckbox
-  {...props}
-  label="Click only the checkbox"
-  value={field.value}
-  onCheckedChange={handleChange}
-  disableToggleLabel
-/>`;
+const dependencies = ["@modular-forms/solid", "solid-motionone"];
 
-const dependencies = ["@modular-forms/solid", "@kobalte/core"];
-
-export default function ModularCheckboxPage() {
+export default function ModularComboboxPage() {
   return (
     <>
-      <Title>Modular Checkbox - ArchiTechs Registry</Title>
+      <Title>Modular Combobox - ArchiTechs Registry</Title>
 
       <PageHeader>
-        <PageHeaderHeading>Modular Checkbox</PageHeaderHeading>
+        <PageHeaderHeading>Modular Combobox</PageHeaderHeading>
         <PageHeaderDescription>
-          A checkbox component integrated with @modular-forms/solid for boolean
-          form fields. Includes label, helper text, error display, and
-          accessible keyboard navigation.
+          A combobox component with autocomplete integrated with
+          @modular-forms/solid. Supports type-ahead filtering, clearable state,
+          and custom action options.
         </PageHeaderDescription>
       </PageHeader>
 
@@ -134,12 +145,9 @@ export default function ModularCheckboxPage() {
         <section>
           <h2 class="mb-4 font-semibold text-xl">Usage</h2>
           <p class="mb-4 text-muted-foreground text-sm">
-            Use with @modular-forms/solid Field component with{" "}
-            <code>type="boolean"</code>:
+            Use with @modular-forms/solid Field component:
           </p>
-          <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-            <code>{usage}</code>
-          </pre>
+          <CodeBlock code={usage} lang="tsx" />
         </section>
 
         <section>
@@ -170,36 +178,52 @@ export default function ModularCheckboxPage() {
                   <td class="py-2 pr-4">
                     <code>string</code>
                   </td>
-                  <td class="py-2">Label text displayed next to checkbox</td>
+                  <td class="py-2">Label text displayed above combobox</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
-                    <code>helperText</code>
+                    <code>options</code>
                   </td>
                   <td class="py-2 pr-4">
-                    <code>string</code>
+                    <code>array</code>
                   </td>
-                  <td class="py-2">Additional description text below label</td>
+                  <td class="py-2">Array of option objects</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
-                    <code>value</code>
-                  </td>
-                  <td class="py-2 pr-4">
-                    <code>boolean</code>
-                  </td>
-                  <td class="py-2">Current checked state</td>
-                </tr>
-                <tr class="border-b">
-                  <td class="py-2 pr-4">
-                    <code>onCheckedChange</code>
+                    <code>onValueChange</code>
                   </td>
                   <td class="py-2 pr-4">
                     <code>function</code>
                   </td>
-                  <td class="py-2">
-                    Required. Callback when checked state changes
+                  <td class="py-2">Required. Callback when value changes</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="py-2 pr-4">
+                    <code>clearable</code>
                   </td>
+                  <td class="py-2 pr-4">
+                    <code>boolean</code>
+                  </td>
+                  <td class="py-2">Show clear button when value is selected</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="py-2 pr-4">
+                    <code>optionValue</code>
+                  </td>
+                  <td class="py-2 pr-4">
+                    <code>string</code>
+                  </td>
+                  <td class="py-2">Key for option value (default: "value")</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="py-2 pr-4">
+                    <code>optionTextValue</code>
+                  </td>
+                  <td class="py-2 pr-4">
+                    <code>string</code>
+                  </td>
+                  <td class="py-2">Key for option label (default: "label")</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
@@ -212,30 +236,21 @@ export default function ModularCheckboxPage() {
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
-                    <code>defaultChecked</code>
+                    <code>firstActionOptions</code>
                   </td>
                   <td class="py-2 pr-4">
-                    <code>boolean</code>
+                    <code>array</code>
                   </td>
-                  <td class="py-2">Initial checked state</td>
+                  <td class="py-2">Action options at the start of the list</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
-                    <code>disableToggleLabel</code>
+                    <code>lastActionOptions</code>
                   </td>
                   <td class="py-2 pr-4">
-                    <code>boolean</code>
+                    <code>array</code>
                   </td>
-                  <td class="py-2">Prevent label click from toggling</td>
-                </tr>
-                <tr class="border-b">
-                  <td class="py-2 pr-4">
-                    <code>wrapperClass</code>
-                  </td>
-                  <td class="py-2 pr-4">
-                    <code>string</code>
-                  </td>
-                  <td class="py-2">Additional class for wrapper element</td>
+                  <td class="py-2">Action options at the end of the list</td>
                 </tr>
               </tbody>
             </table>
@@ -247,33 +262,23 @@ export default function ModularCheckboxPage() {
           <div class="space-y-6">
             <div>
               <h3 class="mb-2 font-medium">Required Field</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{requiredExample}</code>
-              </pre>
+              <CodeBlock code={requiredExample} lang="tsx" />
+            </div>
+            <div>
+              <h3 class="mb-2 font-medium">Clearable</h3>
+              <CodeBlock code={clearableExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Disabled State</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{disabledExample}</code>
-              </pre>
+              <CodeBlock code={disabledExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Error State</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{errorExample}</code>
-              </pre>
+              <CodeBlock code={errorExample} lang="tsx" />
             </div>
             <div>
-              <h3 class="mb-2 font-medium">With Helper Text</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{helperTextExample}</code>
-              </pre>
-            </div>
-            <div>
-              <h3 class="mb-2 font-medium">Disable Label Toggle</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{noToggleLabelExample}</code>
-              </pre>
+              <h3 class="mb-2 font-medium">Custom Action Options</h3>
+              <CodeBlock code={actionOptionsExample} lang="tsx" />
             </div>
           </div>
         </section>
@@ -283,25 +288,27 @@ export default function ModularCheckboxPage() {
           <div class="grid gap-4 sm:grid-cols-2">
             <A
               class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              href="/docs/components/checkbox"
+              href="/docs/components/combobox"
             >
-              <h3 class="font-medium group-hover:underline">Checkbox</h3>
+              <h3 class="font-medium group-hover:underline">Combobox</h3>
               <p class="text-muted-foreground text-sm">
-                Base checkbox component without form integration
+                Base combobox component without form integration
               </p>
             </A>
             <A
               class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              href="/docs/components/switch"
+              href="/docs/modular-form/searchable-select"
             >
-              <h3 class="font-medium group-hover:underline">Switch</h3>
+              <h3 class="font-medium group-hover:underline">
+                Modular Searchable Select
+              </h3>
               <p class="text-muted-foreground text-sm">
-                Toggle switch for boolean settings
+                Searchable select with multiple selection
               </p>
             </A>
             <A
               class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              href="/docs/blocks/modular-form"
+              href="/docs/modular-form"
             >
               <h3 class="font-medium group-hover:underline">Modular Form</h3>
               <p class="text-muted-foreground text-sm">

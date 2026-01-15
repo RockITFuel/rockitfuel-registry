@@ -8,12 +8,7 @@ import {
   PageHeaderHeading,
 } from "~/components/page-header";
 import { Badge } from "~/components/ui/badge";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "~/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 
 type BlockCategory =
   | "featured"
@@ -37,14 +32,6 @@ const blocks: Block[] = [
     description:
       "Responsive sidebar navigation with mobile support, keyboard shortcuts, and theme toggle.",
     categories: ["featured", "sidebar", "dashboard"],
-    status: "new",
-  },
-  {
-    title: "Modular Form",
-    href: "/docs/blocks/modular-form",
-    description:
-      "Form components integrated with @modular-forms/solid - includes input, select, combobox, date picker, and more.",
-    categories: ["featured", "dashboard", "auth"],
     status: "new",
   },
   {
@@ -89,17 +76,15 @@ function BlockCard(props: { block: Block }) {
 function BlockGrid(props: { blocks: Block[] }) {
   return (
     <Show
-      when={props.blocks.length > 0}
       fallback={
         <div class="py-12 text-center text-muted-foreground">
           No blocks available in this category yet.
         </div>
       }
+      when={props.blocks.length > 0}
     >
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <For each={props.blocks}>
-          {(block) => <BlockCard block={block} />}
-        </For>
+        <For each={props.blocks}>{(block) => <BlockCard block={block} />}</For>
       </div>
     </Show>
   );
@@ -107,7 +92,9 @@ function BlockGrid(props: { blocks: Block[] }) {
 
 export default function BlocksIndex() {
   const getBlocksByCategory = (category: BlockCategory) =>
-    createMemo(() => blocks.filter((block) => block.categories.includes(category)));
+    createMemo(() =>
+      blocks.filter((block) => block.categories.includes(category))
+    );
 
   return (
     <>
@@ -122,7 +109,7 @@ export default function BlocksIndex() {
         </PageHeaderDescription>
       </PageHeader>
 
-      <Tabs defaultValue="featured" class="w-full">
+      <Tabs class="w-full" defaultValue="featured">
         <TabsList class="mb-6 flex flex-wrap">
           <For each={categories}>
             {(category) => (

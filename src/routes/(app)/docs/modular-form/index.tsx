@@ -1,6 +1,7 @@
 import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import { For, Show } from "solid-js";
+import { CodeBlock } from "~/components/code-block";
 import { DependencyChips } from "~/components/dependency-chips";
 import { InstallCommand } from "~/components/install-command";
 import {
@@ -84,6 +85,61 @@ const dependencies = [
   "debounce",
 ];
 
+const usageExample = `import { createForm, required, email } from "@modular-forms/solid";
+import { ModularInput } from "~/components/modular-form/modular-input";
+import { ModularSelect } from "~/components/modular-form/modular-select";
+
+type ContactForm = {
+  name: string;
+  email: string;
+  subject: string;
+};
+
+export function ContactForm() {
+  const [form, { Form, Field }] = createForm<ContactForm>();
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Field name="name" validate={required("Name is required")}>
+        {(field, props) => (
+          <ModularInput
+            {...props}
+            label="Name"
+            value={field.value}
+            error={field.error}
+          />
+        )}
+      </Field>
+
+      <Field name="email" validate={[
+        required("Email is required"),
+        email("Please enter a valid email")
+      ]}>
+        {(field, props) => (
+          <ModularInput
+            {...props}
+            type="email"
+            label="Email"
+            value={field.value}
+            error={field.error}
+          />
+        )}
+      </Field>
+
+      <Field name="subject">
+        {(field, props) => (
+          <ModularSelect
+            {...props}
+            label="Subject"
+            value={field.value}
+            options={["General", "Support", "Sales"]}
+          />
+        )}
+      </Field>
+    </Form>
+  );
+}`;
+
 export default function ModularFormPage() {
   return (
     <>
@@ -140,62 +196,7 @@ export default function ModularFormPage() {
           <p class="mb-4 text-muted-foreground text-sm">
             Use with @modular-forms/solid to create validated forms:
           </p>
-          <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-            <code>{`import { createForm, required, email } from "@modular-forms/solid";
-import { ModularInput } from "~/components/modular-form/modular-input";
-import { ModularSelect } from "~/components/modular-form/modular-select";
-
-type ContactForm = {
-  name: string;
-  email: string;
-  subject: string;
-};
-
-export function ContactForm() {
-  const [form, { Form, Field }] = createForm<ContactForm>();
-
-  return (
-    <Form onSubmit={handleSubmit}>
-      <Field name="name" validate={required("Name is required")}>
-        {(field, props) => (
-          <ModularInput
-            {...props}
-            label="Name"
-            value={field.value}
-            error={field.error}
-          />
-        )}
-      </Field>
-
-      <Field name="email" validate={[
-        required("Email is required"),
-        email("Please enter a valid email")
-      ]}>
-        {(field, props) => (
-          <ModularInput
-            {...props}
-            type="email"
-            label="Email"
-            value={field.value}
-            error={field.error}
-          />
-        )}
-      </Field>
-
-      <Field name="subject">
-        {(field, props) => (
-          <ModularSelect
-            {...props}
-            label="Subject"
-            value={field.value}
-            options={["General", "Support", "Sales"]}
-          />
-        )}
-      </Field>
-    </Form>
-  );
-}`}</code>
-          </pre>
+          <CodeBlock code={usageExample} lang="tsx" />
         </section>
 
         <section>

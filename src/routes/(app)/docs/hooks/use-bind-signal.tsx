@@ -1,4 +1,5 @@
 import { Title } from "@solidjs/meta";
+import { CodeBlock } from "~/components/code-block";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -6,30 +7,7 @@ import {
   PageHeaderHeading,
 } from "~/components/page-header";
 
-export default function UseBindSignalPage() {
-  return (
-    <>
-      <Title>useBindSignal - ArchiTechs Registry</Title>
-
-      <PageHeader>
-        <PageHeaderHeading>useBindSignal</PageHeaderHeading>
-        <PageHeaderDescription>
-          Two-way binding hook for controlled components in SolidJS. Simplifies
-          managing component state that needs to be synchronized with a parent.
-        </PageHeaderDescription>
-      </PageHeader>
-
-      <div class="space-y-8">
-        <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
-          <InstallCommand component="use-bind-signal" />
-        </section>
-
-        <section>
-          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
-          <div class="rounded-md bg-muted p-4">
-            <pre class="overflow-x-auto text-sm">
-              <code>{`import { useBindSignal } from "~/hooks/use-bind-signal"
+const usageExample = `import { useBindSignal } from "~/hooks/use-bind-signal"
 
 function ControlledInput(props: {
   value?: string
@@ -58,9 +36,30 @@ function Parent() {
       onChange={setText}
     />
   )
-}`}</code>
-            </pre>
-          </div>
+}`;
+
+export default function UseBindSignalPage() {
+  return (
+    <>
+      <Title>useBindSignal - ArchiTechs Registry</Title>
+
+      <PageHeader>
+        <PageHeaderHeading>useBindSignal</PageHeaderHeading>
+        <PageHeaderDescription>
+          Two-way binding hook for controlled components in SolidJS. Simplifies
+          managing component state that needs to be synchronized with a parent.
+        </PageHeaderDescription>
+      </PageHeader>
+
+      <div class="space-y-8">
+        <section>
+          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <InstallCommand component="use-bind-signal" />
+        </section>
+
+        <section>
+          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
+          <CodeBlock code={usageExample} lang="tsx" />
         </section>
 
         <section>

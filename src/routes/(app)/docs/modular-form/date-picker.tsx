@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
+import { CodeBlock } from "~/components/code-block";
 import { DependencyChips } from "~/components/dependency-chips";
 import { InstallCommand } from "~/components/install-command";
 import {
@@ -153,9 +154,7 @@ export default function ModularDatePickerPage() {
           <p class="mb-4 text-muted-foreground text-sm">
             Use with @modular-forms/solid Field component:
           </p>
-          <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-            <code>{usage}</code>
-          </pre>
+          <CodeBlock code={usage} lang="tsx" />
         </section>
 
         <section>
@@ -288,45 +287,31 @@ export default function ModularDatePickerPage() {
           <div class="space-y-6">
             <div>
               <h3 class="mb-2 font-medium">Required Field</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{requiredExample}</code>
-              </pre>
+              <CodeBlock code={requiredExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Disabled State</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{disabledExample}</code>
-              </pre>
+              <CodeBlock code={disabledExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Error State</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{errorExample}</code>
-              </pre>
+              <CodeBlock code={errorExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Date Constraints</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{constraintsExample}</code>
-              </pre>
+              <CodeBlock code={constraintsExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Week Numbers</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{weekNumbersExample}</code>
-              </pre>
+              <CodeBlock code={weekNumbersExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Clearable</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{clearableExample}</code>
-              </pre>
+              <CodeBlock code={clearableExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Min/Max Range</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{minMaxExample}</code>
-              </pre>
+              <CodeBlock code={minMaxExample} lang="tsx" />
             </div>
           </div>
         </section>
@@ -373,7 +358,7 @@ export default function ModularDatePickerPage() {
             </A>
             <A
               class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              href="/docs/blocks/modular-form"
+              href="/docs/modular-form"
             >
               <h3 class="font-medium group-hover:underline">Modular Form</h3>
               <p class="text-muted-foreground text-sm">

@@ -1,4 +1,5 @@
 import { Title } from "@solidjs/meta";
+import { CodeBlock } from "~/components/code-block";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -49,9 +50,8 @@ export default function DateUtilsPage() {
 
         <section>
           <h2 class="mb-4 font-semibold text-xl">Usage</h2>
-          <div class="rounded-md bg-muted p-4">
-            <pre class="overflow-x-auto text-sm">
-              <code>{`import {
+          <CodeBlock
+            code={`import {
   dateToCalendarDate,
   calendarDateToDate,
   parseDutchDate,
@@ -68,9 +68,9 @@ const jsDate = calendarDateToDate(calDate)
 const parsed = parseDutchDate("23-12-2024")
 
 // Format date for display
-const formatted = formatDate(new Date(), "dd-MM-yyyy")`}</code>
-            </pre>
-          </div>
+const formatted = formatDate(new Date(), "dd-MM-yyyy")`}
+            lang="typescript"
+          />
         </section>
       </div>
     </>

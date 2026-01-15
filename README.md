@@ -17,7 +17,7 @@ A custom shadcn component registry for **SolidJS** featuring the **Gatehouse** a
 Add Gatehouse to your SolidJS project:
 
 ```bash
-npx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/gatehouse.json
+bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/gatehouse.json
 ```
 
 ### Basic Usage
@@ -69,15 +69,15 @@ if (result.isGranted()) {
 
 | Component | Description | Install Command |
 |-----------|-------------|-----------------|
-| `gatehouse` | Authorization library (RBAC, ABAC, ReBAC) | `npx shadcn@latest add .../r/gatehouse.json` |
-| `gatehouse-demo` | Interactive authorization demo | `npx shadcn@latest add .../r/gatehouse-demo.json` |
-| `button` | Button component with variants | `npx shadcn@latest add .../r/button.json` |
-| `card` | Card container component | `npx shadcn@latest add .../r/card.json` |
-| `input` | Input component | `npx shadcn@latest add .../r/input.json` |
-| `label` | Label component | `npx shadcn@latest add .../r/label.json` |
-| `textarea` | Textarea component | `npx shadcn@latest add .../r/textarea.json` |
-| `hello-world` | Simple example component | `npx shadcn@latest add .../r/hello-world.json` |
-| `example-form` | Form with Zod validation | `npx shadcn@latest add .../r/example-form.json` |
+| `gatehouse` | Authorization library (RBAC, ABAC, ReBAC) | `bunx shadcn@latest add .../r/gatehouse.json` |
+| `gatehouse-demo` | Interactive authorization demo | `bunx shadcn@latest add .../r/gatehouse-demo.json` |
+| `button` | Button component with variants | `bunx shadcn@latest add .../r/button.json` |
+| `card` | Card container component | `bunx shadcn@latest add .../r/card.json` |
+| `input` | Input component | `bunx shadcn@latest add .../r/input.json` |
+| `label` | Label component | `bunx shadcn@latest add .../r/label.json` |
+| `textarea` | Textarea component | `bunx shadcn@latest add .../r/textarea.json` |
+| `hello-world` | Simple example component | `bunx shadcn@latest add .../r/hello-world.json` |
+| `example-form` | Form with Zod validation | `bunx shadcn@latest add .../r/example-form.json` |
 
 Replace `...` with `https://solid-registry.coolify.wearearchitechs.dev`
 

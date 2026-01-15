@@ -4,9 +4,7 @@
   "type": "registry:lib",
   "title": "Chart Utilities",
   "description": "Core D3 chart utilities including scales, axes, tooltips, theming, and responsive sizing for SolidJS",
-  "dependencies": [
-    "d3"
-  ],
+  "dependencies": ["d3"],
   "files": [
     {
       "path": "lib/charts/types.ts",

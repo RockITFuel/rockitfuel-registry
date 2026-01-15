@@ -134,3 +134,25 @@ export function IconLink(props: IconProps) {
     </Icon>
   );
 }
+
+export function IconExpand(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M15 3h6v6" />
+      <path d="M9 21H3v-6" />
+      <path d="M21 3l-7 7" />
+      <path d="M3 21l7 -7" />
+    </Icon>
+  );
+}
+
+export function IconContract(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M4 14h6v6" />
+      <path d="M20 10h-6V4" />
+      <path d="M4 20l6 -6" />
+      <path d="M20 4l-6 6" />
+    </Icon>
+  );
+}

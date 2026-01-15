@@ -1,4 +1,5 @@
 import { Title } from "@solidjs/meta";
+import { CodeBlock } from "~/components/code-block";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -6,6 +7,41 @@ import {
   PageHeaderHeading,
 } from "~/components/page-header";
 import { GatehouseDemo } from "~/registry/new-york/blocks/gatehouse-demo/page";
+
+const usageExample = `import { Gatehouse, RBACPolicy, ABACPolicy } from "~/lib/gatehouse"
+
+// Create a Gatehouse instance
+const gatehouse = new Gatehouse()
+
+// Define an RBAC policy
+const rbacPolicy = new RBACPolicy({
+  roles: {
+    admin: { permissions: ["read", "write", "delete"] },
+    editor: { permissions: ["read", "write"] },
+    viewer: { permissions: ["read"] }
+  }
+})
+
+// Define an ABAC policy
+const abacPolicy = new ABACPolicy({
+  rules: [
+    {
+      effect: "allow",
+      condition: (ctx) => ctx.user.department === ctx.resource.department
+    }
+  ]
+})
+
+// Add policies to Gatehouse
+gatehouse.addPolicy(rbacPolicy)
+gatehouse.addPolicy(abacPolicy)
+
+// Check authorization
+const result = await gatehouse.isAuthorized({
+  user: { id: "1", role: "editor", department: "engineering" },
+  action: "write",
+  resource: { id: "doc-1", department: "engineering" }
+})`;
 
 export default function GatehousePage() {
   return (
@@ -60,44 +96,7 @@ export default function GatehousePage() {
 
         <section>
           <h2 class="mb-4 font-semibold text-xl">Basic Usage</h2>
-          <div class="rounded-md bg-muted p-4">
-            <pre class="overflow-x-auto text-sm">
-              <code>{`import { Gatehouse, RBACPolicy, ABACPolicy } from "~/lib/gatehouse"
-
-// Create a Gatehouse instance
-const gatehouse = new Gatehouse()
-
-// Define an RBAC policy
-const rbacPolicy = new RBACPolicy({
-  roles: {
-    admin: { permissions: ["read", "write", "delete"] },
-    editor: { permissions: ["read", "write"] },
-    viewer: { permissions: ["read"] }
-  }
-})
-
-// Define an ABAC policy
-const abacPolicy = new ABACPolicy({
-  rules: [
-    {
-      effect: "allow",
-      condition: (ctx) => ctx.user.department === ctx.resource.department
-    }
-  ]
-})
-
-// Add policies to Gatehouse
-gatehouse.addPolicy(rbacPolicy)
-gatehouse.addPolicy(abacPolicy)
-
-// Check authorization
-const result = await gatehouse.isAuthorized({
-  user: { id: "1", role: "editor", department: "engineering" },
-  action: "write",
-  resource: { id: "doc-1", department: "engineering" }
-})`}</code>
-            </pre>
-          </div>
+          <CodeBlock code={usageExample} lang="typescript" />
         </section>
 
         <section>

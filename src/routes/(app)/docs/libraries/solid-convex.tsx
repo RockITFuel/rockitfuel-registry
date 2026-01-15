@@ -1,4 +1,5 @@
 import { Title } from "@solidjs/meta";
+import { CodeBlock } from "~/components/code-block";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -72,9 +73,8 @@ export default function SolidConvexPage() {
 
         <section>
           <h2 class="mb-4 font-semibold text-xl">Usage</h2>
-          <div class="rounded-md bg-muted p-4">
-            <pre class="overflow-x-auto text-sm">
-              <code>{`import { ConvexProvider, useQuery, useMutation } from "~/lib/solid-convex"
+          <CodeBlock
+            code={`import { ConvexProvider, useQuery, useMutation } from "~/lib/solid-convex"
 import { api } from "../convex/_generated/api"
 
 // Wrap your app with ConvexProvider
@@ -101,9 +101,9 @@ function MyComponent() {
       </button>
     </div>
   )
-}`}</code>
-            </pre>
-          </div>
+}`}
+            lang="tsx"
+          />
         </section>
 
         <section>

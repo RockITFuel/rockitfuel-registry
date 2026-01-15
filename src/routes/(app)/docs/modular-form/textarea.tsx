@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
+import { CodeBlock } from "~/components/code-block";
 import { DependencyChips } from "~/components/dependency-chips";
 import { InstallCommand } from "~/components/install-command";
 import {
@@ -8,47 +9,46 @@ import {
   PageHeaderHeading,
 } from "~/components/page-header";
 
-const usage = `import { createForm, required, email } from "@modular-forms/solid";
-import ModularInput from "~/components/modular-form/modular-input";
+const usage = `import { createForm, required, minLength } from "@modular-forms/solid";
+import { ModularTextArea } from "~/components/modular-form/modular-text-area";
 
-type LoginForm = {
-  email: string;
-  password: string;
+type FeedbackForm = {
+  message: string;
+  comments: string;
 };
 
-export function LoginForm() {
-  const [form, { Form, Field }] = createForm<LoginForm>();
+export function FeedbackForm() {
+  const [form, { Form, Field }] = createForm<FeedbackForm>();
 
   return (
     <Form onSubmit={handleSubmit}>
       <Field
-        name="email"
+        name="message"
         validate={[
-          required("Email is required"),
-          email("Please enter a valid email"),
+          required("Message is required"),
+          minLength(10, "Message must be at least 10 characters"),
         ]}
       >
         {(field, props) => (
-          <ModularInput
+          <ModularTextArea
             {...props}
-            type="email"
-            label="Email"
+            label="Message"
             value={field.value}
             error={field.error}
-            placeholder="Enter your email"
+            placeholder="Enter your message..."
+            rows={4}
           />
         )}
       </Field>
 
-      <Field name="password" validate={required("Password is required")}>
+      <Field name="comments">
         {(field, props) => (
-          <ModularInput
+          <ModularTextArea
             {...props}
-            type="password"
-            label="Password"
+            label="Additional Comments"
             value={field.value}
             error={field.error}
-            placeholder="Enter your password"
+            placeholder="Optional comments..."
           />
         )}
       </Field>
@@ -56,11 +56,11 @@ export function LoginForm() {
   );
 }`;
 
-const requiredExample = `<Field name="email" validate={required("Email is required")}>
+const requiredExample = `<Field name="description" validate={required("Description is required")}>
   {(field, props) => (
-    <ModularInput
+    <ModularTextArea
       {...props}
-      label="Email"
+      label="Description"
       value={field.value}
       error={field.error}
       required
@@ -68,41 +68,41 @@ const requiredExample = `<Field name="email" validate={required("Email is requir
   )}
 </Field>`;
 
-const disabledExample = `<ModularInput
+const disabledExample = `<ModularTextArea
   name="readonly-field"
-  label="Disabled Input"
-  value="Cannot edit this"
+  label="Disabled Textarea"
+  value="This content cannot be edited"
   disabled
 />`;
 
-const errorExample = `<ModularInput
+const errorExample = `<ModularTextArea
   name="error-field"
   label="With Error"
   value=""
   error="This field has an error"
 />`;
 
-const clearableExample = `<ModularInput
-  name="search"
-  label="Search"
-  value={searchValue()}
-  clearable
-  icon={<SearchIcon class="size-4" />}
+const noResizeExample = `<ModularTextArea
+  name="fixed-size"
+  label="Fixed Size"
+  value=""
+  disableResize
+  rows={5}
 />`;
 
-const dependencies = ["@modular-forms/solid", "solid-motionone"];
+const dependencies = ["@modular-forms/solid"];
 
-export default function ModularInputPage() {
+export default function ModularTextareaPage() {
   return (
     <>
-      <Title>Modular Input - ArchiTechs Registry</Title>
+      <Title>Modular Textarea - ArchiTechs Registry</Title>
 
       <PageHeader>
-        <PageHeaderHeading>Modular Input</PageHeaderHeading>
+        <PageHeaderHeading>Modular Textarea</PageHeaderHeading>
         <PageHeaderDescription>
-          A text input component integrated with @modular-forms/solid for
-          validation and state management. Includes label, error display, and
-          optional clearable functionality.
+          A multi-line text input component integrated with @modular-forms/solid
+          for validation and state management. Includes label, error display,
+          and optional resize control.
         </PageHeaderDescription>
       </PageHeader>
 
@@ -125,9 +125,7 @@ export default function ModularInputPage() {
           <p class="mb-4 text-muted-foreground text-sm">
             Use with @modular-forms/solid Field component:
           </p>
-          <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-            <code>{usage}</code>
-          </pre>
+          <CodeBlock code={usage} lang="tsx" />
         </section>
 
         <section>
@@ -158,7 +156,7 @@ export default function ModularInputPage() {
                   <td class="py-2 pr-4">
                     <code>string</code>
                   </td>
-                  <td class="py-2">Label text displayed above input</td>
+                  <td class="py-2">Label text displayed above textarea</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
@@ -171,21 +169,21 @@ export default function ModularInputPage() {
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
-                    <code>clearable</code>
+                    <code>disableResize</code>
                   </td>
                   <td class="py-2 pr-4">
                     <code>boolean</code>
                   </td>
-                  <td class="py-2">Show clear button when input has value</td>
+                  <td class="py-2">Prevent user from resizing the textarea</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
-                    <code>icon</code>
+                    <code>rows</code>
                   </td>
                   <td class="py-2 pr-4">
-                    <code>JSX.Element</code>
+                    <code>number</code>
                   </td>
-                  <td class="py-2">Icon to display on the left side</td>
+                  <td class="py-2">Number of visible text lines</td>
                 </tr>
                 <tr class="border-b">
                   <td class="py-2 pr-4">
@@ -206,27 +204,19 @@ export default function ModularInputPage() {
           <div class="space-y-6">
             <div>
               <h3 class="mb-2 font-medium">Required Field</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{requiredExample}</code>
-              </pre>
+              <CodeBlock code={requiredExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Disabled State</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{disabledExample}</code>
-              </pre>
+              <CodeBlock code={disabledExample} lang="tsx" />
             </div>
             <div>
               <h3 class="mb-2 font-medium">Error State</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{errorExample}</code>
-              </pre>
+              <CodeBlock code={errorExample} lang="tsx" />
             </div>
             <div>
-              <h3 class="mb-2 font-medium">Clearable with Icon</h3>
-              <pre class="overflow-x-auto rounded-md bg-muted p-4 text-sm">
-                <code>{clearableExample}</code>
-              </pre>
+              <h3 class="mb-2 font-medium">Disabled Resize</h3>
+              <CodeBlock code={noResizeExample} lang="tsx" />
             </div>
           </div>
         </section>
@@ -236,16 +226,16 @@ export default function ModularInputPage() {
           <div class="grid gap-4 sm:grid-cols-2">
             <A
               class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              href="/docs/components/input"
+              href="/docs/components/textarea"
             >
-              <h3 class="font-medium group-hover:underline">Input</h3>
+              <h3 class="font-medium group-hover:underline">Textarea</h3>
               <p class="text-muted-foreground text-sm">
-                Base input component without form integration
+                Base textarea component without form integration
               </p>
             </A>
             <A
               class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
-              href="/docs/blocks/modular-form"
+              href="/docs/modular-form"
             >
               <h3 class="font-medium group-hover:underline">Modular Form</h3>
               <p class="text-muted-foreground text-sm">

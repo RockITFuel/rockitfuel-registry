@@ -4,12 +4,8 @@
   "type": "registry:chart",
   "title": "Line Chart",
   "description": "D3-powered line chart component with multiple series support, tooltips, and responsive sizing",
-  "dependencies": [
-    "d3"
-  ],
-  "registryDependencies": [
-    "chart-utils"
-  ],
+  "dependencies": ["d3"],
+  "registryDependencies": ["chart-utils"],
   "files": [
     {
       "path": "components/charts/line-chart.tsx",

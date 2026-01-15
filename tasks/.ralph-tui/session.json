@@ -1,0 +1,306 @@
+{
+  "version": 1,
+  "sessionId": "48968b03-0445-498b-8fac-8833bd863ab3",
+  "status": "interrupted",
+  "startedAt": "2026-01-13T23:10:22.661Z",
+  "updatedAt": "2026-01-14T08:55:23.708Z",
+  "currentIteration": 10,
+  "maxIterations": 10,
+  "tasksCompleted": 10,
+  "isPaused": false,
+  "agentPlugin": "claude",
+  "trackerState": {
+    "plugin": "json",
+    "prdPath": "./prd.json",
+    "totalTasks": 30,
+    "tasks": [
+      {
+        "id": "US-001",
+        "title": "Implement clipboard utilities with toast feedback",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-002",
+        "title": "Build code block component with syntax highlighting",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-003",
+        "title": "Implement prev/next navigation",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-004",
+        "title": "Build on-page table of contents with scrollspy",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-005",
+        "title": "Implement command palette search",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-006",
+        "title": "Create reusable page template component",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-007",
+        "title": "Add categories.json registry endpoint",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-008",
+        "title": "Build dependency chips component",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-009",
+        "title": "Rename super-* components to modular-*",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-010",
+        "title": "Create Components section documentation pages",
+        "status": "completed",
+        "completedInSession": false
+      },
+      {
+        "id": "US-011",
+        "title": "Create Modular Form bundle page",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-012",
+        "title": "Create individual Modular component pages",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-013",
+        "title": "Build block viewer component",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-014",
+        "title": "Create Blocks section with category tabs",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-015",
+        "title": "Build D3 chart core utilities",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-016",
+        "title": "Create D3 line chart component",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-017",
+        "title": "Create D3 area chart component",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-018",
+        "title": "Create D3 bar chart component",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-019",
+        "title": "Create D3 stacked bar chart component",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-020",
+        "title": "Create D3 scatter plot component",
+        "status": "completed",
+        "completedInSession": true
+      },
+      {
+        "id": "US-021",
+        "title": "Create Charts section gallery",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-022",
+        "title": "Create Libraries section pages",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-023",
+        "title": "Create Hooks section pages",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-024",
+        "title": "Create Functions section pages",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-025",
+        "title": "Implement keyboard navigation for sidebar",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-026",
+        "title": "Add ARIA labels and accessibility improvements",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-027",
+        "title": "Implement route-level code splitting",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-028",
+        "title": "Configure Docker deployment",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-029",
+        "title": "Update sidebar navigation for all sections",
+        "status": "open",
+        "completedInSession": false
+      },
+      {
+        "id": "US-030",
+        "title": "Ensure consistent styling across all sections",
+        "status": "open",
+        "completedInSession": false
+      }
+    ]
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "status": "completed",
+      "taskId": "US-011",
+      "taskTitle": "Create Modular Form bundle page",
+      "taskCompleted": true,
+      "durationMs": 489740,
+      "startedAt": "2026-01-13T23:10:51.905Z",
+      "endedAt": "2026-01-13T23:19:01.645Z"
+    },
+    {
+      "iteration": 2,
+      "status": "completed",
+      "taskId": "US-012",
+      "taskTitle": "Create individual Modular component pages",
+      "taskCompleted": true,
+      "durationMs": 3067275,
+      "startedAt": "2026-01-13T23:19:02.654Z",
+      "endedAt": "2026-01-14T00:10:09.929Z"
+    },
+    {
+      "iteration": 3,
+      "status": "completed",
+      "taskId": "US-013",
+      "taskTitle": "Build block viewer component",
+      "taskCompleted": true,
+      "durationMs": 1449385,
+      "startedAt": "2026-01-14T00:10:10.939Z",
+      "endedAt": "2026-01-14T00:34:20.324Z"
+    },
+    {
+      "iteration": 4,
+      "status": "completed",
+      "taskId": "US-014",
+      "taskTitle": "Create Blocks section with category tabs",
+      "taskCompleted": true,
+      "durationMs": 1581098,
+      "startedAt": "2026-01-14T00:34:21.339Z",
+      "endedAt": "2026-01-14T01:00:42.437Z"
+    },
+    {
+      "iteration": 5,
+      "status": "completed",
+      "taskId": "US-015",
+      "taskTitle": "Build D3 chart core utilities",
+      "taskCompleted": true,
+      "durationMs": 1591562,
+      "startedAt": "2026-01-14T01:00:43.446Z",
+      "endedAt": "2026-01-14T01:27:15.008Z"
+    },
+    {
+      "iteration": 6,
+      "status": "completed",
+      "taskId": "US-016",
+      "taskTitle": "Create D3 line chart component",
+      "taskCompleted": true,
+      "durationMs": 1748733,
+      "startedAt": "2026-01-14T01:27:16.015Z",
+      "endedAt": "2026-01-14T01:56:24.748Z"
+    },
+    {
+      "iteration": 7,
+      "status": "completed",
+      "taskId": "US-017",
+      "taskTitle": "Create D3 area chart component",
+      "taskCompleted": true,
+      "durationMs": 276839,
+      "startedAt": "2026-01-14T01:56:25.757Z",
+      "endedAt": "2026-01-14T02:01:02.596Z"
+    },
+    {
+      "iteration": 8,
+      "status": "completed",
+      "taskId": "US-018",
+      "taskTitle": "Create D3 bar chart component",
+      "taskCompleted": true,
+      "durationMs": 397214,
+      "startedAt": "2026-01-14T02:01:03.604Z",
+      "endedAt": "2026-01-14T02:07:40.818Z"
+    },
+    {
+      "iteration": 9,
+      "status": "completed",
+      "taskId": "US-019",
+      "taskTitle": "Create D3 stacked bar chart component",
+      "taskCompleted": true,
+      "durationMs": 704359,
+      "startedAt": "2026-01-14T02:07:41.827Z",
+      "endedAt": "2026-01-14T02:19:26.186Z"
+    },
+    {
+      "iteration": 10,
+      "status": "completed",
+      "taskId": "US-020",
+      "taskTitle": "Create D3 scatter plot component",
+      "taskCompleted": true,
+      "durationMs": 321178,
+      "startedAt": "2026-01-14T02:19:27.195Z",
+      "endedAt": "2026-01-14T02:24:48.373Z"
+    }
+  ],
+  "skippedTaskIds": [],
+  "cwd": "/home/luka/projects/rockitfuel-registry/tasks",
+  "activeTaskIds": [],
+  "subagentPanelVisible": false,
+  "endedAt": "2026-01-14T08:55:23.708Z"
+}

@@ -10,21 +10,26 @@ type CodeBlockProps = {
   class?: string;
   showCopy?: boolean;
   filename?: string;
+  showLineNumbers?: boolean;
 };
 
 export function CodeBlock(props: CodeBlockProps) {
   const [html, setHtml] = createSignal<string | null>(null);
   const lang = () => props.lang || "typescript";
 
-  // Only run highlighting on client to avoid hydration mismatch
-  onMount(() => {
-    codeToHtml(props.code, {
-      lang: lang(),
+  const highlightCode = (code: string, language: string) =>
+    codeToHtml(code, {
+      lang: language,
       themes: {
         light: "github-light",
         dark: "github-dark",
       },
-    }).then(setHtml);
+      defaultColor: "dark",
+    });
+
+  // Only run highlighting on client to avoid hydration mismatch
+  onMount(() => {
+    highlightCode(props.code, lang()).then(setHtml);
   });
 
   // Re-highlight if code changes
@@ -32,15 +37,7 @@ export function CodeBlock(props: CodeBlockProps) {
     if (isServer) {
       return;
     }
-    const code = props.code;
-    const language = lang();
-    codeToHtml(code, {
-      lang: language,
-      themes: {
-        light: "github-light",
-        dark: "github-dark",
-      },
-    }).then(setHtml);
+    highlightCode(props.code, lang()).then(setHtml);
   });
 
   return (
@@ -52,11 +49,14 @@ export function CodeBlock(props: CodeBlockProps) {
       ) : null}
       {html() ? (
         <div
-          class="[&_.shiki]:!bg-transparent [&_pre]:!bg-transparent overflow-x-auto text-sm [&_pre]:p-4 [&_pre]:pr-12"
+          class={cn(
+            "scrollbar-code [&_.shiki]:!bg-transparent [&_pre]:!bg-transparent overflow-x-auto text-sm [&_pre]:p-4 [&_pre]:pr-12",
+            props.showLineNumbers && "[&_.shiki]:show-line-numbers"
+          )}
           innerHTML={html() ?? ""}
         />
       ) : (
-        <pre class="overflow-x-auto p-4 pr-12 text-sm">
+        <pre class="scrollbar-code overflow-x-auto p-4 pr-12 text-sm">
           <code>{props.code}</code>
         </pre>
       )}

@@ -9,7 +9,7 @@
     {
       "path": "components/ui/sonner.tsx",
       "type": "registry:ui",
-      "content": "import type { Component, ComponentProps } from \"solid-js\";\n\nimport { Toaster as Sonner } from \"solid-sonner\";\n\ntype ToasterProps = ComponentProps<typeof Sonner>;\n\nconst Toaster: Component<ToasterProps> = (props) => (\n\t<Sonner\n\t\tclass=\"toaster group\"\n\t\ttoastOptions={{\n\t\t\tclasses: {\n\t\t\t\ttoast:\n\t\t\t\t\t\"group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg\",\n\t\t\t\tdescription: \"group-[.toast]:text-muted-foreground\",\n\t\t\t\tactionButton:\n\t\t\t\t\t\"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground\",\n\t\t\t\tcancelButton:\n\t\t\t\t\t\"group-[.toast]:bg-muted group-[.toast]:text-muted-foreground\",\n\t\t\t},\n\t\t}}\n\t\t{...props}\n\t/>\n);\n\nexport { Toaster };\n"
+      "content": "import type { Component, ComponentProps } from \"solid-js\";\n\nimport { Toaster as Sonner } from \"solid-sonner\";\n\ntype ToasterProps = ComponentProps<typeof Sonner>;\n\nconst Toaster: Component<ToasterProps> = (props) => (\n  <Sonner\n    class=\"toaster group\"\n    toastOptions={{\n      classes: {\n        toast:\n          \"group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg\",\n        description: \"group-[.toast]:text-muted-foreground\",\n        actionButton:\n          \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground\",\n        cancelButton:\n          \"group-[.toast]:bg-muted group-[.toast]:text-muted-foreground\",\n      },\n    }}\n    {...props}\n  />\n);\n\nexport { Toaster };\n"
     }
   ]
 }
