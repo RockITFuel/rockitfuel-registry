@@ -330,7 +330,8 @@
         "Appears in sidebar navigation"
       ],
       "priority": 18,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Updated src/config/docs.ts with Charts section containing Overview, Line Chart, Area Chart, Bar Chart links with 'new' status badges.",
       "dependsOn": ["CH-014", "CH-015", "CH-016", "CH-017"],
       "files": ["src/config/docs.ts"]
     },

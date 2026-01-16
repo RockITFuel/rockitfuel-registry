@@ -133,7 +133,12 @@ export const docsConfig: Config = {
     },
     {
       title: "Charts",
-      items: [{ title: "Overview", href: "/docs/charts", status: "new" }],
+      items: [
+        { title: "Overview", href: "/docs/charts", status: "new" },
+        { title: "Line Chart", href: "/docs/charts/line", status: "new" },
+        { title: "Area Chart", href: "/docs/charts/area", status: "new" },
+        { title: "Bar Chart", href: "/docs/charts/bar", status: "new" },
+      ],
     },
     {
       title: "Libraries",
