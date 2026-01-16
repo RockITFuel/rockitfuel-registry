@@ -37,7 +37,8 @@
         "Minimal shadcn-style aesthetic"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartGrid with horizontal lines by default, optional vertical lines. Uses hsl(var(--border)) for theme integration.",
       "dependsOn": ["CH-001"],
       "files": ["src/components/ui/chart/chart-grid.tsx"]
     },
