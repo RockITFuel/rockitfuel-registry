@@ -1,6 +1,7 @@
 import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import { For } from "solid-js";
+import { H2 } from "~/components/doc-heading";
 import { IconChevronRight } from "~/components/icons";
 import {
   PageHeader,
@@ -60,7 +61,7 @@ export default function LibrariesIndex() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Libraries</h2>
+          <H2 class="mb-4 font-semibold text-xl">Libraries</H2>
           <div class="grid gap-4">
             <For each={libraries}>
               {(lib) => (
@@ -87,7 +88,7 @@ export default function LibrariesIndex() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Hooks</h2>
+          <H2 class="mb-4 font-semibold text-xl">Hooks</H2>
           <div class="grid gap-4 sm:grid-cols-2">
             <For each={hooks}>
               {(hook) => (

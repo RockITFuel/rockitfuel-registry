@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { CodeBlock } from "~/components/code-block";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -22,12 +23,12 @@ export default function SolidConvexPage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <InstallCommand component="solid-convex" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Dependencies</h2>
+          <H2 class="mb-4 font-semibold text-xl">Dependencies</H2>
           <div class="flex flex-wrap gap-2">
             <code class="rounded bg-muted px-2 py-1 text-sm">convex</code>
             <code class="rounded bg-muted px-2 py-1 text-sm">
@@ -37,7 +38,7 @@ export default function SolidConvexPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Features</h2>
+          <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>Reactive queries with SolidJS signals</li>
             <li>Automatic caching and deduplication</li>
@@ -48,7 +49,7 @@ export default function SolidConvexPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Included Files</h2>
+          <H2 class="mb-4 font-semibold text-xl">Included Files</H2>
           <div class="grid gap-2 sm:grid-cols-2">
             <div class="rounded-md border px-3 py-2 text-sm">
               <code>index.tsx</code>
@@ -72,7 +73,7 @@ export default function SolidConvexPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
+          <H2 class="mb-4 font-semibold text-xl">Usage</H2>
           <CodeBlock
             code={`import { ConvexProvider, useQuery, useMutation } from "~/lib/solid-convex"
 import { api } from "../convex/_generated/api"
@@ -107,7 +108,7 @@ function MyComponent() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Note</h2>
+          <H2 class="mb-4 font-semibold text-xl">Note</H2>
           <p class="text-muted-foreground">
             This library requires a Convex backend to be set up. See the{" "}
             <a

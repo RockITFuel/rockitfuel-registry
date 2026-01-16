@@ -2,6 +2,7 @@ import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import { CodeBlock } from "~/components/code-block";
 import { DependencyChips } from "~/components/dependency-chips";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -109,7 +110,7 @@ export default function ModularInputPage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <p class="mb-4 text-muted-foreground text-sm">
             Install the complete modular form bundle:
           </p>
@@ -117,12 +118,12 @@ export default function ModularInputPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Dependencies</h2>
+          <H2 class="mb-4 font-semibold text-xl">Dependencies</H2>
           <DependencyChips dependencies={dependencies} />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
+          <H2 class="mb-4 font-semibold text-xl">Usage</H2>
           <p class="mb-4 text-muted-foreground text-sm">
             Use with @modular-forms/solid Field component:
           </p>
@@ -130,7 +131,7 @@ export default function ModularInputPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Props</h2>
+          <H2 class="mb-4 font-semibold text-xl">Props</H2>
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
@@ -201,7 +202,7 @@ export default function ModularInputPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Examples</h2>
+          <H2 class="mb-4 font-semibold text-xl">Examples</H2>
           <div class="space-y-6">
             <div>
               <h3 class="mb-2 font-medium">Required Field</h3>
@@ -223,7 +224,7 @@ export default function ModularInputPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Related</h2>
+          <H2 class="mb-4 font-semibold text-xl">Related</H2>
           <div class="grid gap-4 sm:grid-cols-2">
             <A
               class="group rounded-lg border p-4 transition-colors hover:bg-muted/50"

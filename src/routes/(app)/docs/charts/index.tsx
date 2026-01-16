@@ -2,6 +2,7 @@ import { Title } from "@solidjs/meta";
 import { createMemo, createSignal, For } from "solid-js";
 import { CodeBlock } from "~/components/code-block";
 import { DependencyChips } from "~/components/dependency-chips";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -292,7 +293,7 @@ const data = [
 function MyChart() {
   const [containerRef, setContainerRef] = createSignal<HTMLDivElement>();
   const size = useResizeObserver(containerRef);
-  
+
   const dimensions = createMemo(() =>
     calculateDimensions(size().width, 300, {
       top: 20, right: 20, bottom: 40, left: 50,
@@ -336,7 +337,7 @@ export default function ChartsPage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Live Example</h2>
+          <H2 class="mb-4 font-semibold text-xl">Live Example</H2>
           <p class="mb-4 text-muted-foreground text-sm">
             A responsive bar chart built using the chart utilities. Hover over
             bars to see tooltips.
@@ -347,17 +348,17 @@ export default function ChartsPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <InstallCommand component="charts" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Dependencies</h2>
+          <H2 class="mb-4 font-semibold text-xl">Dependencies</H2>
           <DependencyChips dependencies={dependencies} />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Included Utilities</h2>
+          <H2 class="mb-4 font-semibold text-xl">Included Utilities</H2>
           <p class="mb-4 text-muted-foreground text-sm">
             The charts library includes 6 utility modules with{" "}
             {utilityModules.reduce((acc, m) => acc + m.exports.length, 0)}{" "}
@@ -392,7 +393,7 @@ export default function ChartsPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
+          <H2 class="mb-4 font-semibold text-xl">Usage</H2>
           <p class="mb-4 text-muted-foreground text-sm">
             Import utilities from the charts library to build custom charts:
           </p>
@@ -400,7 +401,7 @@ export default function ChartsPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Features</h2>
+          <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>
               <strong>Theme-aware colors:</strong> Palettes use CSS variables
@@ -430,7 +431,7 @@ export default function ChartsPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Color Palettes</h2>
+          <H2 class="mb-4 font-semibold text-xl">Color Palettes</H2>
           <p class="mb-4 text-muted-foreground text-sm">
             Available color palettes for different use cases:
           </p>

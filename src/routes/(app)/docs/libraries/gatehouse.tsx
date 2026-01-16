@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { CodeBlock } from "~/components/code-block";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -58,12 +59,12 @@ export default function GatehousePage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <InstallCommand component="gatehouse" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Features</h2>
+          <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>
               <strong>RBAC (Role-Based Access Control)</strong> - Define roles
@@ -84,7 +85,7 @@ export default function GatehousePage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Interactive Demo</h2>
+          <H2 class="mb-4 font-semibold text-xl">Interactive Demo</H2>
           <p class="mb-4 text-muted-foreground text-sm">
             Try the interactive demo below to see how Gatehouse evaluates
             authorization policies.
@@ -95,12 +96,12 @@ export default function GatehousePage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Basic Usage</h2>
+          <H2 class="mb-4 font-semibold text-xl">Basic Usage</H2>
           <CodeBlock code={usageExample} lang="typescript" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Credits</h2>
+          <H2 class="mb-4 font-semibold text-xl">Credits</H2>
           <p class="text-muted-foreground">
             Based on{" "}
             <a

@@ -1,0 +1,290 @@
+# ArchiTechs Registry - Component Documentation
+
+A SolidJS component registry (shadcn/ui style) for distributing reusable components,
+form blocks, libraries, and hooks via CLI installation.
+
+## Quick Start
+
+Initialize shadcn in your SolidJS project:
+```bash
+bunx shadcn@latest init
+```
+
+Install any component:
+```bash
+bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/<component-name>.json
+```
+
+---
+
+## UI Components
+
+### Button
+
+**Name:** button
+**Description:** Button component with variants, loading state, and button group support
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/button.json`
+**Dependencies:** @kobalte/core, class-variance-authority, lucide-solid
+
+### Card
+
+**Name:** card
+**Description:** Card container component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/card.json`
+
+### Dialog
+
+**Name:** dialog
+**Description:** Modal dialog component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/dialog.json`
+**Dependencies:** @kobalte/core
+
+### Dropdown Menu
+
+**Name:** dropdown-menu
+**Description:** Dropdown menu with submenus, radio groups, and checkboxes
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/dropdown-menu.json`
+**Dependencies:** @kobalte/core
+
+### Select
+
+**Name:** select
+**Description:** Select dropdown component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/select.json`
+**Dependencies:** @kobalte/core
+
+### Combobox
+
+**Name:** combobox
+**Description:** Searchable dropdown with autocomplete
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/combobox.json`
+**Dependencies:** @kobalte/core
+
+### Date Picker
+
+**Name:** date-picker
+**Description:** Date selection component with calendar
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/date-picker.json`
+**Dependencies:** @ark-ui/solid, @internationalized/date
+
+### Color Picker
+
+**Name:** color-picker
+**Description:** Full-featured color picker with swatches and channel sliders
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/color-picker.json`
+**Dependencies:** @ark-ui/solid
+
+### Table
+
+**Name:** table
+**Description:** Table component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/table.json`
+
+### Tabs
+
+**Name:** tabs
+**Description:** Tabbed interface component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/tabs.json`
+**Dependencies:** @kobalte/core
+
+### Tooltip
+
+**Name:** tooltip
+**Description:** Tooltip component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/tooltip.json`
+**Dependencies:** @kobalte/core
+
+### Popover
+
+**Name:** popover
+**Description:** Popover component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/popover.json`
+**Dependencies:** @kobalte/core
+
+### Sheet
+
+**Name:** sheet
+**Description:** Slide-out panel/drawer component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/sheet.json`
+**Dependencies:** @kobalte/core, class-variance-authority
+
+### Checkbox
+
+**Name:** checkbox
+**Description:** Checkbox input component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/checkbox.json`
+**Dependencies:** @kobalte/core
+
+### Switch
+
+**Name:** switch
+**Description:** Toggle switch component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/switch.json`
+**Dependencies:** @kobalte/core
+
+### Input
+
+**Name:** input
+**Description:** Text input component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/input.json`
+
+### Separator
+
+**Name:** separator
+**Description:** Visual separator/divider
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/separator.json`
+**Dependencies:** @kobalte/core
+
+### Badge
+
+**Name:** badge
+**Description:** Badge/tag component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/badge.json`
+**Dependencies:** class-variance-authority
+
+### Avatar
+
+**Name:** avatar
+**Description:** User avatar component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/avatar.json`
+**Dependencies:** @kobalte/core
+
+### Alert
+
+**Name:** alert
+**Description:** Alert/notification component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/alert.json`
+**Dependencies:** class-variance-authority
+
+### Progress
+
+**Name:** progress
+**Description:** Progress bar component
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/progress.json`
+**Dependencies:** @kobalte/core
+
+### Skeleton
+
+**Name:** skeleton
+**Description:** Loading skeleton placeholder
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/skeleton.json`
+
+### Sonner
+
+**Name:** sonner
+**Description:** Toast notifications using sonner
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/sonner.json`
+**Dependencies:** solid-sonner
+
+### Carousel
+
+**Name:** carousel
+**Description:** Image/content carousel
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/carousel.json`
+**Dependencies:** embla-carousel-solid
+
+### Collapsible
+
+**Name:** collapsible
+**Description:** Collapsible/accordion section
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/collapsible.json`
+**Dependencies:** @kobalte/core
+
+### Command
+
+**Name:** command
+**Description:** Command palette/menu (cmdk-style)
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/command.json`
+**Dependencies:** cmdk-solid
+
+### Context Menu
+
+**Name:** context-menu
+**Description:** Right-click context menu
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/context-menu.json`
+**Dependencies:** @kobalte/core
+
+### Hover Card
+
+**Name:** hover-card
+**Description:** Card that appears on hover
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/hover-card.json`
+**Dependencies:** @kobalte/core
+
+### Breadcrumb
+
+**Name:** breadcrumb
+**Description:** Navigation breadcrumb trail
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/breadcrumb.json`
+**Dependencies:** @kobalte/core
+
+## Blocks
+
+### App Sidebar
+
+**Name:** app-sidebar
+**Description:** Responsive sidebar navigation with mobile support, keyboard shortcuts, and theme toggle
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/app-sidebar.json`
+**Dependencies:** @solid-primitives/storage, @kobalte/core, lucide-solid
+
+### Helper Components
+
+**Name:** helpers
+**Description:** Utility components for actions, empty states, loading states, and more
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/helpers.json`
+**Dependencies:** debounce, lucide-solid
+
+## Form Componentss
+
+### Modular Form
+
+**Name:** modular-form
+**Description:** Form components integrated with @modular-forms/solid - includes input, select, combobox, date picker, color picker, and more
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/modular-form.json`
+**Dependencies:** @modular-forms/solid, @ark-ui/solid, @internationalized/date, date-fns, solid-motionone, debounce
+
+## Librarys
+
+### Gatehouse
+
+**Name:** gatehouse
+**Description:** A flexible, zero-dependencies authorization TypeScript library supporting RBAC, ABAC, and ReBAC
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/gatehouse.json`
+
+### Solid Convex
+
+**Name:** solid-convex
+**Description:** Reactive Convex integration for SolidJS with caching, optimistic updates, and SSR support
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/solid-convex.json`
+**Dependencies:** convex, @solid-primitives/map
+
+### Date Utilities
+
+**Name:** date-utils
+**Description:** Date conversion and parsing utilities for Dutch date format support
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/date-utils.json`
+**Dependencies:** @internationalized/date, date-fns
+
+## Hooks
+
+### useBindSignal
+
+**Name:** use-bind-signal
+**Description:** Two-way binding hook for controlled components in SolidJS
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/use-bind-signal.json`
+
+### useLoading
+
+**Name:** use-loading
+**Description:** Loading state hook with delayed activation to prevent flicker
+**Install:** `bunx shadcn@latest add https://solid-registry.coolify.wearearchitechs.dev/r/use-loading.json`
+
+---
+
+## Links
+
+- Website: https://solid-registry.coolify.wearearchitechs.dev
+- Based on: solid-ui (https://solid-ui.com)
+- Styling: Tailwind CSS + Kobalte primitives
+
+Generated: 2026-01-15

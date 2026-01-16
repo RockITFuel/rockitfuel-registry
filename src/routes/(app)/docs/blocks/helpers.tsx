@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { For } from "solid-js";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -48,12 +49,12 @@ export default function HelpersPage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <InstallCommand component="helpers" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Dependencies</h2>
+          <H2 class="mb-4 font-semibold text-xl">Dependencies</H2>
           <div class="flex flex-wrap gap-2">
             <code class="rounded bg-muted px-2 py-1 text-sm">debounce</code>
             <code class="rounded bg-muted px-2 py-1 text-sm">lucide-solid</code>
@@ -61,7 +62,7 @@ export default function HelpersPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Included Components</h2>
+          <H2 class="mb-4 font-semibold text-xl">Included Components</H2>
           <div class="grid gap-3 sm:grid-cols-2">
             <For each={components}>
               {(component) => (
@@ -77,7 +78,7 @@ export default function HelpersPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Features</h2>
+          <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>Action wrappers with automatic loading state</li>
             <li>Empty state components for tables and lists</li>

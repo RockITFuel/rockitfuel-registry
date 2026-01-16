@@ -3,6 +3,7 @@ import { A } from "@solidjs/router";
 import { For, Show } from "solid-js";
 import { CodeBlock } from "~/components/code-block";
 import { DependencyChips } from "~/components/dependency-chips";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -156,17 +157,17 @@ export default function ModularFormPage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <InstallCommand component="modular-form" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Dependencies</h2>
+          <H2 class="mb-4 font-semibold text-xl">Dependencies</H2>
           <DependencyChips dependencies={dependencies} />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Included Components</h2>
+          <H2 class="mb-4 font-semibold text-xl">Included Components</H2>
           <div class="grid gap-3 sm:grid-cols-2">
             <For each={components}>
               {(component) => (
@@ -192,7 +193,7 @@ export default function ModularFormPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
+          <H2 class="mb-4 font-semibold text-xl">Usage</H2>
           <p class="mb-4 text-muted-foreground text-sm">
             Use with @modular-forms/solid to create validated forms:
           </p>
@@ -200,7 +201,7 @@ export default function ModularFormPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Validation Behavior</h2>
+          <H2 class="mb-4 font-semibold text-xl">Validation Behavior</H2>
           <p class="mb-4 text-muted-foreground text-sm">
             All modular form components integrate with @modular-forms/solid
             validation:
@@ -230,7 +231,7 @@ export default function ModularFormPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Features</h2>
+          <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>Full integration with @modular-forms/solid</li>
             <li>Built-in validation support</li>

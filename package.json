@@ -25,9 +25,10 @@
     "format": "bunx -b ultracite@latest fix",
     "lint": "bunx -b ultracite@latest check",
     "dev": "vinxi dev --port 4999",
-    "build": "vinxi build",
+    "build": "vinxi build && node scripts/generate-llms-txt.mjs",
     "start": "vinxi start",
     "build:registry": "node scripts/build-registry.mjs",
+    "build:llms": "node scripts/generate-llms-txt.mjs",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },

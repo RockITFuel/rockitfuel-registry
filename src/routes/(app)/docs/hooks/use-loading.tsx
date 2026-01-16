@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { CodeBlock } from "~/components/code-block";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -46,17 +47,17 @@ export default function UseLoadingPage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <InstallCommand component="use-loading" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
+          <H2 class="mb-4 font-semibold text-xl">Usage</H2>
           <CodeBlock code={usageExample} lang="tsx" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Features</h2>
+          <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>Configurable delay before showing loading state</li>
             <li>Prevents UI flicker for fast operations</li>
@@ -66,7 +67,7 @@ export default function UseLoadingPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Why Use Delayed Loading?</h2>
+          <H2 class="mb-4 font-semibold text-xl">Why Use Delayed Loading?</H2>
           <p class="text-muted-foreground">
             When operations complete quickly (under ~200ms), showing a loading
             spinner can actually make the UI feel slower due to the visual

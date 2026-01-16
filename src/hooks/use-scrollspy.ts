@@ -8,7 +8,8 @@ export type TocItem = {
 };
 
 function extractHeadings(container: Element): TocItem[] {
-  const elements = container.querySelectorAll("h2, h3");
+  // Only select headings explicitly marked with data-toc attribute
+  const elements = container.querySelectorAll("[data-toc]");
   const items: TocItem[] = [];
 
   for (const el of elements) {
@@ -27,10 +28,15 @@ function extractHeadings(container: Element): TocItem[] {
       el.id = id;
     }
 
+    // Extract heading level from tag name (h1-h6)
+    const tagName = el.tagName.toLowerCase();
+    const levelMatch = tagName.match(/^h([1-6])$/);
+    const level = levelMatch ? Number.parseInt(levelMatch[1], 10) : 2;
+
     items.push({
       id,
       text,
-      level: el.tagName === "H2" ? 2 : 3,
+      level,
     });
   }
 

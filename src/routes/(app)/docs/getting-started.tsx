@@ -1,6 +1,7 @@
 import { Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import { CodeBlock } from "~/components/code-block";
+import { H2 } from "~/components/doc-heading";
 import {
   PageHeader,
   PageHeaderDescription,
@@ -26,7 +27,7 @@ export default function GettingStarted() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-2xl">What is this?</h2>
+          <H2 class="mb-4 font-semibold text-2xl">What is this?</H2>
           <p class="text-muted-foreground">
             ArchiTechs Registry is a collection of reusable SolidJS components
             built on top of{" "}
@@ -53,7 +54,7 @@ export default function GettingStarted() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-2xl">Prerequisites</h2>
+          <H2 class="mb-4 font-semibold text-2xl">Prerequisites</H2>
           <p class="mb-4 text-muted-foreground">
             Before installing components, make sure your project is set up with
             shadcn:
@@ -66,7 +67,7 @@ export default function GettingStarted() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-2xl">Installing Components</h2>
+          <H2 class="mb-4 font-semibold text-2xl">Installing Components</H2>
           <p class="mb-4 text-muted-foreground">
             Install components from this registry using the shadcn CLI with our
             registry URL:
@@ -82,7 +83,7 @@ export default function GettingStarted() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-2xl">Available Items</h2>
+          <H2 class="mb-4 font-semibold text-2xl">Available Items</H2>
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <div class="rounded-lg border p-4">
               <h3 class="font-semibold">UI Components</h3>
@@ -107,7 +108,7 @@ export default function GettingStarted() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-2xl">Credits</h2>
+          <H2 class="mb-4 font-semibold text-2xl">Credits</H2>
           <p class="text-muted-foreground">
             Built by{" "}
             <A

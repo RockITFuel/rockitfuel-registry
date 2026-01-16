@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { CodeBlock } from "~/components/code-block";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -62,17 +63,17 @@ export default function UseValidatedSearchParamsPage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <InstallCommand component="use-validated-search-params" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
+          <H2 class="mb-4 font-semibold text-xl">Usage</H2>
           <CodeBlock code={usageExample} lang="tsx" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Features</h2>
+          <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>Full Zod schema validation for search params</li>
             <li>
@@ -86,7 +87,7 @@ export default function UseValidatedSearchParamsPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Supported Types</h2>
+          <H2 class="mb-4 font-semibold text-xl">Supported Types</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>
               <code class="rounded bg-muted px-1">z.string()</code> - Strings

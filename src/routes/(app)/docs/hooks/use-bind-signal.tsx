@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
 import { CodeBlock } from "~/components/code-block";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -29,7 +30,7 @@ function ControlledInput(props: {
 // Usage
 function Parent() {
   const [text, setText] = createSignal("Hello")
-  
+
   return (
     <ControlledInput
       value={text()}
@@ -53,17 +54,17 @@ export default function UseBindSignalPage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <InstallCommand component="use-bind-signal" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
+          <H2 class="mb-4 font-semibold text-xl">Usage</H2>
           <CodeBlock code={usageExample} lang="tsx" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Features</h2>
+          <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>Simplifies controlled component patterns</li>
             <li>Automatic synchronization with parent state</li>

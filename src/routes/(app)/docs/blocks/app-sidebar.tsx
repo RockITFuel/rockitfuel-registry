@@ -1,6 +1,7 @@
 import { Title } from "@solidjs/meta";
 import { For } from "solid-js";
 import { CodeBlock } from "~/components/code-block";
+import { H2 } from "~/components/doc-heading";
 import { InstallCommand } from "~/components/install-command";
 import {
   PageHeader,
@@ -39,12 +40,12 @@ export default function AppSidebarPage() {
 
       <div class="space-y-8">
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Installation</h2>
+          <H2 class="mb-4 font-semibold text-xl">Installation</H2>
           <InstallCommand component="app-sidebar" />
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Dependencies</h2>
+          <H2 class="mb-4 font-semibold text-xl">Dependencies</H2>
           <div class="flex flex-wrap gap-2">
             <code class="rounded bg-muted px-2 py-1 text-sm">
               @solid-primitives/storage
@@ -57,7 +58,7 @@ export default function AppSidebarPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Included Components</h2>
+          <H2 class="mb-4 font-semibold text-xl">Included Components</H2>
           <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             <For each={components}>
               {(component) => (
@@ -70,7 +71,7 @@ export default function AppSidebarPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Features</h2>
+          <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>Responsive design with mobile sheet navigation</li>
             <li>Collapsible sidebar with keyboard shortcut (Cmd+B)</li>
@@ -82,7 +83,7 @@ export default function AppSidebarPage() {
         </section>
 
         <section>
-          <h2 class="mb-4 font-semibold text-xl">Usage</h2>
+          <H2 class="mb-4 font-semibold text-xl">Usage</H2>
           <CodeBlock
             code={`import {
   SidebarProvider,
