@@ -277,7 +277,8 @@
         "Related section linking to Area and Bar charts"
       ],
       "priority": 15,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Created Line Chart docs with installation, dependencies, basic/multi-series/dots/curve types examples, props table, and related links.",
       "dependsOn": ["CH-006", "CH-014"],
       "files": ["src/routes/(app)/docs/charts/line.tsx"]
     },
@@ -295,7 +296,8 @@
         "Related section linking to Line and Bar charts"
       ],
       "priority": 16,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Created Area Chart docs with installation, dependencies, basic/gradient/curve/dots examples, props table, and related links.",
       "dependsOn": ["CH-007", "CH-014"],
       "files": ["src/routes/(app)/docs/charts/area.tsx"]
     },
@@ -313,7 +315,8 @@
         "Related section linking to Line and Area charts"
       ],
       "priority": 17,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Created Bar Chart docs with installation, dependencies, basic/hover/radius/size examples, props table, and related links.",
       "dependsOn": ["CH-008", "CH-014"],
       "files": ["src/routes/(app)/docs/charts/bar.tsx"]
     },
