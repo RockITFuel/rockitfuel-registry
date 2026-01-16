@@ -195,7 +195,8 @@
         "Both integrate with ChartRoot"
       ],
       "priority": 11,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartEmpty with customizable message and icon, ChartLoading with skeleton (animated bars) and spinner variants. Both use foreignObject for HTML-in-SVG.",
       "dependsOn": ["CH-001"],
       "files": [
         "src/components/ui/chart/chart-empty.tsx",
