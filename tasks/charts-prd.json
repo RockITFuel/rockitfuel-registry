@@ -148,7 +148,8 @@
         "Animate entrance and data transitions"
       ],
       "priority": 8,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartBar with vertical/horizontal layouts, configurable rounded corners via SVG path, min/max bar size constraints, hover highlighting with brightness filter, and grow-from-origin animation.",
       "dependsOn": ["CH-001", "CH-002", "CH-003", "CH-004"],
       "files": ["src/components/ui/chart/chart-bar.tsx"]
     },
