@@ -1,0 +1,358 @@
+{
+  "name": "Composable Chart System",
+  "description": "A shadcn-style composable chart library for SolidJS using declarative SVG rendering with D3 for mathematical computations.",
+  "specFile": "docs/CHART_SYSTEM_SPEC.md",
+  "promptFile": "PROMPT.md",
+  "userStories": [
+    {
+      "id": "CH-001",
+      "title": "Create ChartContext and ChartRoot components",
+      "description": "As a developer, I want a ChartRoot component with context so that child chart components can access shared state, scales, and dimensions.",
+      "acceptanceCriteria": [
+        "ChartRoot accepts data, config, width, height, margin props",
+        "ChartContext provides dimensions, scales, colorScale to children",
+        "Uses SolidJS Context for state management",
+        "Responsive to container size via ResizeObserver",
+        "TypeScript types exported for ChartConfig, ChartDimensions"
+      ],
+      "priority": 1,
+      "passes": true,
+      "completionNotes": "Implemented ChartContext, ChartRoot, and types. Context provides dimensions, scales (xScale, yScale), colorScale, interaction state, and animation config. Responsive via ResizeObserver.",
+      "dependsOn": [],
+      "files": [
+        "src/components/ui/chart/chart-context.tsx",
+        "src/components/ui/chart/chart-root.tsx",
+        "src/components/ui/chart/types.ts"
+      ]
+    },
+    {
+      "id": "CH-002",
+      "title": "Create ChartGrid component",
+      "description": "As a developer, I want a ChartGrid component so that charts have consistent grid lines for readability.",
+      "acceptanceCriteria": [
+        "Renders horizontal grid lines by default",
+        "Optional vertical grid lines",
+        "Configurable stroke, opacity, dash pattern",
+        "Uses theme CSS variables for colors",
+        "Minimal shadcn-style aesthetic"
+      ],
+      "priority": 2,
+      "passes": false,
+      "dependsOn": ["CH-001"],
+      "files": ["src/components/ui/chart/chart-grid.tsx"]
+    },
+    {
+      "id": "CH-003",
+      "title": "Create ChartXAxis and ChartYAxis components",
+      "description": "As a developer, I want axis components so that charts display labeled scales.",
+      "acceptanceCriteria": [
+        "ChartXAxis renders bottom axis with ticks and labels",
+        "ChartYAxis renders left axis (and optional right for dual-axis)",
+        "Supports preset formatters: date, number, percent, currency",
+        "Supports custom formatter function",
+        "Configurable tick count, axis labels, orientation",
+        "Theme-aware styling via CSS variables"
+      ],
+      "priority": 3,
+      "passes": false,
+      "dependsOn": ["CH-001"],
+      "files": ["src/components/ui/chart/chart-axis.tsx"]
+    },
+    {
+      "id": "CH-004",
+      "title": "Create ChartTooltip and ChartTooltipContent components",
+      "description": "As a user, I want tooltips so that I can see data values on hover.",
+      "acceptanceCriteria": [
+        "Supports cursor-follow mode (tooltip follows mouse)",
+        "Supports snap-to-point mode (tooltip at data point)",
+        "Configurable indicator: dot, line, or none",
+        "ChartTooltipContent shows label and values",
+        "Supports custom formatters for label and values",
+        "Stays within chart bounds"
+      ],
+      "priority": 4,
+      "passes": false,
+      "dependsOn": ["CH-001"],
+      "files": ["src/components/ui/chart/chart-tooltip.tsx"]
+    },
+    {
+      "id": "CH-005",
+      "title": "Create ChartLegend component",
+      "description": "As a user, I want a legend so that I can identify data series.",
+      "acceptanceCriteria": [
+        "Configurable position: top, right, bottom, left",
+        "Configurable alignment: start, center, end",
+        "Shows color indicator and label for each series",
+        "Interactive: click to toggle series visibility",
+        "Icon type options: circle, square, line"
+      ],
+      "priority": 5,
+      "passes": false,
+      "dependsOn": ["CH-001"],
+      "files": ["src/components/ui/chart/chart-legend.tsx"]
+    },
+    {
+      "id": "CH-006",
+      "title": "Create ChartLine component",
+      "description": "As a developer, I want a line chart component so that I can display line series data.",
+      "acceptanceCriteria": [
+        "Renders line path from data points",
+        "Supports curve types: natural, linear, step",
+        "Supports optional dots on data points",
+        "Supports active dot on hover",
+        "Configurable stroke color, width, dash pattern",
+        "Handles null/missing values with gaps",
+        "Supports dual Y-axis (yAxisId prop)",
+        "Animate entrance and data transitions"
+      ],
+      "priority": 6,
+      "passes": false,
+      "dependsOn": ["CH-001", "CH-002", "CH-003", "CH-004"],
+      "files": ["src/components/ui/chart/chart-line.tsx"]
+    },
+    {
+      "id": "CH-007",
+      "title": "Create ChartArea component",
+      "description": "As a developer, I want an area chart component so that I can display filled area series.",
+      "acceptanceCriteria": [
+        "Renders filled area under line",
+        "Supports curve types: natural, linear, step",
+        "Supports stacking modes: none, stacked, expanded (100%)",
+        "Configurable fill color and opacity",
+        "Optional gradient fill",
+        "Handles null/missing values with gaps",
+        "Animate entrance and data transitions"
+      ],
+      "priority": 7,
+      "passes": false,
+      "dependsOn": ["CH-001", "CH-002", "CH-003", "CH-004"],
+      "files": ["src/components/ui/chart/chart-area.tsx"]
+    },
+    {
+      "id": "CH-008",
+      "title": "Create ChartBar component",
+      "description": "As a developer, I want a bar chart component so that I can display categorical bar data.",
+      "acceptanceCriteria": [
+        "Renders vertical bars by default",
+        "Supports horizontal layout option",
+        "Supports stacking modes: none, stacked, expanded (100%)",
+        "Supports grouped bars (multiple series)",
+        "Configurable bar radius, min/max size",
+        "Active bar highlighting on hover",
+        "Animate entrance and data transitions"
+      ],
+      "priority": 8,
+      "passes": false,
+      "dependsOn": ["CH-001", "CH-002", "CH-003", "CH-004"],
+      "files": ["src/components/ui/chart/chart-bar.tsx"]
+    },
+    {
+      "id": "CH-009",
+      "title": "Create ChartLabel component",
+      "description": "As a developer, I want data labels so that values can be displayed on chart elements.",
+      "acceptanceCriteria": [
+        "Configurable position: top, center, bottom, inside, outside",
+        "Custom value formatter",
+        "Configurable offset from element",
+        "Theme-aware text color and font size"
+      ],
+      "priority": 9,
+      "passes": false,
+      "dependsOn": ["CH-006", "CH-007", "CH-008"],
+      "files": ["src/components/ui/chart/chart-label.tsx"]
+    },
+    {
+      "id": "CH-010",
+      "title": "Create ChartReferenceLine component",
+      "description": "As a developer, I want reference lines so that I can highlight thresholds and targets.",
+      "acceptanceCriteria": [
+        "Supports horizontal lines (y value)",
+        "Supports vertical lines (x value)",
+        "Configurable stroke color, width, dash pattern",
+        "Optional label with configurable position"
+      ],
+      "priority": 10,
+      "passes": false,
+      "dependsOn": ["CH-001"],
+      "files": ["src/components/ui/chart/chart-reference-line.tsx"]
+    },
+    {
+      "id": "CH-011",
+      "title": "Create ChartEmpty and ChartLoading components",
+      "description": "As a developer, I want state components so that charts handle empty and loading states gracefully.",
+      "acceptanceCriteria": [
+        "ChartEmpty shows message and optional icon",
+        "ChartLoading shows skeleton or spinner",
+        "Both integrate with ChartRoot"
+      ],
+      "priority": 11,
+      "passes": false,
+      "dependsOn": ["CH-001"],
+      "files": [
+        "src/components/ui/chart/chart-empty.tsx",
+        "src/components/ui/chart/chart-loading.tsx"
+      ]
+    },
+    {
+      "id": "CH-012",
+      "title": "Create chart export utilities",
+      "description": "As a user, I want to export charts so that I can use them in reports and presentations.",
+      "acceptanceCriteria": [
+        "Export chart as PNG image",
+        "Export chart as SVG vector",
+        "Export underlying data as CSV"
+      ],
+      "priority": 12,
+      "passes": false,
+      "dependsOn": ["CH-001"],
+      "files": ["src/components/ui/chart/utils/export.ts"]
+    },
+    {
+      "id": "CH-013",
+      "title": "Create chart index and exports",
+      "description": "As a developer, I want clean exports so that I can import chart components easily.",
+      "acceptanceCriteria": [
+        "index.ts exports all components",
+        "All TypeScript types exported",
+        "Documentation comments on exports"
+      ],
+      "priority": 13,
+      "passes": false,
+      "dependsOn": [
+        "CH-001",
+        "CH-002",
+        "CH-003",
+        "CH-004",
+        "CH-005",
+        "CH-006",
+        "CH-007",
+        "CH-008",
+        "CH-009",
+        "CH-010",
+        "CH-011",
+        "CH-012"
+      ],
+      "files": ["src/components/ui/chart/index.ts"]
+    },
+    {
+      "id": "CH-014",
+      "title": "Create Charts overview documentation page",
+      "description": "As a user, I want a charts overview page so that I can see all available chart types with live demos.",
+      "acceptanceCriteria": [
+        "Page at /docs/charts",
+        "Introduction to chart system",
+        "Live demos of Line, Area, Bar charts",
+        "Links to individual chart type pages",
+        "Installation instructions"
+      ],
+      "priority": 14,
+      "passes": false,
+      "dependsOn": ["CH-013"],
+      "files": ["src/routes/(app)/docs/charts/index.tsx"]
+    },
+    {
+      "id": "CH-015",
+      "title": "Create Line Chart documentation page",
+      "description": "As a user, I want line chart documentation so that I can learn how to use it.",
+      "acceptanceCriteria": [
+        "Page at /docs/charts/line",
+        "Installation section with InstallCommand",
+        "Dependencies section with DependencyChips",
+        "Usage section with CodeBlock",
+        "Complete Props table",
+        "Multiple interactive examples: basic, multiple series, with dots, with legend, custom styling",
+        "Related section linking to Area and Bar charts"
+      ],
+      "priority": 15,
+      "passes": false,
+      "dependsOn": ["CH-006", "CH-014"],
+      "files": ["src/routes/(app)/docs/charts/line.tsx"]
+    },
+    {
+      "id": "CH-016",
+      "title": "Create Area Chart documentation page",
+      "description": "As a user, I want area chart documentation so that I can learn how to use it.",
+      "acceptanceCriteria": [
+        "Page at /docs/charts/area",
+        "Installation section with InstallCommand",
+        "Dependencies section with DependencyChips",
+        "Usage section with CodeBlock",
+        "Complete Props table",
+        "Multiple interactive examples: basic, stacked, expanded, gradient, with legend",
+        "Related section linking to Line and Bar charts"
+      ],
+      "priority": 16,
+      "passes": false,
+      "dependsOn": ["CH-007", "CH-014"],
+      "files": ["src/routes/(app)/docs/charts/area.tsx"]
+    },
+    {
+      "id": "CH-017",
+      "title": "Create Bar Chart documentation page",
+      "description": "As a user, I want bar chart documentation so that I can learn how to use it.",
+      "acceptanceCriteria": [
+        "Page at /docs/charts/bar",
+        "Installation section with InstallCommand",
+        "Dependencies section with DependencyChips",
+        "Usage section with CodeBlock",
+        "Complete Props table",
+        "Multiple interactive examples: basic, grouped, stacked, horizontal, with labels",
+        "Related section linking to Line and Area charts"
+      ],
+      "priority": 17,
+      "passes": false,
+      "dependsOn": ["CH-008", "CH-014"],
+      "files": ["src/routes/(app)/docs/charts/bar.tsx"]
+    },
+    {
+      "id": "CH-018",
+      "title": "Update navigation config with Charts section",
+      "description": "As a user, I want charts in the sidebar so that I can navigate to chart documentation.",
+      "acceptanceCriteria": [
+        "Charts section added to src/config/docs.ts",
+        "Links to: Overview, Line Chart, Area Chart, Bar Chart",
+        "Appears in sidebar navigation"
+      ],
+      "priority": 18,
+      "passes": false,
+      "dependsOn": ["CH-014", "CH-015", "CH-016", "CH-017"],
+      "files": ["src/config/docs.ts"]
+    },
+    {
+      "id": "CH-019",
+      "title": "Verify all components with agent-browser",
+      "description": "As a developer, I want all chart components tested in browser so that they work correctly.",
+      "acceptanceCriteria": [
+        "Dev server starts without errors",
+        "All chart doc pages render correctly",
+        "Interactive examples work (tooltips, hover, legend toggle)",
+        "No console errors"
+      ],
+      "priority": 19,
+      "passes": false,
+      "dependsOn": ["CH-018"],
+      "files": []
+    },
+    {
+      "id": "CH-020",
+      "title": "Run build and E2E tests",
+      "description": "As a developer, I want all tests passing so that the chart system is production ready.",
+      "acceptanceCriteria": [
+        "bun build passes without errors",
+        "bun test:e2e passes all tests",
+        "No TypeScript errors"
+      ],
+      "priority": 20,
+      "passes": false,
+      "dependsOn": ["CH-019"],
+      "files": []
+    }
+  ],
+  "metadata": {
+    "createdAt": "2026-01-16T00:00:00.000Z",
+    "updatedAt": "2026-01-16T00:00:00.000Z",
+    "phase": 1,
+    "totalPhases": 3,
+    "phaseDescription": "Core Charts (Line, Area, Bar)"
+  }
+}
