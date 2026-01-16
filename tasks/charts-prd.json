@@ -213,7 +213,8 @@
         "Export underlying data as CSV"
       ],
       "priority": 12,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented exportChart (PNG with scale factor, SVG with inlined styles) and exportChartData (CSV with configurable columns, date formatting, header option).",
       "dependsOn": ["CH-001"],
       "files": ["src/components/ui/chart/utils/export.ts"]
     },
