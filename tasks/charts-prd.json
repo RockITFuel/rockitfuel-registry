@@ -228,7 +228,8 @@
         "Documentation comments on exports"
       ],
       "priority": 13,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Created index.ts with organized exports: Core (ChartRoot, ChartContext), Layout (Grid, Axes), Series (Line, Area, Bar), Interactive (Tooltip, Legend), Annotation (Label, ReferenceLine), State (Empty, Loading), Utilities (export). All types exported.",
       "dependsOn": [
         "CH-001",
         "CH-002",
