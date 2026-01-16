@@ -110,7 +110,8 @@
         "Animate entrance and data transitions"
       ],
       "priority": 6,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartLine with d3-shape line generator, natural/linear/step curves, configurable dots and active dots on hover, stroke-dasharray animation, connectNulls option, and yAxisId support.",
       "dependsOn": ["CH-001", "CH-002", "CH-003", "CH-004"],
       "files": ["src/components/ui/chart/chart-line.tsx"]
     },
