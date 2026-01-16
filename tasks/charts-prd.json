@@ -180,7 +180,8 @@
         "Optional label with configurable position"
       ],
       "priority": 10,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartReferenceLine with horizontal (y) and vertical (x) lines support, configurable stroke/dasharray, optional labels with start/center/end positioning, and bounds checking.",
       "dependsOn": ["CH-001"],
       "files": ["src/components/ui/chart/chart-reference-line.tsx"]
     },
