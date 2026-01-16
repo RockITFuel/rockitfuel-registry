@@ -1,5 +1,6 @@
 import { Title } from "@solidjs/meta";
-import { createMemo, createSignal, For } from "solid-js";
+import { A } from "@solidjs/router";
+import { For } from "solid-js";
 import { CodeBlock } from "~/components/code-block";
 import { DependencyChips } from "~/components/dependency-chips";
 import { H2 } from "~/components/doc-heading";
@@ -10,314 +11,166 @@ import {
   PageHeaderHeading,
 } from "~/components/page-header";
 import {
-  calculateDimensions,
-  createBandScale,
-  createLinearScale,
-  defaultColorPalette,
-  formatNumber,
-  getColorFromPalette,
-  useChartTooltip,
-  useResizeObserver,
-} from "~/lib/charts";
+  ChartArea,
+  ChartBar,
+  type ChartConfig,
+  ChartGrid,
+  ChartLegend,
+  ChartLine,
+  ChartRoot,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartXAxis,
+  ChartYAxis,
+} from "~/components/ui/chart";
 
-// Demo data for the live example
-const demoData = [
-  { category: "Jan", value: 65 },
-  { category: "Feb", value: 59 },
-  { category: "Mar", value: 80 },
-  { category: "Apr", value: 81 },
-  { category: "May", value: 56 },
-  { category: "Jun", value: 95 },
-  { category: "Jul", value: 72 },
+// Demo data for line chart
+const lineData = [
+  { date: new Date("2024-01-01"), desktop: 186, mobile: 80 },
+  { date: new Date("2024-02-01"), desktop: 305, mobile: 200 },
+  { date: new Date("2024-03-01"), desktop: 237, mobile: 120 },
+  { date: new Date("2024-04-01"), desktop: 73, mobile: 190 },
+  { date: new Date("2024-05-01"), desktop: 209, mobile: 130 },
+  { date: new Date("2024-06-01"), desktop: 214, mobile: 140 },
 ];
 
-// Live bar chart demo component
-function BarChartDemo() {
-  const [containerRef, setContainerRef] = createSignal<HTMLDivElement>();
-  const tooltip = useChartTooltip<{ category: string; value: number }>();
-  const size = useResizeObserver(containerRef, { debounceMs: 100 });
+// Demo data for bar chart
+const barData = [
+  { category: "Jan", value: 186, profit: 80 },
+  { category: "Feb", value: 305, profit: 200 },
+  { category: "Mar", value: 237, profit: 120 },
+  { category: "Apr", value: 73, profit: 190 },
+  { category: "May", value: 209, profit: 130 },
+  { category: "Jun", value: 214, profit: 140 },
+];
 
-  const dimensions = createMemo(() =>
-    calculateDimensions(size().width || 400, 300, {
-      top: 20,
-      right: 20,
-      bottom: 40,
-      left: 50,
-    })
-  );
+const lineConfig: ChartConfig = {
+  desktop: { label: "Desktop", color: "hsl(var(--chart-1))" },
+  mobile: { label: "Mobile", color: "hsl(var(--chart-2))" },
+};
 
-  const xScale = createMemo(() =>
-    createBandScale(
-      demoData.map((d) => d.category),
-      [0, dimensions().innerWidth],
-      { padding: 0.2 }
-    )
-  );
+const barConfig: ChartConfig = {
+  value: { label: "Revenue", color: "hsl(var(--chart-1))" },
+  profit: { label: "Profit", color: "hsl(var(--chart-2))" },
+};
 
-  const yScale = createMemo(() =>
-    createLinearScale([0, 100], [dimensions().innerHeight, 0], { nice: true })
-  );
+const areaConfig: ChartConfig = {
+  desktop: { label: "Desktop", color: "hsl(var(--chart-1))" },
+  mobile: { label: "Mobile", color: "hsl(var(--chart-2))" },
+};
 
+// Line chart demo
+function LineChartDemo() {
   return (
-    <div class="relative w-full" ref={setContainerRef}>
-      <svg
-        aria-label="Bar chart showing monthly values"
-        class="w-full"
-        height={dimensions().height}
-        role="img"
-        viewBox={`0 0 ${dimensions().width} ${dimensions().height}`}
-      >
-        <title>Monthly values bar chart</title>
-        <g
-          transform={`translate(${dimensions().margin.left}, ${dimensions().margin.top})`}
-        >
-          {/* Grid lines */}
-          <For each={yScale().ticks(5)}>
-            {(tick) => (
-              <line
-                stroke="hsl(var(--border))"
-                stroke-dasharray="4,4"
-                stroke-opacity={0.5}
-                x1={0}
-                x2={dimensions().innerWidth}
-                y1={yScale()(tick)}
-                y2={yScale()(tick)}
-              />
-            )}
-          </For>
-
-          {/* Bars */}
-          <For each={demoData}>
-            {(d, i) => (
-              <rect
-                aria-label={`${d.category}: ${d.value}`}
-                class="transition-opacity hover:opacity-80"
-                fill={getColorFromPalette(i(), defaultColorPalette)}
-                height={dimensions().innerHeight - yScale()(d.value)}
-                onPointerEnter={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const containerRect = containerRef()?.getBoundingClientRect();
-                  if (containerRect) {
-                    tooltip.show(d, {
-                      x: rect.left - containerRect.left + rect.width / 2,
-                      y: rect.top - containerRect.top - 10,
-                    });
-                  }
-                }}
-                onPointerLeave={() => tooltip.hide()}
-                rx={4}
-                width={xScale().bandwidth()}
-                x={xScale()(d.category)}
-                y={yScale()(d.value)}
-              />
-            )}
-          </For>
-
-          {/* X-axis */}
-          <g transform={`translate(0, ${dimensions().innerHeight})`}>
-            <line
-              stroke="hsl(var(--border))"
-              x1={0}
-              x2={dimensions().innerWidth}
-            />
-            <For each={demoData}>
-              {(d) => (
-                <text
-                  fill="hsl(var(--muted-foreground))"
-                  font-size="12"
-                  text-anchor="middle"
-                  x={(xScale()(d.category) ?? 0) + xScale().bandwidth() / 2}
-                  y={25}
-                >
-                  {d.category}
-                </text>
-              )}
-            </For>
-          </g>
-
-          {/* Y-axis */}
-          <g>
-            <line stroke="hsl(var(--border))" y2={dimensions().innerHeight} />
-            <For each={yScale().ticks(5)}>
-              {(tick) => (
-                <text
-                  dominant-baseline="middle"
-                  fill="hsl(var(--muted-foreground))"
-                  font-size="12"
-                  text-anchor="end"
-                  x={-10}
-                  y={yScale()(tick)}
-                >
-                  {formatNumber(tick)}
-                </text>
-              )}
-            </For>
-          </g>
-        </g>
-      </svg>
-
-      {/* Tooltip */}
-      {tooltip.isVisible() && (
-        <div
-          class="pointer-events-none absolute z-10 rounded-md border bg-popover px-3 py-2 shadow-md"
-          style={{
-            left: `${tooltip.state().position.x}px`,
-            top: `${tooltip.state().position.y}px`,
-            transform: "translate(-50%, -100%)",
-          }}
-        >
-          <div class="font-medium text-sm">
-            {tooltip.state().data?.category}
-          </div>
-          <div class="text-muted-foreground text-xs">
-            Value: {formatNumber(tooltip.state().data?.value ?? 0)}
-          </div>
-        </div>
-      )}
+    <div class="h-[300px] w-full">
+      <ChartRoot config={lineConfig} data={lineData} height={300}>
+        <ChartGrid horizontal />
+        <ChartLine dataKey="desktop" dot />
+        <ChartLine dataKey="mobile" dot />
+        <ChartXAxis tickFormat="date" />
+        <ChartYAxis tickFormat="number" />
+        <ChartTooltip>
+          <ChartTooltipContent />
+        </ChartTooltip>
+        <ChartLegend position="bottom" />
+      </ChartRoot>
     </div>
   );
 }
 
-// Utility modules for documentation
-const utilityModules = [
+// Area chart demo
+function AreaChartDemo() {
+  return (
+    <div class="h-[300px] w-full">
+      <ChartRoot config={areaConfig} data={lineData} height={300}>
+        <ChartGrid horizontal />
+        <ChartArea dataKey="desktop" fillOpacity={0.3} gradient />
+        <ChartArea dataKey="mobile" fillOpacity={0.3} gradient />
+        <ChartXAxis tickFormat="date" />
+        <ChartYAxis tickFormat="number" />
+        <ChartTooltip>
+          <ChartTooltipContent />
+        </ChartTooltip>
+        <ChartLegend position="bottom" />
+      </ChartRoot>
+    </div>
+  );
+}
+
+// Bar chart demo
+function BarChartDemo() {
+  return (
+    <div class="h-[300px] w-full">
+      <ChartRoot config={barConfig} data={barData} height={300} xKey="category">
+        <ChartGrid horizontal />
+        <ChartBar activeBar dataKey="value" />
+        <ChartXAxis />
+        <ChartYAxis tickFormat="number" />
+        <ChartTooltip>
+          <ChartTooltipContent />
+        </ChartTooltip>
+        <ChartLegend position="bottom" />
+      </ChartRoot>
+    </div>
+  );
+}
+
+const chartTypes = [
   {
-    name: "Scales",
-    file: "scales.ts",
-    description: "D3 scale wrappers for linear, time, band, and color scales",
-    exports: [
-      "createLinearScale",
-      "createTimeScale",
-      "createBandScale",
-      "createPointScale",
-      "createColorScale",
-      "calculateDimensions",
-      "computeNumericExtent",
-      "computeTimeExtent",
-    ],
+    title: "Line Chart",
+    description: "Display trends over time with connected data points",
+    href: "/docs/charts/line",
   },
   {
-    name: "Axis",
-    file: "axis.ts",
-    description: "Axis generators and styling utilities",
-    exports: [
-      "createAxisGenerator",
-      "renderAxis",
-      "styleAxis",
-      "createGridLines",
-      "styleGridLines",
-      "getTickFormat",
-    ],
+    title: "Area Chart",
+    description: "Emphasize volume with filled areas under lines",
+    href: "/docs/charts/area",
   },
   {
-    name: "Theme",
-    file: "theme.ts",
-    description: "Theme-aware color palettes and styling",
-    exports: [
-      "getChartTheme",
-      "defaultColorPalette",
-      "extendedColorPalette",
-      "categoricalPalette",
-      "sequentialPalette",
-      "divergingPalette",
-      "getColorFromPalette",
-      "withOpacity",
-      "chartStyles",
-    ],
-  },
-  {
-    name: "Tooltip",
-    file: "tooltip.ts",
-    description: "Reactive tooltip state and positioning",
-    exports: [
-      "useChartTooltip",
-      "calculateTooltipPosition",
-      "getRelativeMousePosition",
-      "findClosestPoint",
-      "findClosestPointByX",
-      "bisectIndex",
-    ],
-  },
-  {
-    name: "Format",
-    file: "format.ts",
-    description: "Number, date, and label formatting utilities",
-    exports: [
-      "formatNumber",
-      "formatCurrency",
-      "formatPercent",
-      "formatSI",
-      "formatDate",
-      "formatShortDate",
-      "formatFullDate",
-      "formatTime",
-      "formatDateTime",
-      "formatDuration",
-      "formatBytes",
-      "truncateLabel",
-      "createAbbreviatedFormatter",
-    ],
-  },
-  {
-    name: "Resize",
-    file: "resize.ts",
-    description: "Responsive container sizing hooks",
-    exports: [
-      "useResizeObserver",
-      "useChartDimensions",
-      "getDevicePixelRatio",
-      "scaleCanvas",
-      "setSvgViewBox",
-    ],
+    title: "Bar Chart",
+    description: "Compare categorical data with rectangular bars",
+    href: "/docs/charts/bar",
   },
 ];
 
-const dependencies = ["d3"];
+const dependencies = ["d3-array", "d3-scale", "d3-shape"];
 
 const usageExample = `import {
-  calculateDimensions,
-  createBandScale,
-  createLinearScale,
-  defaultColorPalette,
-  formatNumber,
-  getColorFromPalette,
-  useChartTooltip,
-  useResizeObserver,
-} from "~/lib/charts";
+  ChartRoot,
+  ChartLine,
+  ChartXAxis,
+  ChartYAxis,
+  ChartGrid,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  type ChartConfig,
+} from "~/components/ui/chart";
 
 const data = [
-  { category: "Jan", value: 65 },
-  { category: "Feb", value: 59 },
-  { category: "Mar", value: 80 },
+  { date: new Date("2024-01-01"), desktop: 186, mobile: 80 },
+  { date: new Date("2024-02-01"), desktop: 305, mobile: 200 },
+  { date: new Date("2024-03-01"), desktop: 237, mobile: 120 },
 ];
 
+const config: ChartConfig = {
+  desktop: { label: "Desktop", color: "hsl(var(--chart-1))" },
+  mobile: { label: "Mobile", color: "hsl(var(--chart-2))" },
+};
+
 function MyChart() {
-  const [containerRef, setContainerRef] = createSignal<HTMLDivElement>();
-  const size = useResizeObserver(containerRef);
-
-  const dimensions = createMemo(() =>
-    calculateDimensions(size().width, 300, {
-      top: 20, right: 20, bottom: 40, left: 50,
-    })
-  );
-
-  const xScale = createMemo(() =>
-    createBandScale(
-      data.map((d) => d.category),
-      [0, dimensions().innerWidth],
-      { padding: 0.2 }
-    )
-  );
-
-  const yScale = createMemo(() =>
-    createLinearScale([0, 100], [dimensions().innerHeight, 0], { nice: true })
-  );
-
   return (
-    <div ref={setContainerRef}>
-      <svg viewBox={\`0 0 \${dimensions().width} \${dimensions().height}\`}>
-        {/* Your chart elements here */}
-      </svg>
-    </div>
+    <ChartRoot data={data} config={config} height={400}>
+      <ChartGrid horizontal />
+      <ChartLine dataKey="desktop" dot />
+      <ChartLine dataKey="mobile" dot />
+      <ChartXAxis tickFormat="date" />
+      <ChartYAxis tickFormat="number" />
+      <ChartTooltip>
+        <ChartTooltipContent />
+      </ChartTooltip>
+      <ChartLegend position="bottom" />
+    </ChartRoot>
   );
 }`;
 
@@ -329,27 +182,16 @@ export default function ChartsPage() {
       <PageHeader>
         <PageHeaderHeading>Charts</PageHeaderHeading>
         <PageHeaderDescription>
-          A collection of D3-based chart utilities for building custom,
-          theme-aware charts in SolidJS. Includes scales, axes, formatting,
-          tooltips, and responsive sizing helpers.
+          A composable chart library for SolidJS using declarative SVG rendering
+          with D3 for mathematical computations. Follows shadcn/ui patterns for
+          easy customization and theming.
         </PageHeaderDescription>
       </PageHeader>
 
       <div class="space-y-8">
         <section>
-          <H2 class="mb-4 font-semibold text-xl">Live Example</H2>
-          <p class="mb-4 text-muted-foreground text-sm">
-            A responsive bar chart built using the chart utilities. Hover over
-            bars to see tooltips.
-          </p>
-          <div class="rounded-md border bg-muted/50 p-4">
-            <BarChartDemo />
-          </div>
-        </section>
-
-        <section>
           <H2 class="mb-4 font-semibold text-xl">Installation</H2>
-          <InstallCommand component="charts" />
+          <InstallCommand component="chart" />
         </section>
 
         <section>
@@ -358,96 +200,177 @@ export default function ChartsPage() {
         </section>
 
         <section>
-          <H2 class="mb-4 font-semibold text-xl">Included Utilities</H2>
+          <H2 class="mb-4 font-semibold text-xl">Line Chart</H2>
           <p class="mb-4 text-muted-foreground text-sm">
-            The charts library includes 6 utility modules with{" "}
-            {utilityModules.reduce((acc, m) => acc + m.exports.length, 0)}{" "}
-            exported functions.
+            Display trends over time with connected data points. Supports
+            multiple series, dots, and various curve types.
           </p>
-          <div class="grid gap-4 md:grid-cols-2">
-            <For each={utilityModules}>
-              {(module) => (
-                <div class="rounded-md border p-4">
-                  <div class="mb-2 flex items-center justify-between">
-                    <h3 class="font-medium">{module.name}</h3>
-                    <code class="text-muted-foreground text-xs">
-                      {module.file}
-                    </code>
-                  </div>
-                  <p class="mb-3 text-muted-foreground text-sm">
-                    {module.description}
-                  </p>
-                  <div class="flex flex-wrap gap-1">
-                    <For each={module.exports}>
-                      {(fn) => (
-                        <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
-                          {fn}
-                        </code>
-                      )}
-                    </For>
-                  </div>
-                </div>
-              )}
-            </For>
+          <div class="rounded-md border bg-muted/50 p-4">
+            <LineChartDemo />
+          </div>
+        </section>
+
+        <section>
+          <H2 class="mb-4 font-semibold text-xl">Area Chart</H2>
+          <p class="mb-4 text-muted-foreground text-sm">
+            Emphasize volume with filled areas under lines. Supports gradients,
+            stacking, and transparency.
+          </p>
+          <div class="rounded-md border bg-muted/50 p-4">
+            <AreaChartDemo />
+          </div>
+        </section>
+
+        <section>
+          <H2 class="mb-4 font-semibold text-xl">Bar Chart</H2>
+          <p class="mb-4 text-muted-foreground text-sm">
+            Compare categorical data with rectangular bars. Supports grouping,
+            stacking, and hover effects.
+          </p>
+          <div class="rounded-md border bg-muted/50 p-4">
+            <BarChartDemo />
           </div>
         </section>
 
         <section>
           <H2 class="mb-4 font-semibold text-xl">Usage</H2>
           <p class="mb-4 text-muted-foreground text-sm">
-            Import utilities from the charts library to build custom charts:
+            Import chart components and compose them declaratively:
           </p>
           <CodeBlock code={usageExample} lang="tsx" />
+        </section>
+
+        <section>
+          <H2 class="mb-4 font-semibold text-xl">Chart Types</H2>
+          <p class="mb-4 text-muted-foreground text-sm">
+            Detailed documentation for each chart type:
+          </p>
+          <div class="grid gap-4 md:grid-cols-3">
+            <For each={chartTypes}>
+              {(type) => (
+                <A
+                  class="rounded-md border p-4 transition-colors hover:bg-muted/50"
+                  href={type.href}
+                >
+                  <h3 class="font-medium">{type.title}</h3>
+                  <p class="mt-1 text-muted-foreground text-sm">
+                    {type.description}
+                  </p>
+                </A>
+              )}
+            </For>
+          </div>
         </section>
 
         <section>
           <H2 class="mb-4 font-semibold text-xl">Features</H2>
           <ul class="list-inside list-disc space-y-2 text-muted-foreground">
             <li>
-              <strong>Theme-aware colors:</strong> Palettes use CSS variables
-              for automatic dark/light mode support
+              <strong>Composable:</strong> Build charts by combining small,
+              focused components
             </li>
             <li>
-              <strong>Responsive sizing:</strong> useResizeObserver and
-              useChartDimensions hooks for responsive charts
+              <strong>Declarative:</strong> SVG rendered directly in JSX, D3
+              only for math
             </li>
             <li>
-              <strong>D3 integration:</strong> Thin wrappers around D3 scales
-              and axis generators
+              <strong>Theme-aware:</strong> Uses CSS variables for automatic
+              dark/light mode
             </li>
             <li>
-              <strong>SolidJS reactive:</strong> Hooks return signals for
-              seamless reactivity
+              <strong>Responsive:</strong> ResizeObserver-based container sizing
             </li>
             <li>
-              <strong>Accessible formatting:</strong> Colorblind-friendly
-              categorical palette included
+              <strong>Interactive:</strong> Tooltips, legends, and hover effects
+              built-in
             </li>
             <li>
-              <strong>Tooltip helpers:</strong> Position calculation and closest
-              point detection
+              <strong>Animated:</strong> Smooth entrance and transition
+              animations
+            </li>
+            <li>
+              <strong>Accessible:</strong> ARIA labels and keyboard navigation
+              support
+            </li>
+            <li>
+              <strong>Exportable:</strong> PNG, SVG, and CSV export utilities
             </li>
           </ul>
         </section>
 
         <section>
-          <H2 class="mb-4 font-semibold text-xl">Color Palettes</H2>
-          <p class="mb-4 text-muted-foreground text-sm">
-            Available color palettes for different use cases:
-          </p>
-          <div class="space-y-4">
-            <div>
-              <h3 class="mb-2 font-medium text-sm">Default Palette</h3>
-              <div class="flex gap-2">
-                <For each={defaultColorPalette}>
-                  {(color) => (
-                    <div
-                      class="h-8 w-8 rounded"
-                      style={{ "background-color": color }}
-                      title={color}
-                    />
-                  )}
-                </For>
+          <H2 class="mb-4 font-semibold text-xl">Components</H2>
+          <div class="grid gap-2 md:grid-cols-2">
+            <div class="rounded-md border p-3">
+              <h3 class="font-medium">Core</h3>
+              <div class="mt-2 flex flex-wrap gap-1">
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartRoot
+                </code>
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartContext
+                </code>
+              </div>
+            </div>
+            <div class="rounded-md border p-3">
+              <h3 class="font-medium">Layout</h3>
+              <div class="mt-2 flex flex-wrap gap-1">
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartGrid
+                </code>
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartXAxis
+                </code>
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartYAxis
+                </code>
+              </div>
+            </div>
+            <div class="rounded-md border p-3">
+              <h3 class="font-medium">Series</h3>
+              <div class="mt-2 flex flex-wrap gap-1">
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartLine
+                </code>
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartArea
+                </code>
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartBar
+                </code>
+              </div>
+            </div>
+            <div class="rounded-md border p-3">
+              <h3 class="font-medium">Interactive</h3>
+              <div class="mt-2 flex flex-wrap gap-1">
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartTooltip
+                </code>
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartLegend
+                </code>
+              </div>
+            </div>
+            <div class="rounded-md border p-3">
+              <h3 class="font-medium">Annotation</h3>
+              <div class="mt-2 flex flex-wrap gap-1">
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartLabel
+                </code>
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartReferenceLine
+                </code>
+              </div>
+            </div>
+            <div class="rounded-md border p-3">
+              <h3 class="font-medium">State</h3>
+              <div class="mt-2 flex flex-wrap gap-1">
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartEmpty
+                </code>
+                <code class="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  ChartLoading
+                </code>
               </div>
             </div>
           </div>

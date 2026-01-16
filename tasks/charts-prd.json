@@ -258,7 +258,8 @@
         "Installation instructions"
       ],
       "priority": 14,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Updated /docs/charts with live demos for Line, Area, Bar charts using the new composable components. Added installation instructions, dependencies, usage example, features list, and component reference grid.",
       "dependsOn": ["CH-013"],
       "files": ["src/routes/(app)/docs/charts/index.tsx"]
     },
