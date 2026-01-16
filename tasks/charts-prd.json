@@ -90,7 +90,8 @@
         "Icon type options: circle, square, line"
       ],
       "priority": 5,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartLegend with configurable position/alignment, circle/square/line icons, interactive series toggle with visual feedback (opacity change, strikethrough).",
       "dependsOn": ["CH-001"],
       "files": ["src/components/ui/chart/chart-legend.tsx"]
     },
