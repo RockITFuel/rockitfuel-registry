@@ -73,7 +73,8 @@
         "Stays within chart bounds"
       ],
       "priority": 4,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartTooltip with cursor/snap modes, dot/line/none indicators, cursor line, and ChartTooltipContent with customizable formatters. Uses Portal for positioning and bisector for finding closest data point.",
       "dependsOn": ["CH-001"],
       "files": ["src/components/ui/chart/chart-tooltip.tsx"]
     },
