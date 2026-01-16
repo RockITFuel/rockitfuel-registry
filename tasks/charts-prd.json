@@ -164,7 +164,8 @@
         "Theme-aware text color and font size"
       ],
       "priority": 9,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartLabel with configurable position (top/center/bottom/inside/outside), custom formatter, offset, fill color, fontSize, fontWeight. Uses dominant-baseline for vertical alignment.",
       "dependsOn": ["CH-006", "CH-007", "CH-008"],
       "files": ["src/components/ui/chart/chart-label.tsx"]
     },
