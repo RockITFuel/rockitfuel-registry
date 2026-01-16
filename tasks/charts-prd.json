@@ -129,7 +129,8 @@
         "Animate entrance and data transitions"
       ],
       "priority": 7,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartArea with d3-shape area generator, natural/linear/step curves, gradient fill option, configurable opacity, stroke on top edge, optional dots, and fade-in animation.",
       "dependsOn": ["CH-001", "CH-002", "CH-003", "CH-004"],
       "files": ["src/components/ui/chart/chart-area.tsx"]
     },
