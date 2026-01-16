@@ -55,7 +55,8 @@
         "Theme-aware styling via CSS variables"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
+      "completionNotes": "Implemented ChartXAxis and ChartYAxis with preset formatters (date, number, percent, currency) and custom function support. Supports top/bottom and left/right orientations.",
       "dependsOn": ["CH-001"],
       "files": ["src/components/ui/chart/chart-axis.tsx"]
     },
